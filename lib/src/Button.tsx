@@ -1,0 +1,280 @@
+import {
+  Component,
+  JSX,
+  splitProps,
+  createSignal,
+  onCleanup,
+  Show,
+  mergeProps,
+} from "solid-js";
+import { matches } from "./internal/keyboard/match";
+import keys from "./internal/keyboard/keys";
+import { ButtonKindsType } from "./types";
+import { settings } from "carbon-components";
+import { composeEventFunctions } from "./internal/events";
+import { Dynamic } from "solid-js/web";
+import { createId } from "./internal/id";
+
+const { prefix } = settings;
+
+export type ButtonProps = {
+  dangerDescription?: string;
+  disabled?: boolean;
+  role?: string;
+  size?: "default" | "field" | "small" | "sm" | "md" | "lg" | "xl" | "2xl";
+  renderIcon?: Component;
+  hasIconOnly?: boolean;
+  href?: string;
+  iconDescription?: string;
+  isExpressive?: boolean;
+  isSelected?: boolean;
+  tabIndex?: number;
+  tooltipAlignment?: "start" | "center" | "end";
+  tooltipPosition?: "top" | "start" | "bottom" | "left";
+  type?: "button" | "reset" | "submit";
+  ref?: HTMLElement | HTMLButtonElement | ((el: HTMLElement | HTMLButtonElement) => void);
+  kind?: ButtonKindsType;
+} & JSX.HTMLAttributes<HTMLElement>;
+
+const dangerButtonVariants = ["danger", "danger--tertiary", "danger--ghost"];
+
+const buttonImage = (renderIcon?: Component, iconDescription?: string) =>
+  !renderIcon ? undefined : (
+    <Dynamic
+      aria-label={iconDescription}
+      className={`${prefix}--btn__icon`}
+      aria-hidden="true"
+    />
+  );
+
+export const Button: Component<ButtonProps> = (props) => {
+  let rest: Omit<JSX.HTMLAttributes<HTMLElement>, "ref">;
+  [props, rest] = splitProps(props, [
+    "children",
+    "dangerDescription",
+    "disabled",
+    "role",
+    "size",
+    "renderIcon",
+    "hasIconOnly",
+    "href",
+    "iconDescription",
+    "isExpressive",
+    "isSelected",
+    "tabIndex",
+    "tooltipAlignment",
+    "tooltipPosition",
+    "type",
+    "onClick",
+    "onBlur",
+    "onFocus",
+    "onMouseEnter",
+    "onMouseLeave",
+    "ref",
+    "kind",
+  ]);
+  props = mergeProps(
+    {
+      tabIndex: 0,
+      type: "button",
+      disabled: false,
+      kind: "primary",
+      size: "default",
+      dangerDescription: "danger",
+      tooltipAlignment: "center",
+      tooltipPosition: "top",
+      isExpressive: false,
+    },
+    props
+  );
+  let tooltipRef: HTMLDivElement;
+  let buttonRef: HTMLElement;
+  let tooltipTimeout: number;
+  const [allowTooltipVisibility, setAllowTooltipVisibility] =
+    createSignal(false);
+  const [isHovered, setIsHovered] = createSignal(false);
+  const [isFocused, setIsFocused] = createSignal(false);
+  const [classList, setClassList] = createSignal<{
+    [key: string]: boolean | undefined;
+  }>({
+    [`${prefix}--btn`]: true,
+    [`${prefix}--btn--sm`]:
+      (props.size === "small" && !props.isExpressive) ||
+      (props.size === "sm" && !props.isExpressive),
+    [`${prefix}--btn--md`]:
+      (props.size === "field" && !props.isExpressive) ||
+      (props.size === "md" && !props.isExpressive),
+    [`${prefix}--btn--lg`]: props.size === "xl",
+    [`${prefix}--btn--xl`]: props.size === "2xl",
+    [`${prefix}--btn--${props.kind}`]: !!props.kind,
+    [`${prefix}--btn--disabled`]: props.disabled,
+    [`${prefix}--btn--expressive`]: props.isExpressive,
+    [`${prefix}--tooltip--hidden`]:
+      props.hasIconOnly && !allowTooltipVisibility(),
+    [`${prefix}--tooltip--visible`]: isHovered(),
+    [`${prefix}--btn--icon-only`]: props.hasIconOnly,
+    [`${prefix}--btn--selected`]:
+      props.hasIconOnly && props.isSelected && props.kind === "ghost",
+    [`${prefix}--tooltip__trigger`]: props.hasIconOnly,
+    [`${prefix}--tooltip--a11y`]: props.hasIconOnly,
+    [`${prefix}--btn--icon-only--${props.tooltipPosition}`]:
+      props.hasIconOnly && !!props.tooltipPosition,
+    [`${prefix}--tooltip--align-${props.tooltipAlignment}`]:
+      props.hasIconOnly && !!props.tooltipAlignment,
+  });
+  const potentiallyCloseTooltips = (evt: Event) =>
+    setClassList((list) => ({
+      ...list,
+      [`${prefix}--tooltip--hidden`]: evt.currentTarget !== buttonRef,
+    }));
+  const handleFocus = (evt: FocusEvent) => {
+    if (props.hasIconOnly) {
+      potentiallyCloseTooltips(evt);
+      setIsHovered(!isHovered);
+      setIsFocused(true);
+      setAllowTooltipVisibility(true);
+    }
+  };
+  const handleBlur = () => {
+    if (props.hasIconOnly) {
+      setIsHovered(false);
+      setIsFocused(false);
+      setAllowTooltipVisibility(false);
+    }
+  };
+  const handleMouseEnter = (evt: MouseEvent) => {
+    if (props.hasIconOnly) {
+      setIsHovered(true);
+      tooltipTimeout && clearTimeout(tooltipTimeout);
+
+      if (evt.target === tooltipRef) {
+        setAllowTooltipVisibility(true);
+        return;
+      }
+
+      potentiallyCloseTooltips(evt);
+
+      setAllowTooltipVisibility(true);
+    }
+  };
+  const handleMouseLeave = () => {
+    if (!isFocused() && props.hasIconOnly) {
+      tooltipTimeout = setTimeout(() => {
+        setAllowTooltipVisibility(false);
+        setIsHovered(false);
+      }, 100) as unknown as number;
+    }
+  };
+  const potentiallyPreventClickEvent = (evt: MouseEvent) => {
+    // Prevent clicks on the tooltip from triggering the button click event
+    if (evt.target === tooltipRef) {
+      evt.preventDefault();
+      return;
+    }
+  };
+  const handleEscKeyDown = (event: KeyboardEvent) => {
+    if (matches(event, [keys.Escape])) {
+      setAllowTooltipVisibility(false);
+      setIsHovered(false);
+    }
+  };
+  document.addEventListener("keydown", handleEscKeyDown);
+  onCleanup(() => document.removeEventListener("keydown", handleEscKeyDown));
+  const assistiveId = createId();
+
+  const assistiveText = () => {
+    if (props.hasIconOnly)
+      return (
+        <div
+          ref={tooltipRef}
+          onMouseEnter={handleMouseEnter}
+          className={`${prefix}--assistive-text`}
+        >
+          {props.iconDescription}
+        </div>
+      );
+    else if (dangerButtonVariants.includes(props.kind!))
+      return (
+        <span id={assistiveId} className={`${prefix}--visually-hidden`}>
+          {props.dangerDescription}
+        </span>
+      );
+    else return undefined;
+  };
+
+  return (
+    <Show
+      when={!props.href || props.disabled}
+      fallback={
+        <a
+          tabIndex={props.tabIndex}
+          classList={classList()}
+          ref={props.ref as HTMLAnchorElement}
+          onMouseEnter={composeEventFunctions([
+            props.onMouseEnter as () => any,
+            handleMouseEnter,
+          ])}
+          onMouseLeave={composeEventFunctions([
+            props.onMouseLeave as () => any,
+            handleMouseLeave,
+          ])}
+          onFocus={composeEventFunctions([
+            props.onFocus as () => any,
+            handleFocus,
+          ])}
+          onBlur={composeEventFunctions([
+            props.onBlur as () => any,
+            handleBlur,
+          ])}
+          onClick={composeEventFunctions([
+            potentiallyPreventClickEvent,
+            props.onClick as () => any,
+          ])}
+          {...rest}
+        >
+          {assistiveText()}
+          {props.children}
+          {buttonImage(props.renderIcon, props.iconDescription)}
+        </a>
+      }
+    >
+      <button
+        tabIndex={props.tabIndex}
+        classList={classList()}
+        ref={props.ref as HTMLButtonElement}
+        type={props.type}
+        disabled={props.disabled}
+        aria-describedby={
+          dangerButtonVariants.includes(props.kind!) ? assistiveId : undefined
+        }
+        aria-pressed={
+          props.hasIconOnly && props.kind === "ghost"
+            ? props.isSelected
+            : undefined
+        }
+        onMouseEnter={composeEventFunctions([
+          props.onMouseEnter as () => any,
+          handleMouseEnter,
+        ])}
+        onMouseLeave={composeEventFunctions([
+          props.onMouseLeave as () => any,
+          handleMouseLeave,
+        ])}
+        onFocus={composeEventFunctions([
+          props.onFocus as () => any,
+          handleFocus,
+        ])}
+        onBlur={composeEventFunctions([props.onBlur as () => any, handleBlur])}
+        onClick={composeEventFunctions([
+          potentiallyPreventClickEvent,
+          props.onClick as () => any,
+        ])}
+        {...rest}
+      >
+        {assistiveText()}
+        {props.children}
+        {buttonImage(props.renderIcon, props.iconDescription)}
+      </button>
+    </Show>
+  );
+};

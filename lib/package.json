@@ -1,0 +1,41 @@
+{
+  "name": "carbon-components-solid",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "dependencies": {
+    "lodash.debounce": "^4.0.8",
+    "lodash.findlast": "^4.6.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "5.3.0",
+    "@rollup/plugin-image": "^2.0.6",
+    "@types/carbon-components": "^10.27.0",
+    "rollup": "^2.52.4",
+    "rollup-preset-solid": "1.0.0"
+  },
+  "peerDependencies": {
+    "@carbon/icons": "^10.32.0",
+    "babel-preset-solid": "^0.26.5",
+    "carbon-components": "^10.35.0",
+    "copy-to-clipboard": "^3.3.1",
+    "flatpickr": "^4.6.1",
+    "solid-js": "^1.0.0"
+  },
+  "source": "src/index.tsx",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "solid": "./dist/source/index.jsx",
+      "import": "./dist/esm/index.js",
+      "browser": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "node": "./dist/cjs/index.js"
+    }
+  }
+}
