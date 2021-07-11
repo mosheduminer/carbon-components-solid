@@ -7,3 +7,4 @@ Use [AccordionItem](lib/src/AccordionItem.tsx) as a reference.
 + Most of the rest is just copy paste, then fix it up to work with solid
 + Move useMemos and useCallbacks into arrow functions, useEffect to createEffect (or no effect at all, if appropriate), change state to signal, etc.
 + instead of `cx` from classnames, use solid's `classList`. Sometimes it will be usefull to extract the classList to a variable, if so, just remember to define it as a function (`() => {"class": true}`), so it remains reactive.
++ Don't port deprecated components, they contain `warning(didWarnAboutDeprecation,...` in the source code.
