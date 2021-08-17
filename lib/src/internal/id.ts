@@ -1,11 +1,3 @@
-import { settings } from "carbon-components";
-const { prefix } = settings;
+import { createUniqueId } from "solid-js";
 
-const setupCreateId = () => {
-  let i = 0;
-  return () => {
-    return `${prefix}-${i++}`
-  }
-}
-
-export const createId = setupCreateId();
+export const createId = createUniqueId;

@@ -10,7 +10,7 @@
     "flatpickr": "^4.6.1",
     "lodash.debounce": "^4.0.8",
     "lodash.findlast": "^4.6.0",
-    "solid-js": "^1.0.0"
+    "solid-js": "^1.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
