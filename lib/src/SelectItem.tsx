@@ -45,6 +45,3 @@ export const SelectItem: Component<SelectItemProps> = (props) => {
     </option>
   );
 };
-
-export default SelectItem;
- 
