@@ -1,6 +1,7 @@
 import { getByText } from '../utils/dom';
 import { fireEvent, render } from 'solid-testing-library';
 import { AccordionItem } from '../src/AccordionItem';
+import { createSignal } from 'solid-js';
 import { settings } from 'carbon-components';
 
 
@@ -17,23 +18,24 @@ describe('AccordionItem', () => {
   });
 
   it('should update the item open state when the `open` prop changes', () => {
-    const wrapper = render(() =>
-      <AccordionItem title="A heading" open>
+    const [open, setOpen] = createSignal(true);
+    const { container } = render(() =>
+      <AccordionItem title="A heading" open={open()}>
         Lorem ipsum.
       </AccordionItem>
     );
 
     expect(
-      (wrapper
-        .find(`.${prefix}--accordion__item`) as HTMLElement)
+      (container
+        .querySelector(`.${prefix}--accordion__item`) as HTMLElement)
         .classList.contains(`${prefix}--accordion__item--active`)
     ).toBe(true);
 
-    wrapper.setProps({ open: false });
+    setOpen(false);
 
     expect(
-      (wrapper
-        .find(`.${prefix}--accordion__item`) as HTMLElement)
+      (container
+        .querySelector(`.${prefix}--accordion__item`) as HTMLElement)
         .classList.contains(`${prefix}--accordion__item--active`)
     ).toBe(false);
   });
@@ -47,51 +49,53 @@ describe('AccordionItem', () => {
       </AccordionItem>
     );
 
-    fireEvent.click(getByText(container, title));
+    fireEvent.click(getByText(container, title)!);
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('should call `onHeadingClick` when the accordion header is clicked', () => {
     const onHeadingClick = jest.fn();
-    const wrapper = render(() =>
+    const { container } = render(() =>
       <AccordionItem title="A heading" open onHeadingClick={onHeadingClick}>
         Lorem ipsum.
       </AccordionItem>
     );
-    (wrapper.find('button') as HTMLElement).click();
+    fireEvent.click(container.querySelector('button') as HTMLElement);
     expect(onHeadingClick).toHaveBeenCalledTimes(1);
   });
 
   it('should close an open AccordionItem panel when the Esc key is pressed', () => {
-    const wrapper = render(() =>
+    const { container } = render(() =>
       <AccordionItem title="A heading" open>
         Lorem ipsum.
       </AccordionItem>
     );
-    (wrapper.find('button') as HTMLElement).dispatchEvent(new KeyboardEvent('keydown', {
+    fireEvent.keyDown(container.querySelector('button') as HTMLElement, {
       key: 'Escape',
       keyCode: 27,
-    }));
+      //@ts-ignore
+      which: 27,
+    });
     expect(
-      (wrapper
-        .find(`.${prefix}--accordion__item`) as HTMLElement)
+      (container
+        .querySelector(`.${prefix}--accordion__item`) as HTMLElement)
         .classList.contains(`${prefix}--accordion__item--active`)
     ).toBe(false);
   });
 
   it('should not close an open AccordionItem panel if the Esc key is pressed in the panel', () => {
-    const wrapper = render(() =>
+    const { container } = render(() =>
       <AccordionItem title="A heading" open>
         <input data-test-id="input" />
       </AccordionItem>
     );
-    (wrapper.find('[data-test-id="input"]') as HTMLElement).dispatchEvent(new KeyboardEvent('keydown', {
+    (container.querySelector('[data-test-id="input"]') as HTMLElement).dispatchEvent(new KeyboardEvent('keydown', {
       key: 'Escape',
       keyCode: 27,
     }));
     expect(
-      (wrapper
-        .find(`.${prefix}--accordion__item`) as HTMLElement)
+      (container
+        .querySelector(`.${prefix}--accordion__item`) as HTMLElement)
         .classList.contains(`${prefix}--accordion__item--active`)
     ).toBe(true);
   });

@@ -14,13 +14,13 @@
  * @param {string} text
  * @returns {?HTMLElement}
  */
-export function getByText(node, text) {
-  if (node.nodeType === Node.TEXT_NODE && node.textContent.trim() === text) {
-    return node.parentNode;
+export function getByText(node: HTMLElement, text: string): HTMLElement | null {
+  if (node.nodeType === Node.TEXT_NODE && node.textContent!.trim() === text) {
+    return node.parentNode as HTMLElement;
   }
 
   for (const child of node.childNodes) {
-    const match = getByText(child, text);
+    const match = getByText(child as HTMLElement, text);
     if (match) {
       return match;
     }
@@ -36,7 +36,7 @@ export function getByText(node, text) {
  * @param {string} label
  * @returns {?HTMLElement}
  */
-export function getByLabel(node, label) {
+export function getByLabel(node: HTMLElement, label: string): HTMLElement | null {
   if (node.nodeType === Node.ELEMENT_NODE) {
     if (
       node.hasAttribute('aria-label') &&
@@ -47,17 +47,17 @@ export function getByLabel(node, label) {
 
     if (node.hasAttribute('aria-labelledby')) {
       const labelledby = node.getAttribute('aria-labelledby');
-      const labelers = labelledby.split(' ').map((id) => {
+      const labelers = labelledby!.split(' ').map((id) => {
         return document.getElementById(id);
       });
 
       for (const labeler of labelers) {
-        const labelMatch = getByLabel(labeler, label);
+        const labelMatch = getByLabel(labeler!, label);
         if (labelMatch) {
           return node;
         }
 
-        const textMatch = getByText(labeler, label);
+        const textMatch = getByText(labeler!, label);
         if (textMatch) {
           return node;
         }
@@ -73,7 +73,7 @@ export function getByLabel(node, label) {
   }
 
   for (const child of node.childNodes) {
-    const match = getByLabel(child, label);
+    const match = getByLabel(child as HTMLElement, label);
     if (match) {
       return match;
     }
@@ -88,8 +88,8 @@ export function getByLabel(node, label) {
  * @param {HTMLElement} element
  * @returns {boolean}
  */
-export function isElementVisible(element) {
-  const { getComputedStyle } = element.ownerDocument.defaultView;
+export function isElementVisible(element: HTMLElement): boolean {
+  const { getComputedStyle } = element.ownerDocument.defaultView!;
   const { display, visibility, opacity } = getComputedStyle(element);
 
   if (
@@ -98,6 +98,7 @@ export function isElementVisible(element) {
     visibility === 'hidden' ||
     visibility === 'collapse' ||
     opacity === '0' ||
+    //@ts-ignore
     opacity === 0
   ) {
     return false;
