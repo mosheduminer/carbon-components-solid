@@ -28,7 +28,6 @@ export const AccordionItem: Component<AccordionItemProps> = (props) => {
     "class",
     "children",
     "disabled",
-    "onClick",
     "onHeadingClick",
     "open",
     "title",
@@ -91,7 +90,7 @@ export const AccordionItem: Component<AccordionItemProps> = (props) => {
         disabled={props.disabled}
         aria-expanded={isOpen()}
         className={`${prefix}--accordion__heading`}
-        onClick={onClick}
+        onClick={(e) => onClick(e)}
         onKeyDown={onKeyDown}
         type="button"
       >

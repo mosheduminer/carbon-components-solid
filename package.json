@@ -15,6 +15,7 @@
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-typescript": "^7.13.0",
+    "@types/jest": "^27.0.1",
     "@types/lodash.debounce": "^4.0.6",
     "@types/lodash.findlast": "^4.6.6",
     "babel-loader": "^8.2.2",
