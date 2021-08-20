@@ -53,7 +53,7 @@ export const ContentSwitcher: Component<ContentSwitcherProps> = (props) => {
     }
   };
 
-  const chlds = children(() => props.children) as () => ContentSwitchProps[];
+  const chlds = children(() => props.children) as unknown as () => ContentSwitchProps[];
 
   return (
     <div {...rest} classList={{

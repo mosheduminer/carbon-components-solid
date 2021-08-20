@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion should render 1`] = `
+<div>
+  <ul
+    class="bx--accordion bx--accordion--end"
+  >
+    <li
+      class="child bx--accordion__item--function () { [native code] }"
+    >
+      <button
+        aria-expanded="false"
+        class="bx--accordion__heading"
+        type="button"
+      >
+        <svg
+          class="bx--accordion__arrow"
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
+        <div
+          class="bx--accordion__title"
+        >
+          Heading A
+        </div>
+      </button>
+      <div
+        class="bx--accordion__content"
+      >
+        Panel A
+      </div>
+    </li>
+    <li
+      class="child bx--accordion__item--function () { [native code] }"
+    >
+      <button
+        aria-expanded="false"
+        class="bx--accordion__heading"
+        type="button"
+      >
+        <svg
+          class="bx--accordion__arrow"
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
+        <div
+          class="bx--accordion__title"
+        >
+          Heading B
+        </div>
+      </button>
+      <div
+        class="bx--accordion__content"
+      >
+        Panel B
+      </div>
+    </li>
+    <li
+      class="child bx--accordion__item--function () { [native code] }"
+    >
+      <button
+        aria-expanded="false"
+        class="bx--accordion__heading"
+        type="button"
+      >
+        <svg
+          class="bx--accordion__arrow"
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
+        <div
+          class="bx--accordion__title"
+        >
+          Heading C
+        </div>
+      </button>
+      <div
+        class="bx--accordion__content"
+      >
+        Panel C
+      </div>
+    </li>
+  </ul>
+</div>
+`;
