@@ -5,7 +5,7 @@ Object {
   "baseElement": <body>
     <div>
       <li
-        class="bx--accordion__item bx--accordion__item--function () { [native code] } extra-class"
+        class="bx--accordion__item extra-class"
       >
         <button
           aria-expanded="false"
@@ -37,7 +37,7 @@ Object {
   </body>,
   "container": <div>
     <li
-      class="bx--accordion__item bx--accordion__item--function () { [native code] } extra-class"
+      class="bx--accordion__item extra-class"
     >
       <button
         aria-expanded="false"

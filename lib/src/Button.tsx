@@ -42,7 +42,7 @@ const buttonImage = (renderIcon?: Component, iconDescription?: string) =>
   !renderIcon ? undefined : (
     <Dynamic
       aria-label={iconDescription}
-      className={`${prefix}--btn__icon`}
+      class={`${prefix}--btn__icon`}
       aria-hidden="true"
     />
   );
@@ -188,14 +188,14 @@ export const Button: Component<ButtonProps> = (props) => {
         <div
           ref={tooltipRef}
           onMouseEnter={handleMouseEnter}
-          className={`${prefix}--assistive-text`}
+          class={`${prefix}--assistive-text`}
         >
           {props.iconDescription}
         </div>
       );
     else if (dangerButtonVariants.includes(props.kind!))
       return (
-        <span id={assistiveId} className={`${prefix}--visually-hidden`}>
+        <span id={assistiveId} class={`${prefix}--visually-hidden`}>
           {props.dangerDescription}
         </span>
       );

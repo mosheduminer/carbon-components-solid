@@ -521,13 +521,13 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
           const error = () => {
             if (childProps.invalid) {
               return (
-                <div className={`${prefix}--form-requirement`}>
+                <div class={`${prefix}--form-requirement`}>
                   {childProps.invalidText}
                 </div>
               );
             } else if (childProps.warn) {
               return (
-                <div className={`${prefix}--form-requirement`}>
+                <div class={`${prefix}--form-requirement`}>
                   {childProps.warnText}
                 </div>
               );
@@ -589,7 +589,7 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
                 <Switch
                   fallback={
                     <Calendar
-                      className={`${prefix}--date-picker__icon`}
+                      class={`${prefix}--date-picker__icon`}
                       aria-label={childProps.iconDescription}
                       onClick={childProps.openCalendar}
                       role="img"

@@ -10,7 +10,7 @@ import { fireEvent } from "solid-testing-library"
  * @param {HTMLInputElement} input
  * @param {Array<File>} [files]
  */
-export function uploadFiles(input: HTMLInputElement, files: File[] = []) {
+export function uploadFiles(input: HTMLInputElement, files: File[] | File = []) {
   // Define the 'files' property on the input with the given files
   Object.defineProperty(input, 'files', {
     writable: true,

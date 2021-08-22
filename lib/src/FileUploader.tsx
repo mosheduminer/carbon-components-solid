@@ -165,7 +165,7 @@ export const FileUploaderDropContainer: Component<FileUploaderDropContainerProps
           <input
             type="file"
             id={uid()}
-            className={`${prefix}--file-input`}
+            class={`${prefix}--file-input`}
             ref={inputRef}
             tabIndex="-1"
             disabled={props.disabled}
@@ -190,12 +190,12 @@ export type FileUploaderButtonProps = {
   disableLabelChanges?: boolean;
   disabled?: boolean;
   id?: string;
-  labelText: JSX.Element;
+  labelText?: JSX.Element;
   listFiles?: boolean;
   multiple?: boolean;
   name?: string;
-  onInput: (e: InputEvent) => any;
-  onClick?: JSX.BoundEventHandler<HTMLLabelElement, MouseEvent>;
+  onInput?: (e: InputEvent) => any;
+  onClick?: JSX.EventHandler<HTMLLabelElement, MouseEvent>;
   role?: string;
   size?: "default" | "sm" | "md" | "lg";
   tabIndex?: number;
@@ -271,7 +271,7 @@ export const FileUploaderButton: Component<FileUploaderButtonProps> = (
         setLabelText(files[0].name);
       }
     }
-    props.onInput(event);
+    props.onInput && props.onInput(event);
   }
 
   return (
@@ -279,6 +279,7 @@ export const FileUploaderButton: Component<FileUploaderButtonProps> = (
       <label
         tabIndex={props.disabled ? -1 : props.tabIndex || 0}
         classList={{
+          [props.class!]: !!props.class,
           [`${prefix}--btn--${props.buttonKind}`]: !!props.buttonKind,
           [`${prefix}--btn--disabled`]: props.disabled,
           // V11: remove field, small
@@ -295,7 +296,7 @@ export const FileUploaderButton: Component<FileUploaderButtonProps> = (
         </span>
       </label>
       <input
-        className={`${prefix}--visually-hidden`}
+        class={`${prefix}--visually-hidden`}
         ref={inputRef}
         id={inputId()}
         disabled={props.disabled}
@@ -343,13 +344,13 @@ export const Filename: Component<FilenameProps> = (props) => {
       <Match when={props.status === "edit"}>
         <>
           {props.invalid && (
-            <WarningFilled className={`${prefix}--file-invalid`} />
+            <WarningFilled class={`${prefix}--file-invalid`} />
           )}
           {/**
            @ts-ignore */}
           <button
             aria-label={props.iconDescription}
-            className={`${prefix}--file-close`}
+            class={`${prefix}--file-close`}
             type="button"
             {...rest}
           >
@@ -412,10 +413,10 @@ export const FileUploaderItem: Component<FileUploaderItemProps> = (props) => {
       }}
       {...rest}
     >
-      <p className={`${prefix}--file-filename`} title={props.name}>
+      <p class={`${prefix}--file-filename`} title={props.name}>
         {props.name}
       </p>
-      <span className={`${prefix}--file__state-container`}>
+      <span class={`${prefix}--file__state-container`}>
         <Filename
           iconDescription={props.iconDescription}
           status={props.status}
@@ -424,7 +425,7 @@ export const FileUploaderItem: Component<FileUploaderItemProps> = (props) => {
             //@ts-ignore
             (evt) => {
               if (matches(evt, [keys.Enter, keys.Space])) {
-                if (status === "edit") {
+                if (props.status === "edit") {
                   props.onDelete && props.onDelete(evt, { uuid: id });
                 }
               }
@@ -433,7 +434,8 @@ export const FileUploaderItem: Component<FileUploaderItemProps> = (props) => {
           onClick={
             //@ts-ignore
             (evt) => {
-              if (status === "edit") {
+              console.log("testing here")
+              if (props.status === "edit") {
                 props.onDelete && props.onDelete(evt, { uuid: id });
               }
             }
@@ -446,7 +448,7 @@ export const FileUploaderItem: Component<FileUploaderItemProps> = (props) => {
             {props.errorSubject}
           </div>
           {props.errorBody && (
-            <p className={`${prefix}--form-requirement__supplement`}>
+            <p class={`${prefix}--form-requirement__supplement`}>
               {props.errorBody}
             </p>
           )}
@@ -461,7 +463,7 @@ export type FileUploaderProps = {
   buttonKind?: ButtonKindsType;
   buttonLabel?: string;
   class?: string;
-  filenameStatus: "edit" | "complete" | "uploading";
+  filenameStatus?: "edit" | "complete" | "uploading";
   iconDescription?: string;
   labelDescription?: string;
   labelTitle?: string;
@@ -471,6 +473,7 @@ export type FileUploaderProps = {
   onClick?: (event: Event) => any;
   onDelete?: (event: Event) => any;
   size?: "sm" | "md" | "lg";
+  clearFiles?: (func: () => void) => any;
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const FileUploader: Component<FileUploaderProps> = (props) => {
@@ -480,7 +483,6 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
     "buttonKind",
     "buttonLabel",
     "class",
-    "filenameStatus",
     "filenameStatus",
     "iconDescription",
     "labelDescription",
@@ -516,6 +518,7 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
       setPrevFilenameStatus(filenameStatus());
     }
   });
+  props.clearFiles && props.clearFiles(() => setFilenames([]));
   const handleChange = (evt: InputEvent) => {
     evt.stopPropagation();
     const filenames = Array.prototype.map.call(
@@ -567,8 +570,8 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
       }}
       {...rest}
     >
-      <p className={`${prefix}--file--label`}>{props.labelTitle}</p>
-      <p className={`${prefix}--label-description`}>{props.labelDescription}</p>
+      <p class={`${prefix}--file--label`}>{props.labelTitle}</p>
+      <p class={`${prefix}--label-description`}>{props.labelDescription}</p>
       <FileUploaderButton
         labelText={props.buttonLabel}
         multiple={props.multiple}
@@ -579,7 +582,7 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
         name={props.name}
         size={props.size}
       />
-      <div className={`${prefix}--file-container`}>
+      <div class={`${prefix}--file-container`}>
         <For each={filenames()}>
           {(name, index) => (
             <span
@@ -591,8 +594,8 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
               ref={nodes[index()]}
               {...rest}
             >
-              <p className={`${prefix}--file-filename`}>{name}</p>
-              <span className={`${prefix}--file__state-container`}>
+              <p class={`${prefix}--file-filename`}>{name}</p>
+              <span class={`${prefix}--file__state-container`}>
                 <Filename
                   iconDescription={props.iconDescription}
                   status={filenameStatus()}

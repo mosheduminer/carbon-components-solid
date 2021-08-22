@@ -75,17 +75,17 @@ export const Toggle: Component<ToggleProps> = (props) => {
         }}
       />
       <label
-        className={`${prefix}--toggle-input__label`}
+        class={`${prefix}--toggle-input__label`}
         for={props.id}
         aria-label={
           typeof props.labelText === "string" ? undefined : props["aria-label"]
         }
       >
         {props.labelText}
-        <span className={`${prefix}--toggle__switch`}>
+        <span class={`${prefix}--toggle__switch`}>
           {props.size && (
             <svg
-              className={`${prefix}--toggle__check`}
+              class={`${prefix}--toggle__check`}
               width="6px"
               height="5px"
               viewBox="0 0 6 5"
@@ -93,10 +93,10 @@ export const Toggle: Component<ToggleProps> = (props) => {
               <path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z" />
             </svg>
           )}
-          <span className={`${prefix}--toggle__text--off`} aria-hidden="true">
+          <span class={`${prefix}--toggle__text--off`} aria-hidden="true">
             {props.labelA}
           </span>
-          <span className={`${prefix}--toggle__text--on`} aria-hidden="true">
+          <span class={`${prefix}--toggle__text--on`} aria-hidden="true">
             {props.labelB}
           </span>
         </span>

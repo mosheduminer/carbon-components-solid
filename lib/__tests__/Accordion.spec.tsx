@@ -8,14 +8,14 @@ describe('Accordion', () => {
 
   it('should render', () => {
     const { container } = render(() =>
-      <Accordion className="extra-class">
-        <AccordionItem className="child" title="Heading A">
+      <Accordion class="extra-class">
+        <AccordionItem class="child" title="Heading A">
           Panel A
         </AccordionItem>
-        <AccordionItem className="child" title="Heading B">
+        <AccordionItem class="child" title="Heading B">
           Panel B
         </AccordionItem>
-        <AccordionItem className="child" title="Heading C">
+        <AccordionItem class="child" title="Heading C">
           Panel C
         </AccordionItem>
       </Accordion>
@@ -27,14 +27,14 @@ describe('Accordion', () => {
   describe('automated verification testing', () => {
     it('should have no Axe violations', async () => {
       render(() =>
-        <Accordion className="extra-class">
-          <AccordionItem className="child" title="Heading A">
+        <Accordion class="extra-class">
+          <AccordionItem class="child" title="Heading A">
             Panel A
           </AccordionItem>
-          <AccordionItem className="child" title="Heading B">
+          <AccordionItem class="child" title="Heading B">
             Panel B
           </AccordionItem>
-          <AccordionItem className="child" title="Heading C">
+          <AccordionItem class="child" title="Heading C">
             Panel C
           </AccordionItem>
         </Accordion>
@@ -56,14 +56,14 @@ describe('Accordion', () => {
     it('should have no Accessibility Checker violations', async () => {
       render(() =>
         <main>
-          <Accordion className="extra-class">
-            <AccordionItem className="child" title="Heading A">
+          <Accordion class="extra-class">
+            <AccordionItem class="child" title="Heading A">
               Panel A
             </AccordionItem>
-            <AccordionItem className="child" title="Heading B">
+            <AccordionItem class="child" title="Heading B">
               Panel B
             </AccordionItem>
-            <AccordionItem className="child" title="Heading C">
+            <AccordionItem class="child" title="Heading C">
               Panel C
             </AccordionItem>
           </Accordion>
@@ -91,14 +91,14 @@ describe('Accordion', () => {
   describe('basic keyboard accessibility testing', () => {
     it('should receive focus', async () => {
       render(() =>
-        <Accordion className="extra-class">
-          <AccordionItem className="child" title="Heading A">
+        <Accordion class="extra-class">
+          <AccordionItem class="child" title="Heading A">
             Panel A
           </AccordionItem>
-          <AccordionItem className="child" title="Heading B">
+          <AccordionItem class="child" title="Heading B">
             Panel B
           </AccordionItem>
-          <AccordionItem className="child" title="Heading C">
+          <AccordionItem class="child" title="Heading C">
             Panel C
           </AccordionItem>
         </Accordion>
@@ -110,14 +110,14 @@ describe('Accordion', () => {
 
     it('should open with enter', async () => {
       render(() =>
-        <Accordion className="extra-class">
-          <AccordionItem className="child" title="Heading A">
+        <Accordion class="extra-class">
+          <AccordionItem class="child" title="Heading A">
             Panel A
           </AccordionItem>
-          <AccordionItem className="child" title="Heading B">
+          <AccordionItem class="child" title="Heading B">
             Panel B
           </AccordionItem>
-          <AccordionItem className="child" title="Heading C">
+          <AccordionItem class="child" title="Heading C">
             Panel C
           </AccordionItem>
         </Accordion>
@@ -134,14 +134,14 @@ describe('Accordion', () => {
 
     it('should open with spacebar', async () => {
       render(() =>
-        <Accordion className="extra-class">
-          <AccordionItem className="child" title="Heading A">
+        <Accordion class="extra-class">
+          <AccordionItem class="child" title="Heading A">
             Panel A
           </AccordionItem>
-          <AccordionItem className="child" title="Heading B">
+          <AccordionItem class="child" title="Heading B">
             Panel B
           </AccordionItem>
-          <AccordionItem className="child" title="Heading C">
+          <AccordionItem class="child" title="Heading C">
             Panel C
           </AccordionItem>
         </Accordion>

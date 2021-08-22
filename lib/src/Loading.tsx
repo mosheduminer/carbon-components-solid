@@ -47,21 +47,21 @@ export const Loading: Component<LoadingProps> = (props) => {
         [`${prefix}--loading--stop`]: !props.active,
       }}
     >
-      <label id={loadingId} className={`${prefix}--visually-hidden`}>
+      <label id={loadingId} class={`${prefix}--visually-hidden`}>
         {props.description}
       </label>
-      <svg className={`${prefix}--loading__svg`} viewBox="0 0 100 100">
+      <svg class={`${prefix}--loading__svg`} viewBox="0 0 100 100">
         <title>{props.description}</title>
         {props.small ? (
           <circle
-            className={`${prefix}--loading__background`}
+            class={`${prefix}--loading__background`}
             cx="50%"
             cy="50%"
             r="44"
           />
         ) : undefined}
         <circle
-          className={`${prefix}--loading__stroke`}
+          class={`${prefix}--loading__stroke`}
           cx="50%"
           cy="50%"
           r="44"
