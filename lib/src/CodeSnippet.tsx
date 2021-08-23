@@ -205,7 +205,7 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
         ref={codeContainerRef}
         role={props.type === 'single' ? 'textbox' : undefined}
         tabIndex={props.type === 'single' && !props.disabled ? 0 : undefined}
-        className={`${prefix}--snippet-container`}
+        class={`${prefix}--snippet-container`}
         aria-label={props.ariaLabel || 'code-snippet'}
         onScroll={(props.type === 'single' && handleScroll) || undefined}
         style={styles()}>
@@ -220,10 +220,10 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
        * snippet focus border overlap
        */}
       {hasLeftOverflow() && (
-        <div className={`${prefix}--snippet__overflow-indicator--left`} />
+        <div class={`${prefix}--snippet__overflow-indicator--left`} />
       )}
       {hasRightOverflow() && (
-        <div className={`${prefix}--snippet__overflow-indicator--right`} />
+        <div class={`${prefix}--snippet__overflow-indicator--right`} />
       )}
       {!props.hideCopyButton && (
         <CopyButton
@@ -238,15 +238,15 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
         <Button
           kind="ghost"
           size="field"
-          className={`${prefix}--snippet-btn--expand`}
+          class={`${prefix}--snippet-btn--expand`}
           disabled={props.disabled}
           onClick={() => setExpandedCode(!expandedCode)}>
-          <span className={`${prefix}--snippet-btn--text`}>
+          <span class={`${prefix}--snippet-btn--text`}>
             {expandCodeBtnText()}
           </span>
           <ChevronDown
             aria-label={expandCodeBtnText()}
-            className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
+            class={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             role="img"
           />
         </Button>

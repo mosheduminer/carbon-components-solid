@@ -15,5 +15,8 @@ export * from "./ContextMenu";
 export * from "./Copy";
 export * from "./CopyButton";
 export * from "./DangerButton";
+export * from "./DatePicker";
+export * from "./DatePickerInput";
+export * from "./FileUploader";
 export * from "./icons";
 export * from "./SkeletonText";

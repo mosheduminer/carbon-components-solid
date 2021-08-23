@@ -61,7 +61,7 @@ export const Copy: Component<CopyProps> = (props) => {
       {animation() ? props.feedback : rest['aria-label']}
       <span
         aria-hidden="true"
-        className={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
+        class={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
         {props.feedback}
       </span>
     </button>

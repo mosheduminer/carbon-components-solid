@@ -186,7 +186,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
         ref={startSentinel}
         tabIndex="0"
         role="link"
-        className={`${prefix}--visually-hidden`}
+        class={`${prefix}--visually-hidden`}
       >
         Focus sentinel
       </span>
@@ -209,7 +209,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
         ref={endSentinel}
         tabIndex="0"
         role="link"
-        className={`${prefix}--visually-hidden`}
+        class={`${prefix}--visually-hidden`}
       >
         Focus sentinel
       </span>
@@ -325,7 +325,7 @@ export const ModalBody: Component<ModalBodyProps> = (props) => {
         {props.children}
       </div>
       {props.hasScrollingContent && (
-        <div className={`${prefix}--modal-content--overflow-indicator`} />
+        <div class={`${prefix}--modal-content--overflow-indicator`} />
       )}
     </>
   );
@@ -382,7 +382,7 @@ export const ModalFooter: (props: ModalFooterProps) => (innerProps: {
     if (props.secondaryButtonText) {
       return (
         <Button
-          className={props.secondaryClass}
+          class={props.secondaryClass}
           onClick={props.onRequestClose}
           kind="secondary"
         >

@@ -1,4 +1,4 @@
-import { getByText } from '../utils/dom';
+import { getByText } from '../test-utils/dom';
 import { fireEvent, render } from 'solid-testing-library';
 import { AccordionItem } from '../src/AccordionItem';
 import { createSignal } from 'solid-js';

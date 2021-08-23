@@ -91,7 +91,7 @@ export const ContentSwitcher: Component<ContentSwitcherProps> = (props) => {
             {...rest}
             class={`${prefix}--content-switcher-btn`}
             classList={{ [`${prefix}--content-switcher--selected`]: slctd, [childProps.class!]: !!childProps.class }}>
-            <span className={`${prefix}--content-switcher__label`} title={childProps.text}>
+            <span class={`${prefix}--content-switcher__label`} title={childProps.text}>
               {childProps.text}
             </span>
           </button>

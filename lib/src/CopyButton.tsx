@@ -35,7 +35,7 @@ export const CopyButton: Component<CopyButtonProps> = (props) => {
   );
   return (
     <Copy
-      class={`className ${prefix}--copy-btn`}
+      class={`class ${prefix}--copy-btn`}
       onClick={props.onClick}
       disabled={props.disabled}
       feedbackTimeout={props.feedbackTimeout}

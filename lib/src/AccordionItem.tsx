@@ -79,7 +79,7 @@ export const AccordionItem: Component<AccordionItemProps> = (props) => {
       class={`${prefix}--accordion__item`}
       classList={{
         [`${prefix}--accordion__item--active`]: isOpen(),
-        [`${prefix}--accordion__item--${animation}`]: !!animation,
+        [`${prefix}--accordion__item--${animation()}`]: !!animation(),
         [`${prefix}--accordion__item--disabled`]: props.disabled,
         [props.class!]: !!props.class,
       }}
@@ -89,15 +89,15 @@ export const AccordionItem: Component<AccordionItemProps> = (props) => {
       <button
         disabled={props.disabled}
         aria-expanded={isOpen()}
-        className={`${prefix}--accordion__heading`}
+        class={`${prefix}--accordion__heading`}
         onClick={(e) => onClick(e)}
         onKeyDown={onKeyDown}
         type="button"
       >
         <ChevronRight class={`${prefix}--accordion__arrow`} />
-        <div className={`${prefix}--accordion__title`}>{props.title}</div>
+        <div class={`${prefix}--accordion__title`}>{props.title}</div>
       </button>
-      <div className={`${prefix}--accordion__content`}>{props.children}</div>
+      <div class={`${prefix}--accordion__content`}>{props.children}</div>
     </li>
   );
 };
