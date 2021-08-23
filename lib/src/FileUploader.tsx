@@ -10,7 +10,6 @@ import {
   Switch,
   Match,
   For,
-  onMount,
 } from "solid-js";
 import { CloseFilled, WarningFilled, CheckmarkFilled } from "./icons/16";
 import { Loading } from "./Loading";
@@ -492,6 +491,7 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
     "onClick",
     "onDelete",
     "size",
+    "clearFiles",
   ]);
   props = mergeProps(
     {
@@ -511,14 +511,14 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
     createSignal<string | undefined>(undefined);
   const [filenameStatus, setFilenameStatus] =
     createSignal<"edit" | "complete" | "uploading" | undefined>(undefined);
-  onMount(() => {
+  createEffect(() => {
     if (prevFilenameStatus() !== props.filenameStatus) {
       setFilenameStatus(props.filenameStatus);
       setPrevFilenameStatus(filenameStatus());
     }
   });
   props.clearFiles && props.clearFiles(() => setFilenames([]));
-  const handleChange = (evt: InputEvent) => {
+  const handleChange = (evt: Event) => {
     evt.stopPropagation();
     const filenames = Array.prototype.map.call(
       (evt.target as HTMLInputElement).files,
@@ -575,7 +575,7 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
         labelText={props.buttonLabel}
         multiple={props.multiple}
         buttonKind={props.buttonKind}
-        onInput={handleChange}
+        onChange={handleChange}
         disableLabelChanges
         accept={props.accept}
         name={props.name}

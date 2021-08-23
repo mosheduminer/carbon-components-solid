@@ -2,6 +2,7 @@ import { getByLabel, getByText } from "../test-utils/dom";
 import { render, cleanup } from "solid-testing-library";
 import { FileUploader } from "../src";
 import { uploadFiles } from "../test-utils/upload-files";
+import { createSignal } from "solid-js";
 
 describe("FileUploader", () => {
   afterEach(cleanup);
@@ -39,7 +40,7 @@ describe("FileUploader", () => {
     expect(getByText(container, "upload")).toBeInstanceOf(HTMLElement);
   });
 
-  it("should clear all uploaded files when `clearFiles` is called on a ref", () => {
+  it("should clear all uploaded files when `clearFiles` is called", () => {
     let clearFiles!: () => any;
     const { container } = render(() => (
       <FileUploader clearFiles={(func) => (clearFiles = func)} />
@@ -57,9 +58,10 @@ describe("FileUploader", () => {
   it("should synchronize the filename status state when its prop changes", () => {
     const container = document.createElement("div");
     const description = "test";
+    const [status, setStatus] = createSignal<"edit" | "complete" | "uploading" | undefined>("edit");
     render(
       () => (
-        <FileUploader filenameStatus="edit" iconDescription={description} />
+        <FileUploader filenameStatus={status()} iconDescription={description} />
       ),
       {
         container,
@@ -71,14 +73,7 @@ describe("FileUploader", () => {
 
     const edit = getByLabel(container, description)!;
 
-    render(
-      () => (
-        <FileUploader filenameStatus="complete" iconDescription={description} />
-      ),
-      {
-        container,
-      }
-    );
+    setStatus("complete")
 
     const complete = getByLabel(container, description)!;
     expect(edit.parentNode).not.toEqual(complete.parentNode);
