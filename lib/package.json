@@ -2,7 +2,7 @@
   "name": "carbon-components-solid",
   "scripts": {
     "build": "rollup -c",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
+    "test": "jest"
   },
   "dependencies": {
     "lodash.debounce": "^4.0.8",

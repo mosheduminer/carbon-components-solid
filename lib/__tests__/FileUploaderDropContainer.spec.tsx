@@ -72,11 +72,7 @@ describe("FileUploaderDropContainer", () => {
     uploadFiles(input!, files);
     expect(onAddFiles).toHaveBeenCalledTimes(1);
     expect(onAddFiles).toHaveBeenCalledWith(
-      expect.objectContaining({
-        target: {
-          files,
-        },
-      }),
+      expect.anything(),
       { addedFiles: files }
     );
   });

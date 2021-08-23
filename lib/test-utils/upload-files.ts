@@ -13,6 +13,8 @@ import { fireEvent } from "solid-testing-library"
 export function uploadFiles(input: HTMLInputElement, files: File[] | File = []) {
   // Define the 'files' property on the input with the given files
   Object.defineProperty(input, 'files', {
+    configurable: true,
+    enumerable: true,
     writable: true,
     value: files,
   });

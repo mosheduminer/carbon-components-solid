@@ -30,7 +30,7 @@ export type FileUploaderDropContainerProps = {
   multiple?: boolean;
   name?: string;
   onAddFiles?: (
-    event: (DragEvent | InputEvent) & {
+    event: (DragEvent | Event) & {
       currentTarget: HTMLInputElement;
       target: Element;
     },
@@ -72,7 +72,7 @@ export const FileUploaderDropContainer: Component<FileUploaderDropContainerProps
     function validateFiles(
       event:
         | DragEvent
-        | (InputEvent & { currentTarget: HTMLInputElement; target: Element })
+        | (Event & { currentTarget: HTMLInputElement; target: Element })
     ): (File & { invalidFileType?: boolean })[] {
       const transferredFiles =
         event.type === "drop"
@@ -98,9 +98,9 @@ export const FileUploaderDropContainer: Component<FileUploaderDropContainerProps
       }, [] as (File & { invalidFileType?: boolean })[]);
     }
 
-    const handleInput: JSX.EventHandler<
+    const handleChange: JSX.EventHandler<
       HTMLInputElement,
-      InputEvent | DragEvent
+      Event | DragEvent
     > = (event) => {
       const addedFiles = validateFiles(event);
       return props.onAddFiles?.(event, { addedFiles });
@@ -172,7 +172,7 @@ export const FileUploaderDropContainer: Component<FileUploaderDropContainerProps
             accept={props.accept?.join(",")}
             name={props.name}
             multiple={props.multiple}
-            onInput={handleInput}
+            onChange={handleChange}
             onClick={(evt) => {
               //@ts-ignore
               evt.currentTarget.value = null;
@@ -194,7 +194,7 @@ export type FileUploaderButtonProps = {
   listFiles?: boolean;
   multiple?: boolean;
   name?: string;
-  onInput?: (e: InputEvent) => any;
+  onChange?: (e: Event) => any;
   onClick?: JSX.EventHandler<HTMLLabelElement, MouseEvent>;
   role?: string;
   size?: "default" | "sm" | "md" | "lg";
@@ -218,7 +218,7 @@ export const FileUploaderButton: Component<FileUploaderButtonProps> = (
     "multiple",
     "name",
     "onClick",
-    "onInput",
+    "onChange",
     "role",
     "size",
     "tabIndex",
@@ -259,8 +259,8 @@ export const FileUploaderButton: Component<FileUploaderButtonProps> = (
     }
   }
 
-  function handleOnInput(
-    event: InputEvent & { currentTarget: HTMLInputElement; target: Element }
+  function handleOnChange(
+    event: Event & { currentTarget: HTMLInputElement; target: Element }
   ) {
     const files = (event.currentTarget as HTMLInputElement)?.files;
     const length = (event.currentTarget as HTMLInputElement)?.files!.length;
@@ -271,7 +271,7 @@ export const FileUploaderButton: Component<FileUploaderButtonProps> = (
         setLabelText(files[0].name);
       }
     }
-    props.onInput && props.onInput(event);
+    props.onChange && props.onChange(event);
   }
 
   return (
@@ -305,7 +305,7 @@ export const FileUploaderButton: Component<FileUploaderButtonProps> = (
         multiple={props.multiple}
         accept={props.accept?.join(",")}
         name={props.name}
-        onInput={handleOnInput}
+        onChange={handleOnChange}
         onClick={onClick}
       />
     </>
@@ -434,7 +434,6 @@ export const FileUploaderItem: Component<FileUploaderItemProps> = (props) => {
           onClick={
             //@ts-ignore
             (evt) => {
-              console.log("testing here")
               if (props.status === "edit") {
                 props.onDelete && props.onDelete(evt, { uuid: id });
               }
@@ -469,7 +468,7 @@ export type FileUploaderProps = {
   labelTitle?: string;
   multiple?: boolean;
   name?: string;
-  onInput?: (event: Event) => any;
+  onChange?: (event: Event) => any;
   onClick?: (event: Event) => any;
   onDelete?: (event: Event) => any;
   size?: "sm" | "md" | "lg";
@@ -489,7 +488,7 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
     "labelTitle",
     "multiple",
     "name",
-    "onInput",
+    "onChange",
     "onClick",
     "onDelete",
     "size",
@@ -530,8 +529,8 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
     } else {
       setFilenames(filenames);
     }
-    if (props.onInput) {
-      props.onInput(evt);
+    if (props.onChange) {
+      props.onChange(evt);
     }
   };
 
