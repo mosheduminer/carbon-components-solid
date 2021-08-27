@@ -26,6 +26,7 @@ export type CheckboxProps = {
 export const Checkbox: Component<CheckboxProps> = (props) => {
   let rest: JSX.HTMLAttributes<HTMLInputElement>;
   [props, rest] = splitProps(props, [
+    "children",
     "class",
     "checked",
     "defaultChecked",

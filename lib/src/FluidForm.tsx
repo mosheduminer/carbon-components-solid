@@ -19,7 +19,7 @@ export type FluidFormProps = {
 
 export const FluidForm: Component<FluidFormProps> = (props) => {
   let rest: JSX.HTMLAttributes<HTMLFormElement>;
-  [props, rest] = splitProps(props, ["class"]);
+  [props, rest] = splitProps(props, ["children", "class"]);
   return (
     <FormContext.Provider value={{ isFluid: true }}>
       <Form class={props.class} {...rest}>

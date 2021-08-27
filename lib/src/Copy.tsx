@@ -16,7 +16,7 @@ export type CopyProps = {
 
 export const Copy: Component<CopyProps> = (props) => {
   let rest: JSX.HTMLAttributes<HTMLButtonElement>;
-  [props, rest] = splitProps(props, ["class", "feedback", "feedbackTimeout", "onAnimationEnd", "onClick", "disabled"]);
+  [props, rest] = splitProps(props, ["children", "class", "feedback", "feedbackTimeout", "onAnimationEnd", "onClick", "disabled"]);
   props = mergeProps({ feedback: "Copied!", feedbackTimeout: 2000, onClick: () => { } }, props);
 
   const [animation, setAnimation] = createSignal('');

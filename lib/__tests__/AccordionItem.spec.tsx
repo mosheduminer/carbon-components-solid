@@ -9,12 +9,12 @@ const { prefix } = settings;
 
 describe('AccordionItem', () => {
   it('should render', () => {
-    const wrapper = render(() =>
+    const { container } = render(() =>
       <AccordionItem title="A heading" class="extra-class">
         Lorem ipsum.
       </AccordionItem>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   it('should update the item open state when the `open` prop changes', () => {

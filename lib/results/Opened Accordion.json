@@ -45,7 +45,7 @@
             "potentialviolation": 0,
             "ignored": 0
         },
-        "scanTime": 74,
+        "scanTime": 70,
         "ruleArchive": "Latest Deployment (latest)",
         "policies": [
             "IBM_Accessibility"
@@ -54,9 +54,9 @@
             "violation",
             "potentialviolation"
         ],
-        "startScan": 1629431882296
+        "startScan": 1629927669371
     },
-    "scanID": "f0f59c08-dcec-4bb8-8196-bc4b0a39c342",
+    "scanID": "ec4abd5d-263e-4547-8ec1-1a516618595e",
     "toolID": "accessibility-checker-v3.1.9",
     "label": "Opened Accordion"
 }

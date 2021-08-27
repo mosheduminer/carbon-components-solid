@@ -1,7 +1,4 @@
-import { JSX, Component, splitProps, mergeProps } from "solid-js";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { JSX, Component, mergeProps } from "solid-js";
 
 export type ContentSwitchProps = {
   class?: string;

@@ -27,6 +27,7 @@ export const BreadcrumbItem: Component<BreadcrumbItemProps> = (props) => {
   let rest: JSX.HTMLAttributes<HTMLLIElement>;
   [props, rest] = splitProps(props, [
     "aria-current",
+    "children",
     "class",
     "href",
     "isCurrentPage",
