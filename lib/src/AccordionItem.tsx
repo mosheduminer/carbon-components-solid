@@ -47,7 +47,7 @@ export const AccordionItem: Component<AccordionItemProps> = (props) => {
   });
 
   function onClick(event: MouseEvent) {
-    const nextValue = !isOpen;
+    const nextValue = !isOpen();
     setAnimation(isOpen() ? "collapsing" : "expanding");
     setIsOpen(nextValue);
     if (props.onHeadingClick) {
