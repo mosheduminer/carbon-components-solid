@@ -1,18 +1,19 @@
 import { Component, JSX, splitProps, mergeProps } from "solid-js";
 import { settings } from "carbon-components";
 import { createId } from "./internal/id";
+import { usePrefix } from "./internal/usePrefix";
 const { prefix } = settings;
 
 export type CheckboxProps = {
+  checked?: boolean;
   class?: string;
-  checked: boolean;
-  defaultChecked: boolean;
+  defaultChecked?: boolean;
   disabled?: boolean;
   hideLabel?: boolean;
-  id?: string;
+  id: string;
   indeterminate?: boolean;
-  labelText?: JSX.Element;
-  onChange: (
+  labelText: JSX.Element;
+  onChange?: (
     evt: Event & {
       currentTarget: HTMLInputElement;
       target: Element;
@@ -20,10 +21,10 @@ export type CheckboxProps = {
     details: { checked: boolean; id: string }
   ) => any;
   title?: string;
-  wrapperClass?: string;
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
 export const Checkbox: Component<CheckboxProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLInputElement>;
   [props, rest] = splitProps(props, [
     "children",
@@ -37,19 +38,18 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
     "labelText",
     "onChange",
     "title",
-    "wrapperClass",
   ]);
   props = mergeProps(
     { indeterminate: false, onChange: () => { }, title: "", id: createId() },
     props
   );
 
-  return (<div class={props.wrapperClass}>
+  return (<div class={`${prefix}--form-item ${prefix}--checkbox-wrapper`} classList={{[props.class!]: !!props.class}}>
     <input
       {...rest}
       type="checkbox"
       onChange={(evt) => {
-        props.onChange(evt, { checked: evt.currentTarget.checked, id: props.id! });
+        props.onChange!(evt, { checked: evt.currentTarget.checked, id: props.id! });
       }}
       class={`${prefix}--checkbox`}
       id={props.id}
@@ -66,8 +66,7 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
     />
     <label
       for={props.id}
-      class={`${prefix}--form-item ${prefix}--checkbox-wrapper`}
-      classList={{ [props.wrapperClass!]: !!props.wrapperClass }}
+      class={`${prefix}--checkbox-label`}
       title={props.title || undefined}
     >
       <span

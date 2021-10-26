@@ -5,13 +5,13 @@ export type DatePickerInputProps = {
   disabled?: boolean;
   hideLabel?: boolean;
   iconDescription?: string;
-  id: string;
+  id?: string;
   invalid?: boolean;
-  invalidText: JSX.Element;
-  labelText: string;
+  invalidText?: JSX.Element;
+  labelText?: string;
   onChange?: JSX.EventHandler<HTMLInputElement, Event>;
   onClick?: JSX.EventHandler<HTMLInputElement, MouseEvent>;
-  openCalendar: (e: MouseEvent) => any;
+  openCalendar?: (e: MouseEvent) => any;
   pattern?: string;
   placeholder?: string;
   size?: "sm" | "md" | "lg";

@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, JSX, mergeProps, splitProps, Switch, Match } from "solid-js";
+import { Component, createSignal, JSX, mergeProps, splitProps, Switch, Match } from "solid-js";
 import { createId } from "./internal/id";
 import { Copy } from "./Copy";
 import { CopyButton } from "./CopyButton";
@@ -199,77 +199,81 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
     return styles;
   }
 
-  return <Switch fallback={
-    <div {...rest as JSX.HTMLAttributes<HTMLDivElement>} class={`${prefix}--snippet`} classList={classes()}>
-      <div
-        ref={codeContainerRef}
-        role={props.type === 'single' ? 'textbox' : undefined}
-        tabIndex={props.type === 'single' && !props.disabled ? 0 : undefined}
-        class={`${prefix}--snippet-container`}
-        aria-label={props.ariaLabel || 'code-snippet'}
-        onScroll={(props.type === 'single' && handleScroll) || undefined}
-        style={styles()}>
-        <pre
-          ref={codeContentRef}
-          onScroll={(props.type === 'multi' && handleScroll) || undefined}>
-          <code>{props.children}</code>
-        </pre>
+  return (
+    <Switch fallback={
+      <div {...rest as JSX.HTMLAttributes<HTMLDivElement>} class={`${prefix}--snippet`} classList={classes()}>
+        <div
+          ref={codeContainerRef}
+          role={props.type === 'single' ? 'textbox' : undefined}
+          tabIndex={props.type === 'single' && !props.disabled ? 0 : undefined}
+          class={`${prefix}--snippet-container`}
+          aria-label={props.ariaLabel || 'code-snippet'}
+          onScroll={(props.type === 'single' && handleScroll) || undefined}
+          style={styles()}>
+          <pre
+            ref={codeContentRef}
+            onScroll={(props.type === 'multi' && handleScroll) || undefined}>
+            <code>{props.children}</code>
+          </pre>
+        </div>
+        {/**
+         * left overflow indicator must come after the snippet due to z-index and
+         * snippet focus border overlap
+         */}
+        {hasLeftOverflow() && (
+          <div class={`${prefix}--snippet__overflow-indicator--left`} />
+        )}
+        {hasRightOverflow() && (
+          <div class={`${prefix}--snippet__overflow-indicator--right`} />
+        )}
+        {!props.hideCopyButton && (
+          <CopyButton
+            disabled={props.disabled}
+            onClick={handleCopyClick}
+            feedback={props.feedback}
+            feedbackTimeout={props.feedbackTimeout}
+            iconDescription={props.copyButtonDescription}
+          />
+        )}
+        {shouldShowMoreLessBtn() && (
+          <Button
+            kind="ghost"
+            size="field"
+            class={`${prefix}--snippet-btn--expand`}
+            disabled={props.disabled}
+            onClick={() => setExpandedCode(!expandedCode)}
+          >
+            <span class={`${prefix}--snippet-btn--text`}>
+              {expandCodeBtnText()}
+            </span>
+            <ChevronDown
+              aria-label={expandCodeBtnText()}
+              class={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
+              role="img"
+            />
+          </Button>
+        )}
       </div>
-      {/**
-       * left overflow indicator must come after the snippet due to z-index and
-       * snippet focus border overlap
-       */}
-      {hasLeftOverflow() && (
-        <div class={`${prefix}--snippet__overflow-indicator--left`} />
-      )}
-      {hasRightOverflow() && (
-        <div class={`${prefix}--snippet__overflow-indicator--right`} />
-      )}
-      {!props.hideCopyButton && (
-        <CopyButton
-          disabled={props.disabled}
+    }>
+      <Match when={props.type === "inline" && props.hideCopyButton}>
+        <span class={`${prefix}--snippet`} classList={classes()}>
+          <code id={uid}>{props.children}</code>
+        </span>
+      </Match>
+      <Match when={props.type === "inline"}>
+        <Copy
+          {...rest as JSX.HTMLAttributes<HTMLButtonElement>}
           onClick={handleCopyClick}
+          classList={classes()}
+          class={`${prefix}--snippet`}
+          aria-label={props.ariaLabel}
+          aria-describedby={uid}
           feedback={props.feedback}
           feedbackTimeout={props.feedbackTimeout}
-          iconDescription={props.copyButtonDescription}
-        />
-      )}
-      {shouldShowMoreLessBtn() && (
-        <Button
-          kind="ghost"
-          size="field"
-          class={`${prefix}--snippet-btn--expand`}
-          disabled={props.disabled}
-          onClick={() => setExpandedCode(!expandedCode)}>
-          <span class={`${prefix}--snippet-btn--text`}>
-            {expandCodeBtnText()}
-          </span>
-          <ChevronDown
-            aria-label={expandCodeBtnText()}
-            class={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
-            role="img"
-          />
-        </Button>
-      )}
-    </div>
-  }>
-    <Match when={props.type === "inline" && props.hideCopyButton}>
-      <span class={`${prefix}--snippet`} classList={classes()}>
-        <code id={uid}>{props.children}</code>
-      </span>
-    </Match>
-    <Match when={props.type === "inline"}>
-      <Copy
-        {...rest as JSX.HTMLAttributes<HTMLButtonElement>}
-        onClick={handleCopyClick}
-        classList={classes()}
-        class={`${prefix}--snippet`}
-        aria-label={props.ariaLabel}
-        aria-describedby={uid}
-        feedback={props.feedback}
-        feedbackTimeout={props.feedbackTimeout}>
-        <code id={uid}>{props.children}</code>
-      </Copy>
-    </Match>
-  </Switch>;
+        >
+          <code id={uid}>{props.children}</code>
+        </Copy>
+      </Match>
+    </Switch>
+  );
 };

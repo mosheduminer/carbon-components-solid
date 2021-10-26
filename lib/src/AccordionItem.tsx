@@ -5,6 +5,7 @@ import {
   JSX,
   mergeProps,
   createEffect,
+  untrack,
 } from "solid-js";
 import { settings } from "carbon-components";
 import { ChevronRight } from "./icons/16";
@@ -39,8 +40,10 @@ export const AccordionItem: Component<AccordionItemProps> = (props) => {
   const [animation, setAnimation] = createSignal("");
 
   createEffect(() => {
-    if (props.open !== prevIsOpen()) {
-      setAnimation(isOpen() ? "collapsing" : "expanding");
+    const open = untrack(() => isOpen());
+    const prevOpen = untrack(() => prevIsOpen());
+    if (props.open !== prevOpen) {
+      setAnimation(open ? "collapsing" : "expanding");
       setIsOpen(props.open);
       setPrevIsOpen(props.open);
     }

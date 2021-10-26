@@ -16,11 +16,16 @@ export const Breadcrumb: Component<BreadcrumbProps> = (props) => {
 
   return (
     <nav
-      class={`${prefix}--breadcrumb`}
       classList={{ [`${prefix}--breadcrumb--no-trailing-slash`]: props.noTrailingSlash }}
       {...rest}
-      ref={props.ref}>
-      <ol classList={{[props.class!]: !!props.class}}>{props.children}</ol>
+      //@ts-ignore
+      ref={(e) => props.ref && props.ref(e)}>
+      <ol
+        class={`${prefix}--breadcrumb`}
+        classList={{[props.class!]: !!props.class}}
+      >
+        {props.children}
+      </ol>
     </nav>
   )
 }

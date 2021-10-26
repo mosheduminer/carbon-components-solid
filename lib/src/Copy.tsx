@@ -16,7 +16,7 @@ export type CopyProps = {
 
 export const Copy: Component<CopyProps> = (props) => {
   let rest: JSX.HTMLAttributes<HTMLButtonElement>;
-  [props, rest] = splitProps(props, ["children", "class", "feedback", "feedbackTimeout", "onAnimationEnd", "onClick", "disabled"]);
+  [props, rest] = splitProps(props, ["children", "class", "classList", "feedback", "feedbackTimeout", "onAnimationEnd", "onClick", "disabled"]);
   props = mergeProps({ feedback: "Copied!", feedbackTimeout: 2000, onClick: () => { } }, props);
 
   const [animation, setAnimation] = createSignal('');
@@ -37,6 +37,7 @@ export const Copy: Component<CopyProps> = (props) => {
   };
 
   onCleanup(() => handleFadeOut.cancel());
+  
 
   return (
     <button
@@ -44,8 +45,10 @@ export const Copy: Component<CopyProps> = (props) => {
       type="button"
       class={`${prefix}--copy`}
       classList={{
-        [`${prefix}--copy-btn--animating`]: !!animation,
-        [`${prefix}--copy-btn--${animation}`]: !!animation,
+        [props.class!]: !!props.class,
+        [`${prefix}--copy-btn--animating`]: !!animation(),
+        [`${prefix}--copy-btn--${animation()}`]: !!animation(),
+        ...(props.classList || {})
       }}
       onClick={composeEventFunctions([props.onClick, handleClick])}
       onAnimationEnd={composeEventFunctions([
@@ -56,12 +59,14 @@ export const Copy: Component<CopyProps> = (props) => {
       aria-live="polite"
       aria-label={
         (!props.children && (animation() ? props.feedback : rest['aria-label'])) || undefined
-      }>
+      }
+    >
       {props.children}
       {animation() ? props.feedback : rest['aria-label']}
       <span
         aria-hidden="true"
-        class={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}>
+        class={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}
+      >
         {props.feedback}
       </span>
     </button>
