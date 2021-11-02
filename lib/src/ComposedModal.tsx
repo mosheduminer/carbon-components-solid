@@ -10,13 +10,14 @@ import {
   onCleanup,
 } from "solid-js";
 import { settings } from "carbon-components";
-import { composeEventFunctions } from "./internal/events";
+import { composeEventHandlers } from "./internal/events";
 import keys from "./internal/keyboard/keys";
 import { matches } from "./internal/keyboard/match";
 import wrapFocus, { elementOrParentIsFloatingMenu } from "./internal/wrapFocus";
 import { Close } from "./icons/32";
 import { ButtonSet } from "./ButtonSet";
 import { Button } from "./Button";
+import { callEventHandlerUnion } from "./internal/callEventHandlerUnion";
 
 const { prefix } = settings;
 
@@ -32,7 +33,7 @@ export type ComposedModalProps = {
   open?: boolean;
   preventCloseOnClickOutside?: boolean;
   selectorPrimaryFocus?: string;
-  selectorsFloatingMenus: string[];
+  selectorsFloatingMenus?: string[];
   size?: "xs" | "sm" | "md" | "lg";
 };
 
@@ -116,7 +117,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
         endTrapNode: endSentinelNode,
         currentActiveNode: currentActiveNode as Element,
         oldActiveNode: oldActiveNode as Element,
-        selectorsFloatingMenus,
+        selectorsFloatingMenus: selectorsFloatingMenus!,
       });
     }
   };
@@ -128,7 +129,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
     }
   };
 
-  const handleKeyDown = composeEventFunctions<KeyboardEvent, HTMLDivElement>([
+  const handleKeyDown = composeEventHandlers<KeyboardEvent, HTMLDivElement>([
     (e) => {
       // Esc key
       if (matches(e, [keys.Escape])) closeModal(e);
@@ -229,9 +230,7 @@ export type ModalHeaderProps = {
   titleClass?: string;
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
-export const ModalHeader: (
-  props: ModalHeaderProps
-) => (props: { closeModal: (e: MouseEvent) => any }) => JSX.Element = (
+export const ModalHeader = ((
   props: ModalHeaderProps
 ) => {
     let rest: JSX.HTMLAttributes<HTMLDivElement>;
@@ -277,7 +276,7 @@ export const ModalHeader: (
         {props.children}
 
         <button
-          onClick={composeEventFunctions([innerProps.closeModal, props.onClick])}
+          onClick={composeEventHandlers([innerProps.closeModal, props.onClick])}
           class={`${prefix}--modal-close`}
           classList={{ [props.closeClass!]: !!props.closeClass }}
           title={props.iconDescription}
@@ -291,7 +290,7 @@ export const ModalHeader: (
         </button>
       </div>]
     );
-  };
+  }) as Component<ModalHeaderProps>
 
 export type ModalBodyProps = {
   ariaLabel?: string;
@@ -347,10 +346,7 @@ export type ModalFooterProps = {
   secondaryClass?: string;
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
-export const ModalFooter: (props: ModalFooterProps) => (innerProps: {
-  ref: HTMLElement | ((e: HTMLElement) => any);
-  closeModal: (e: MouseEvent) => any;
-}) => JSX.Element = (props) => {
+export const ModalFooter = ((props: ModalFooterProps) => {
   let rest: JSX.HTMLAttributes<HTMLDivElement>;
   [props, rest] = splitProps(props, ["children", "class", "danger", "onRequestClose", "onRequestSubmit", "primaryButtonDisabled", "primaryButtonText", "primaryClass", "secondaryButtonText", "secondaryButtons", "secondaryClass"]);
   props = mergeProps(
@@ -358,7 +354,17 @@ export const ModalFooter: (props: ModalFooterProps) => (innerProps: {
     props
   );
 
-  const SecondaryButtonSet = () => {
+  const SecondaryButtonSet = (
+    innerProps: { closeModal: (e: MouseEvent) => any }
+  ) => {
+    const handleRequestClose = (evt: MouseEvent & {
+      currentTarget: HTMLElement;
+      target: Element;
+    }) => {
+      innerProps.closeModal(evt);
+      if (props.onRequestClose) callEventHandlerUnion(props.onRequestClose, evt);
+    };
+
     if (
       Array.isArray(props.secondaryButtons) &&
       props.secondaryButtons.length <= 2
@@ -370,7 +376,7 @@ export const ModalFooter: (props: ModalFooterProps) => (innerProps: {
               <Button
                 class={props.secondaryClass}
                 kind="secondary"
-                onClick={onButtonClick || props.onRequestClose}
+                onClick={onButtonClick || handleRequestClose}
               >
                 {buttonText}
               </Button>
@@ -383,7 +389,7 @@ export const ModalFooter: (props: ModalFooterProps) => (innerProps: {
       return (
         <Button
           class={props.secondaryClass}
-          onClick={props.onRequestClose}
+          onClick={handleRequestClose}
           kind="secondary"
         >
           {props.secondaryButtonText}
@@ -407,7 +413,7 @@ export const ModalFooter: (props: ModalFooterProps) => (innerProps: {
       }}
       {...rest}
     >
-      <SecondaryButtonSet />
+      <SecondaryButtonSet closeModal={innerProps.closeModal} />
       {props.primaryButtonText && (
         <Button
           onClick={props.onRequestSubmit}
@@ -422,4 +428,4 @@ export const ModalFooter: (props: ModalFooterProps) => (innerProps: {
       {props.children}
     </ButtonSet>
   );
-};
+}) as Component<ModalFooterProps>

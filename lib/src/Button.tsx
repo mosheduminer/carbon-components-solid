@@ -11,7 +11,7 @@ import { matches } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
 import { ButtonKindsType } from "./types";
 import { settings } from "carbon-components";
-import { composeEventFunctions } from "./internal/events";
+import { composeEventHandlers } from "./internal/events";
 import { Dynamic } from "solid-js/web";
 import { createId } from "./internal/id";
 
@@ -210,23 +210,23 @@ export const Button: Component<ButtonProps> = (props) => {
           tabIndex={props.tabIndex}
           classList={classList()}
           ref={props.ref as HTMLAnchorElement}
-          onMouseEnter={composeEventFunctions([
+          onMouseEnter={composeEventHandlers([
             props.onMouseEnter as () => any,
             handleMouseEnter,
           ])}
-          onMouseLeave={composeEventFunctions([
+          onMouseLeave={composeEventHandlers([
             props.onMouseLeave as () => any,
             handleMouseLeave,
           ])}
-          onFocus={composeEventFunctions([
+          onFocus={composeEventHandlers([
             props.onFocus as () => any,
             handleFocus,
           ])}
-          onBlur={composeEventFunctions([
+          onBlur={composeEventHandlers([
             props.onBlur as () => any,
             handleBlur,
           ])}
-          onClick={composeEventFunctions([
+          onClick={composeEventHandlers([
             potentiallyPreventClickEvent,
             props.onClick as () => any,
           ])}
@@ -252,20 +252,20 @@ export const Button: Component<ButtonProps> = (props) => {
             ? props.isSelected
             : undefined
         }
-        onMouseEnter={composeEventFunctions([
+        onMouseEnter={composeEventHandlers([
           props.onMouseEnter as () => any,
           handleMouseEnter,
         ])}
-        onMouseLeave={composeEventFunctions([
+        onMouseLeave={composeEventHandlers([
           props.onMouseLeave as () => any,
           handleMouseLeave,
         ])}
-        onFocus={composeEventFunctions([
+        onFocus={composeEventHandlers([
           props.onFocus as () => any,
           handleFocus,
         ])}
-        onBlur={composeEventFunctions([props.onBlur as () => any, handleBlur])}
-        onClick={composeEventFunctions([
+        onBlur={composeEventHandlers([props.onBlur as () => any, handleBlur])}
+        onClick={composeEventHandlers([
           potentiallyPreventClickEvent,
           props.onClick as () => any,
         ])}

@@ -1,7 +1,6 @@
 import { Component, JSX, mergeProps } from "solid-js";
 
 export type DatePickerInputProps = {
-  datePickerType?: "simple" | "single" | "range";
   disabled?: boolean;
   hideLabel?: boolean;
   iconDescription?: string;

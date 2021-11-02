@@ -4,6 +4,7 @@ import { ContentSwitchProps } from "./ContentSwitch";
 import keys from "./internal/keyboard/keys";
 import { matches } from "./internal/keyboard/match";
 import { getNextIndex } from "./internal/keyboard/navigation";
+import { composeEventHandlers } from './internal/events';
 
 const { prefix } = settings;
 
@@ -34,7 +35,8 @@ export const ContentSwitcher: Component<ContentSwitcherProps> = (props) => {
       if (selectionMode === "manual") {
         const switchRef = switchRefs[nextIndex];
         switchRef && switchRef.focus();
-      } else {
+      }
+      else {
         setSelected(nextIndex);
         const switchRef = switchRefs[selected()];
         switchRef && switchRef.focus();
@@ -45,7 +47,8 @@ export const ContentSwitcher: Component<ContentSwitcherProps> = (props) => {
           text: data.text,
         });
       }
-    } else if (selected() !== index) {
+    }
+    else if (selected() !== index) {
       setSelected(index);
       const switchRef = switchRefs[index];
       switchRef && switchRef.focus();
@@ -56,10 +59,15 @@ export const ContentSwitcher: Component<ContentSwitcherProps> = (props) => {
   const chlds = children(() => props.children) as unknown as () => ContentSwitchProps[];
 
   return (
-    <div {...rest} classList={{
-      [`${prefix}--content-switcher--${props.size}`]: !!props.size,
-      [props.class!]: !!props.class,
-    }} class={`${prefix}--content-switcher`} role="tablist">
+    <div
+      {...rest}
+      classList={{
+        [`${prefix}--content-switcher--${props.size}`]: !!props.size,
+        [props.class!]: !!props.class,
+      }}
+      class={`${prefix}--content-switcher`}
+      role="tablist"
+    >
       <For each={chlds()}>
         {(childProps, index) => {
           let rest: JSX.HTMLAttributes<HTMLButtonElement>;
@@ -67,34 +75,65 @@ export const ContentSwitcher: Component<ContentSwitcherProps> = (props) => {
             "text",
             "disabled",
             "name",
+            "onClick",
+            "onKeyDown"
           ]);
-          const slctd = selected() === index();
-          return <button
-            type="button"
-            ref={(el => {
-              switchRefs[index()] = el;
-              typeof childProps.ref === "function" ? childProps.ref(el) : childProps.ref = el;
-            })}
-            disabled={childProps.disabled}
-            role="tab"
-            tabIndex={slctd ? '0' : '-1'}
-            aria-selected={slctd}
-            onClick={(e) => {
-              e.preventDefault()
-              handleChildChange({
-                index: index(),
-                name: childProps.name,
-                text: childProps.text,
-              });
-            }}
-            onKeyDown={(event) => handleChildChange({ index: index(), name: childProps.name, text: childProps.text, key: event.key || event.which })}
-            {...rest}
-            class={`${prefix}--content-switcher-btn`}
-            classList={{ [`${prefix}--content-switcher--selected`]: slctd, [childProps.class!]: !!childProps.class }}>
-            <span class={`${prefix}--content-switcher__label`} title={childProps.text}>
-              {childProps.text}
-            </span>
-          </button>
+          const slctd = () => selected() === index();
+
+          const handleClick = (e: MouseEvent) => {
+            e.preventDefault();
+            childProps.onClick!({ index: index(), name: childProps.name, text: childProps.text });
+          };
+
+          const handleKeyDown = (e: KeyboardEvent) => {
+            const key = e.key || e.which;
+            childProps.onKeyDown!({ index: index(), name: childProps.name, text: childProps.text, key });
+          };
+          
+          return (
+            <button
+              type="button"
+              ref={(el => {
+                switchRefs[index()] = el;
+                typeof childProps.ref === "function" ? childProps.ref(el) : childProps.ref = el;
+              })}
+              disabled={childProps.disabled}
+              role="tab"
+              tabIndex={slctd() ? '0' : '-1'}
+              aria-selected={slctd()}
+              onClick={
+                composeEventHandlers([
+                  (e) => {
+                    handleChildChange({
+                      index: index(),
+                      name: childProps.name,
+                      text: childProps.text,
+                    });
+                  },
+                  handleClick
+                ])
+              }
+              onKeyDown={
+                composeEventHandlers([
+                  (e) => {
+                    handleChildChange({ 
+                      index: index(), name: childProps.name, 
+                      text: childProps.text, 
+                      key: e.key || e.which
+                    })
+                  },
+                  handleKeyDown
+                ])
+              }
+              {...rest}
+              class={`${prefix}--content-switcher-btn`}
+              classList={{ [`${prefix}--content-switcher--selected`]: slctd(), [childProps.class!]: !!childProps.class }}
+            >
+              <span class={`${prefix}--content-switcher__label`} title={childProps.text}>
+                {childProps.text}
+              </span>
+            </button>
+          )
         }}
       </For>
     </div>

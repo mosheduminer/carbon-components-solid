@@ -440,10 +440,14 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
     }
   });
 
-  const c = children(() => props.children) as () => (
-    | DatePickerInputProps
-    | HTMLInputElement
-  )[];
+  type Child = (DatePickerInputProps | HTMLInputElement);
+
+  const c = (() => {
+    const c = children(() => props.children)()
+    if (Array.isArray(c)) return c
+    return [c]
+  }) as () => Child[];
+
 
   const isLabelTextEmpty = () =>
     c().every((child) => child instanceof HTMLElement || !child.labelText);
@@ -477,7 +481,6 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
           let childRest: JSX.HTMLAttributes<HTMLInputElement>;
           [childProps, childRest] = splitProps(childProps, [
             "children",
-            "datePickerType",
             "disabled",
             "hideLabel",
             "iconDescription",
@@ -538,6 +541,7 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
               !!childProps.size,
             [`${prefix}--date-picker__input--invalid`]: childProps.invalid,
           });
+          console.log(props.datePickerType)
           return (
             <div
               classList={{
@@ -602,7 +606,7 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
                 >
                   <Match
                     when={
-                      childProps.datePickerType === "simple" &&
+                      props.datePickerType === "simple" &&
                       !childProps.invalid &&
                       !childProps.warn
                     }

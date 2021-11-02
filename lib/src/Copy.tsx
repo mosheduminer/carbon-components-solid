@@ -1,5 +1,5 @@
 import { Component, splitProps, mergeProps, JSX, createSignal, onCleanup } from "solid-js";
-import { composeEventFunctions } from "./internal/events";
+import { composeEventHandlers } from "./internal/events";
 import { settings } from "carbon-components";
 import { debounce } from "lodash";
 
@@ -50,8 +50,8 @@ export const Copy: Component<CopyProps> = (props) => {
         [`${prefix}--copy-btn--${animation()}`]: !!animation(),
         ...(props.classList || {})
       }}
-      onClick={composeEventFunctions([props.onClick, handleClick])}
-      onAnimationEnd={composeEventFunctions([
+      onClick={composeEventHandlers([props.onClick, handleClick])}
+      onAnimationEnd={composeEventHandlers([
         props.onAnimationEnd,
         handleAnimationEnd,
       ])}
