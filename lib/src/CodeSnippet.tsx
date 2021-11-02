@@ -8,7 +8,7 @@ import { settings } from "carbon-components";
 import useResizeObserver from "./internal/ResizeObserver";
 import copy from "copy-to-clipboard";
 import { debounce } from "lodash";
-import { composeEventFunctions } from "./internal/events";
+import { composeEventHandlers } from "./internal/events";
 
 const { prefix } = settings;
 
@@ -163,7 +163,7 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
     }
   });
 
-  const handleCopyClick = (evt: MouseEvent) => composeEventFunctions([() => copy(props.children), props.onClick]);
+  const handleCopyClick = (evt: MouseEvent) => composeEventHandlers([() => copy(props.children), props.onClick]);
 
   const classes = () => (
     {

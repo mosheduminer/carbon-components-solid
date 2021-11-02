@@ -4,14 +4,16 @@ export type ContentSwitchProps = {
   class?: string;
   disabled?: boolean;
   name: string;
-  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
-  onKeyDown?: JSX.EventHandlerUnion<HTMLButtonElement, KeyboardEvent>;
+  onClick?: ({ index, name, text }: { index: number, name: string, text: string }) => void;
+  onKeyDown?: ({ index, name, text }: { index: number, name: string, text: string, key: string | number }) => void;
   selected?: boolean;
   text: string;
   ref?: (HTMLButtonElement | undefined) | ((b: HTMLButtonElement) => any);
 };
 
 export const ContentSwitch: Component<ContentSwitchProps> = (props) => {
+  // console.log(props.onClick);
+  
   props = mergeProps(
     { selected: false, onClick: () => { }, onKeyDown: () => { } },
     props
