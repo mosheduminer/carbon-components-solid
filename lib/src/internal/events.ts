@@ -1,16 +1,17 @@
 import { JSX } from "solid-js";
 import { callEventHandlerUnion } from './callEventHandlerUnion';
 
-export const composeEventHandlers = <E extends Event>(
-  handlers: JSX.EventHandlerUnion<Element, E>[]
+export const composeEventHandlers = <E extends Event, T extends Element>(
+  handlers: (JSX.EventHandlerUnion<T, E> | undefined)[]
 ) =>
-  (event: E & { currentTarget: Element; target: Element; }) => {
+  (event: E & { currentTarget: T; target: Element; }) => {
     for (let i = 0; i < handlers.length; i++) {
       if (event.defaultPrevented) {
         break;
       }
-      if (typeof handlers[i] === 'function') {
-        callEventHandlerUnion(handlers[i], event)
+      const handler = handlers[i];
+      if (typeof handler === 'function' || Array.isArray(handler)) {
+        callEventHandlerUnion(handler, event)
       }
     }
   };
