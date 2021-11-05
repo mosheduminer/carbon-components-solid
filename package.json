@@ -1,17 +1,23 @@
 {
   "name": "carbon-components-solid-repo",
-  "workspaces": [
-    "lib",
-    "utils"
-  ],
+  "workspaces": {
+    "packages": [
+      "lib",
+      "utils",
+      "example"
+    ],
+    "nohoist": [
+      "**/solid-start"
+    ]
+  },
   "private": "true",
   "dependencies": {
-    "carbon-components": "^10.41.0",
+    "carbon-components": "^10.47.0",
     "copy-to-clipboard": "^3.3.1",
     "flatpickr": "^4.6.1",
     "lodash.debounce": "^4.0.8",
     "lodash.findlast": "^4.6.0",
-    "solid-js": "^1.1.1"
+    "solid-js": "^1.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -23,8 +29,5 @@
     "babel-preset-solid": "^0.26.5",
     "core-js": "^3.12.1",
     "prettier": "^2.3.0"
-  },
-  "scripts": {
-    "format": "prettier -w \"src/**/*.{js,ts,json,css,tsx,jsx}\""
   }
 }

@@ -32,20 +32,25 @@ export type ButtonProps = {
   tooltipAlignment?: "start" | "center" | "end";
   tooltipPosition?: "top" | "start" | "bottom" | "left";
   type?: "button" | "reset" | "submit";
-  ref?: HTMLElement | HTMLButtonElement | ((el: HTMLElement | HTMLButtonElement) => void);
+  ref?:
+    | HTMLElement
+    | HTMLButtonElement
+    | ((el: HTMLElement | HTMLButtonElement) => void);
   kind?: ButtonKindsType;
 } & JSX.HTMLAttributes<HTMLElement>;
 
 const dangerButtonVariants = ["danger", "danger--tertiary", "danger--ghost"];
 
-const buttonImage = (renderIcon?: Component, iconDescription?: string) =>
-  !renderIcon ? undefined : (
+const buttonImage = (renderIcon?: Component<{class?: string}>, iconDescription?: string) => (
+  <Show when={renderIcon}>
     <Dynamic
+      component={renderIcon}
       aria-label={iconDescription}
       class={`${prefix}--btn__icon`}
       aria-hidden="true"
     />
-  );
+  </Show>
+);
 
 export const Button: Component<ButtonProps> = (props) => {
   let rest: Omit<JSX.HTMLAttributes<HTMLElement>, "ref">;
@@ -222,10 +227,7 @@ export const Button: Component<ButtonProps> = (props) => {
             props.onFocus as () => any,
             handleFocus,
           ])}
-          onBlur={composeEventHandlers([
-            props.onBlur as () => any,
-            handleBlur,
-          ])}
+          onBlur={composeEventHandlers([props.onBlur as () => any, handleBlur])}
           onClick={composeEventHandlers([
             potentiallyPreventClickEvent,
             props.onClick as () => any,

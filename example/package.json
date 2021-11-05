@@ -1,0 +1,23 @@
+{
+  "name": "carbon-components-solid-example",
+  "scripts": {
+    "dev": "solid-start dev",
+    "build": "solid-start build",
+    "start": "solid-start start"
+  },
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "sass": "1.43.4",
+    "solid-app-router": "^0.1.11",
+    "solid-js": "^1.2.2",
+    "solid-meta": "^0.27.2",
+    "solid-start": "0.1.0-alpha.35",
+    "solid-start-node": "0.1.0-alpha.35",
+    "typescript": "^4.4.3",
+    "vite": "^2.6.12"
+  },
+  "engines": {
+    "node": ">=12"
+  }
+}

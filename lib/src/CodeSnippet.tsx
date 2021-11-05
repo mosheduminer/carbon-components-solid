@@ -7,7 +7,7 @@ import { ChevronDown } from "./icons/16";
 import { settings } from "carbon-components";
 import useResizeObserver from "./internal/ResizeObserver";
 import copy from "copy-to-clipboard";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 import { composeEventHandlers } from "./internal/events";
 
 const { prefix } = settings;

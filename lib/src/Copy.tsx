@@ -1,7 +1,7 @@
 import { Component, splitProps, mergeProps, JSX, createSignal, onCleanup } from "solid-js";
 import { composeEventHandlers } from "./internal/events";
 import { settings } from "carbon-components";
-import { debounce } from "lodash";
+import debounce from "lodash.debounce";
 
 const { prefix } = settings;
 

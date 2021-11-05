@@ -18,5 +18,5 @@ export * from "./DangerButton";
 export * from "./DatePicker";
 export * from "./DatePickerInput";
 export * from "./FileUploader";
-export * from "./icons";
+export * as icons from "./icons";
 export * from "./SkeletonText";

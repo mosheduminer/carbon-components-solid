@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render 1`] = `
+<div>
+  <header
+    aria-label="label"
+    class="bx--header custom-class"
+  />
+</div>
+`;

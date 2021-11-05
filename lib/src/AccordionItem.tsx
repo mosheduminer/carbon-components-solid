@@ -21,7 +21,7 @@ export type AccordionItemProps = {
   onHeadingClick?: (props: { event: MouseEvent; isOpen: boolean }) => any;
   open?: boolean;
   title?: JSX.Element;
-} & JSX.HTMLAttributes<HTMLLIElement>;
+} & Omit<JSX.HTMLAttributes<HTMLLIElement>, "title">;
 
 export const AccordionItem: Component<AccordionItemProps> = (props) => {
   let rest: JSX.HTMLAttributes<HTMLLIElement>;

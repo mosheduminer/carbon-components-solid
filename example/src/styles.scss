@@ -1,0 +1,23 @@
+// Your entrypoint for including sass files from Carbon
+$css--font-face: true;
+$css--helpers: true;
+$css--body: true;
+$css--use-layer: true;
+$css--reset: true;
+$css--default-type: true;
+$css--plex: true;
+
+// Include defaults typically provided through the `styles.scss` entrypoint
+@import 'carbon-components/scss/globals/scss/_css--reset.scss';
+@import 'carbon-components/scss/globals/scss/_css--font-face.scss';
+@import 'carbon-components/scss/globals/scss/_css--helpers.scss';
+@import 'carbon-components/scss/globals/scss/_css--body.scss';
+
+// Optionally include the grid
+@import 'carbon-components/scss/globals/grid/_grid.scss';
+
+// Optionally include components that you need
+// @import 'carbon-components/scss/components/loading/loading';
+// @import 'carbon-components/scss/components/accordion/accordion';
+
+@import 'carbon-components/scss/globals/scss/styles.scss';
