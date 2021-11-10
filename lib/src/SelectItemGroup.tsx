@@ -7,10 +7,10 @@ export type SelectItemGroupProps = {
   class?: string;
   disabled?: boolean;
   label: string;
-} & JSX.HTMLAttributes<HTMLOptGroupElement>;
+} & JSX.OptgroupHTMLAttributes<HTMLOptGroupElement>;
 
 export const SelectItemGroup: Component<SelectItemGroupProps> = (props) => {
-  let other: JSX.HTMLAttributes<HTMLOptGroupElement>;
+  let other: JSX.OptgroupHTMLAttributes<HTMLOptGroupElement>;
   [props, other] = splitProps(props, [
     "class",
     "disabled",
