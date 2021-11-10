@@ -20,3 +20,6 @@ export * from "./DatePickerInput";
 export * from "./FileUploader";
 export * as icons from "./icons";
 export * from "./SkeletonText";
+export * from "./Select"
+export * from "./SelectItemGroup"
+export * from "./SelectItem"
