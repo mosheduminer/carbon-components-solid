@@ -1,7 +1,7 @@
 import { JSX } from "solid-js";
 
 export function callEventHandlerUnion<T, E extends Event>(
-	eventHandlerUnion: JSX.EventHandlerUnion<T, E>,
+	eventHandlerUnion: JSX.EventHandlerUnion<T, E> | undefined,
 	event: E & {
 		currentTarget: T;
 		target: Element;

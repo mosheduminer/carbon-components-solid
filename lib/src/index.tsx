@@ -23,3 +23,4 @@ export * from "./SkeletonText";
 export * from "./Select"
 export * from "./SelectItemGroup"
 export * from "./SelectItem"
+export * from "./TextInput"
