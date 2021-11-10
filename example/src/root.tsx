@@ -4,12 +4,7 @@ import { Links, Meta, Outlet, Scripts } from "solid-start/components";
 import Selector from "~/components/Selector";
 import "./styles.scss";
 
-const components = [
-  "Accordion",
-  "Breadcrumb",
-  "Button",
-  "Checkbox",
-];
+const components = ["Accordion", "Breadcrumb", "Button", "Checkbox", "Select"];
 
 const Page = () => {
   const navigator = useNavigate();
