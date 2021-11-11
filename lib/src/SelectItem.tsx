@@ -14,10 +14,10 @@ export type SelectItemProps = {
   hidden? : boolean;
   text?: string;
   value?: any;
-} & JSX.HTMLAttributes<HTMLOptionElement>;
+} & JSX.OptionHTMLAttributes<HTMLOptionElement>;
 
 export const SelectItem: Component<SelectItemProps> = (props) => {
-  let other: JSX.HTMLAttributes<HTMLOptionElement>;
+  let other: JSX.OptionHTMLAttributes<HTMLOptionElement>;
   [props, other] = splitProps(props, [
     "class",
     "children",
