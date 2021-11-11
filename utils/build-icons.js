@@ -15,7 +15,7 @@ const SRC_32 = "../node_modules/@carbon/icons/svg/32";
 const SRC_DIRS = [SRC_OTHER, SRC_16, SRC_20, SRC_24, SRC_32];
 const NAMES = ["other", "16", "20", "24", "32"];
 
-const BASE_OUTPUT = "../lib/src/icons"
+const BASE_OUTPUT = "../lib/src/icons";
 
 // Start the whole machinery
 main().catch((e) => {
@@ -25,7 +25,9 @@ main().catch((e) => {
 
 async function main() {
   // Generate the icons in the proper folder
-  SRC_DIRS.map((dir, index) => generateIcons({ path: dir, name: NAMES[index], outline: false }));
+  SRC_DIRS.map((dir, index) =>
+    generateIcons({ path: dir, name: NAMES[index], outline: false })
+  );
 }
 
 async function generateIcons({ path, name, outline }) {
@@ -35,17 +37,23 @@ async function generateIcons({ path, name, outline }) {
   for (const icon of icons) {
     if (statSync(join(path, icon)).isDirectory()) continue;
     let iconName = pascalCase(parse(icon).name);
-//    iconName = ["export", "delete", "function", "package"].includes(iconName) ? `_${iconName}` : iconName;
-    iconName = Number.isNaN(Number.parseInt(iconName[0])) ? iconName : `_${iconName}`;
+    // iconName = ["export", "delete", "function", "package"].includes(iconName) ? `_${iconName}` : iconName;
+    iconName = Number.isNaN(Number.parseInt(iconName[0]))
+      ? iconName
+      : `_${iconName}`;
     const iconSVG = await readFile(join(path, icon), { encoding: "utf-8" });
 
     // Clean the SVG markup
     const cleanedSVG = iconSVG
       .split("\n")
       .filter(Boolean)
-      .map((path) => path.replace(/fill="(#\w+)"/g, 'fill="transparent"')).join(" ");
+      .map((path) => path.replace(/fill="(#\w+)"/g, 'fill="transparent"'))
+      .join(" ");
 
-    const [cleanedSVG1, cleanedSVG2] = [cleanedSVG.substring(0, 4), cleanedSVG.substring(5)];
+    const [cleanedSVG1, cleanedSVG2] = [
+      cleanedSVG.substring(0, 4),
+      cleanedSVG.substring(5),
+    ];
 
     const code = [cleanedSVG1, "{...props}", cleanedSVG2].join(" ");
     const iconPathsStr = dd`export const ${iconName}: Component<JSX.HTMLAttributes<SVGSVGElement>> = (props) => ${code};`;
@@ -53,7 +61,11 @@ async function generateIcons({ path, name, outline }) {
   }
 
   const exportedIconsStr = exportedIcons.join("\n");
-  await outputFile(join(process.cwd(), BASE_OUTPUT, name, "index.tsx"), exportedIconsStr, {
-    encoding: "utf-8",
-  });
+  await outputFile(
+    join(process.cwd(), BASE_OUTPUT, name, "index.tsx"),
+    exportedIconsStr,
+    {
+      encoding: "utf-8",
+    }
+  );
 }
