@@ -3,9 +3,10 @@
  */
 
 import { Component, createMemo, JSX } from "solid-js";
-import { WarningFilled } from "../icons/16";
-import { EditOff, WarningAltFilled } from "../icons/32";
-import { settings } from "carbon-components";
+import { EditOff16 } from "../../icons/icons/EditOff16";
+import { WarningAltFilled16 } from "../../icons/icons/WarningAltFilled16";
+import { WarningFilled16 } from "../../icons/icons/WarningFilled16";
+import settings from "carbon-components/es/globals/js/settings";
 
 const { prefix } = settings;
 
@@ -40,10 +41,10 @@ export function useNormalizedInputProps(props: {
     };
 
     if (props.readOnly) {
-      normalizedProps.icon = EditOff;
+      normalizedProps.icon = EditOff16;
     } else {
       if (normalizedProps.invalid) {
-        normalizedProps.icon = WarningFilled;
+        normalizedProps.icon = WarningFilled16;
         normalizedProps.validation = (
           <div
             className={`${prefix}--form-requirement`}
@@ -53,7 +54,7 @@ export function useNormalizedInputProps(props: {
           </div>
         );
       } else if (normalizedProps.warn) {
-        normalizedProps.icon = WarningAltFilled;
+        normalizedProps.icon = WarningAltFilled16;
         normalizedProps.validation = (
           <div
             className={`${prefix}--form-requirement`}

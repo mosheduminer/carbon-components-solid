@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import findLast from 'lodash.findlast';
-import { settings } from 'carbon-components';
+import findLast from "lodash.findlast";
+import settings from "carbon-components/es/globals/js/settings";
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
-} from './keyboard/navigation';
+} from "./keyboard/navigation";
 
 const { prefix } = settings;
 
@@ -25,10 +25,10 @@ function elementOrParentIsFloatingMenu(
   selectorsFloatingMenus = [
     `.${prefix}--overflow-menu-options`,
     `.${prefix}--tooltip`,
-    '.flatpickr-calendar',
+    ".flatpickr-calendar",
   ]
 ) {
-  if (node && typeof node.closest === 'function') {
+  if (node && typeof node.closest === "function") {
     return selectorsFloatingMenus.some((selector) => node.closest(selector));
   }
 }
@@ -65,12 +65,11 @@ function wrapFocus({
     !bodyNode.contains(currentActiveNode) &&
     !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
   ) {
-    const comparisonResult = oldActiveNode.compareDocumentPosition(
-      currentActiveNode
-    );
+    const comparisonResult =
+      oldActiveNode.compareDocumentPosition(currentActiveNode);
     if (
       currentActiveNode === startTrapNode ||
-      comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING as number
+      comparisonResult & (DOCUMENT_POSITION_BROAD_PRECEDING as number)
     ) {
       const tabbable = findLast(
         bodyNode.querySelectorAll(selectorTabbable),
@@ -83,7 +82,7 @@ function wrapFocus({
       }
     } else if (
       currentActiveNode === endTrapNode ||
-      comparisonResult & DOCUMENT_POSITION_BROAD_FOLLOWING as number
+      comparisonResult & (DOCUMENT_POSITION_BROAD_FOLLOWING as number)
     ) {
       const tabbable = Array.prototype.find.call(
         bodyNode.querySelectorAll(selectorTabbable),
