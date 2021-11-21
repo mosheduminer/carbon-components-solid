@@ -20,8 +20,5 @@
   },
   "engines": {
     "node": ">=12"
-  },
-  "dependencies": {
-    "esbuild-linux-64": "^0.13.13"
   }
 }
