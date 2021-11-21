@@ -3,8 +3,8 @@ import { createId } from "./internal/id";
 import { Copy } from "./Copy";
 import { CopyButton } from "./CopyButton";
 import { Button } from "./Button";
-import { ChevronDown } from "./icons/16";
-import { settings } from "carbon-components";
+import { ChevronDown16 } from "../icons/icons/ChevronDown16";
+import settings from "carbon-components/es/globals/js/settings";
 import useResizeObserver from "./internal/ResizeObserver";
 import copy from "copy-to-clipboard";
 import debounce from "lodash.debounce";
@@ -246,7 +246,7 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
             <span class={`${prefix}--snippet-btn--text`}>
               {expandCodeBtnText()}
             </span>
-            <ChevronDown
+            <ChevronDown16
               aria-label={expandCodeBtnText()}
               class={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
               role="img"

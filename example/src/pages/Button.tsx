@@ -1,4 +1,4 @@
-import { icons } from "carbon-components-solid";
+import { Add16 } from "carbon-components-solid/icons/Add16";
 import { Button, ButtonSet } from "carbon-components-solid";
 import { For } from "solid-js";
 import { Dynamic } from "solid-js/web";
@@ -55,7 +55,7 @@ const Ghost = () => {
 
 const IconButton = () => (
   <Button
-    renderIcon={icons._32.Add}
+    renderIcon={Add16}
     iconDescription="Icon Description"
     hasIconOnly
   />
@@ -105,7 +105,7 @@ const ExpressiveButtons = () => {
           margin: "1rem",
         }}
       >
-        <Button isExpressive size="default" renderIcon={icons._32.Add}>
+        <Button isExpressive size="default" renderIcon={Add16}>
           Button
         </Button>
       </div>
@@ -116,7 +116,7 @@ const ExpressiveButtons = () => {
       >
         <Button
           isExpressive
-          renderIcon={icons._32.Add}
+          renderIcon={Add16}
           hasIconOnly
           iconDescription="Icon description"
         />

@@ -12,7 +12,7 @@ import {
 } from "solid-js";
 import flatpickr from "flatpickr";
 import l10n from "flatpickr/dist/l10n/index";
-import { settings } from "carbon-components";
+import settings from "carbon-components/es/globals/js/settings";
 import { DatePickerInputProps } from "./DatePickerInput";
 import carbonFlatpickrAppendToPlugin from "./plugins/appendToPlugin";
 import carbonFlatpickrFixEventsPlugin from "./plugins/fixEventsPlugin";
@@ -21,8 +21,9 @@ import { match } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
 import { key, Locale } from "flatpickr/dist/types/locale";
 import { Instance } from "flatpickr/dist/types/instance";
-import { WarningFilled } from "./icons/16";
-import { WarningAltFilled, Calendar } from "./icons/32";
+import { WarningAltFilled16 } from "../icons/icons/WarningAltFilled16";
+import { Calendar16 } from "../icons/icons/Calendar16";
+import { WarningFilled16 } from "../icons/icons/WarningFilled16";
 import { Hook } from "flatpickr/dist/types/options";
 
 const { prefix } = settings;
@@ -592,7 +593,7 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
                 )}
                 <Switch
                   fallback={
-                    <Calendar
+                    <Calendar16
                       class={`${prefix}--date-picker__icon`}
                       aria-label={childProps.iconDescription}
                       onClick={childProps.openCalendar}
@@ -601,7 +602,7 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
                       {childProps.iconDescription && (
                         <title>{childProps.iconDescription}</title>
                       )}
-                    </Calendar>
+                    </Calendar16>
                   }
                 >
                   <Match
@@ -614,12 +615,12 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
                     {undefined}
                   </Match>
                   <Match when={childProps.invalid}>
-                    <WarningFilled
+                    <WarningFilled16
                       class={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
                     />
                   </Match>
                   <Match when={!childProps.invalid && childProps.warn}>
-                    <WarningAltFilled
+                    <WarningAltFilled16
                       class={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
                     />
                   </Match>

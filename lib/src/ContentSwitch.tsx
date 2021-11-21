@@ -12,8 +12,6 @@ export type ContentSwitchProps = {
 };
 
 export const ContentSwitch: Component<ContentSwitchProps> = (props) => {
-  // console.log(props.onClick);
-  
   props = mergeProps(
     { selected: false, onClick: () => { }, onKeyDown: () => { } },
     props

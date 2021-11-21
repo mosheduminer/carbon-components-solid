@@ -1,7 +1,6 @@
+import { useNavigate } from "solid-app-router";
+
 export default function Home() {
-  return (
-    <main>
-      <h1>Hello world!</h1>
-    </main>
-  );
+  const navigator = useNavigate();
+  navigator("Accordion")
 }

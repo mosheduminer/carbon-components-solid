@@ -1,17 +1,17 @@
-import { Component, For, mergeProps, JSX } from 'solid-js'
-import { Dynamic } from 'solid-js/web'
-import { settings } from 'carbon-components'
-const { prefix } = settings
+import { Component, For, mergeProps, JSX } from "solid-js";
+import { Dynamic } from "solid-js/web";
+import settings from "carbon-components/es/globals/js/settings";
+const { prefix } = settings;
 
 export type AccordionProps = {
-  align?: 'start' | 'end'
-  class?: string
-  disabled?: boolean
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-} & JSX.HTMLAttributes<HTMLLIElement>
+  align?: "start" | "end";
+  class?: string;
+  disabled?: boolean;
+  size?: "sm" | "md" | "lg" | "xl";
+} & JSX.HTMLAttributes<HTMLLIElement>;
 
 export const Accordion: Component<AccordionProps> = (props) => {
-  props = mergeProps({ align: 'end' }, props)
+  props = mergeProps({ align: "end" }, props);
 
   return (
     <ul
@@ -30,5 +30,5 @@ export const Accordion: Component<AccordionProps> = (props) => {
         props.children
       )}
     </ul>
-  )
-}
+  );
+};

@@ -1,7 +1,7 @@
 import { Component, splitProps, mergeProps, JSX } from "solid-js";
 import { Copy } from "./Copy";
-import { Copy as CopyIcon } from "./icons/32";
-import { settings } from "carbon-components";
+import { Copy16 } from "../icons/icons/Copy16";
+import settings from "carbon-components/es/globals/js/settings";
 
 const { prefix } = settings;
 
@@ -44,7 +44,7 @@ export const CopyButton: Component<CopyButtonProps> = (props) => {
       title={props.iconDescription}
       {...rest}
     >
-      <CopyIcon class={`${prefix}--snippet__icon`} />
+      <Copy16 class={`${prefix}--snippet__icon`} />
     </Copy>
   );
 };

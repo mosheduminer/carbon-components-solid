@@ -1,4 +1,4 @@
-import { settings } from "carbon-components";
+import settings from "carbon-components/es/globals/js/settings";
 import {
   Component,
   createEffect,
@@ -11,7 +11,9 @@ import {
   Match,
   For,
 } from "solid-js";
-import { CloseFilled, WarningFilled, CheckmarkFilled } from "./icons/16";
+import { CheckmarkFilled16 } from "../icons/icons/CheckmarkFilled16";
+import { CloseFilled16 } from "../icons/icons/CloseFilled16";
+import { WarningFilled16 } from "../icons/icons/WarningFilled16";
 import { Loading } from "./Loading";
 import { createId, uniqueId } from "./internal/id";
 import keys from "./internal/keyboard/keys";
@@ -343,7 +345,7 @@ export const Filename: Component<FilenameProps> = (props) => {
       <Match when={props.status === "edit"}>
         <>
           {props.invalid && (
-            <WarningFilled class={`${prefix}--file-invalid`} />
+            <WarningFilled16 class={`${prefix}--file-invalid`} />
           )}
           {/**
            @ts-ignore */}
@@ -353,20 +355,20 @@ export const Filename: Component<FilenameProps> = (props) => {
             type="button"
             {...rest}
           >
-            <CloseFilled />
+            <CloseFilled16 />
           </button>
         </>
       </Match>
       <Match when={props.status === "complete"}>
         {/**
          @ts-ignore */}
-        <CheckmarkFilled
+        <CheckmarkFilled16
           aria-label={props.iconDescription}
           class={`${prefix}--file-complete`}
           {...rest}
         >
           {props.iconDescription && <title>{props.iconDescription}</title>}
-        </CheckmarkFilled>
+        </CheckmarkFilled16>
       </Match>
     </Switch>
   );

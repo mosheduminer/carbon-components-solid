@@ -1,5 +1,5 @@
 import { Checkbox } from "carbon-components-solid";
-import { settings } from 'carbon-components';
+import settings from "carbon-components/es/globals/js/settings";
 
 const { prefix } = settings;
 
@@ -11,4 +11,4 @@ export default function () {
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
     </fieldset>
   );
-};
+}

@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const ChartBarOverlay20 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="20" height="20"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M4,28V26H26V16H4V14H18V4H4V2H2V28a2,2,0,0,0,2,2H30V28ZM24,18v6H4V22H20V20H4V18ZM16,6v6H4V10h8V8H4V6Z" /></svg>

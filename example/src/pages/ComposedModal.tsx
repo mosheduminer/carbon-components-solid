@@ -4,12 +4,14 @@ import {
   ModalBody,
   ModalHeader,
   ModalFooter,
+  Select,
+  SelectItem,
   TextInput,
 } from "carbon-components-solid";
-import { Component, createSignal, JSX } from "solid-js";
+import { Component, createEffect, createSignal, JSX } from "solid-js";
 import { Portal } from "solid-js/web";
 
-export const WithStateManager = () => {
+export default function() {
   type Props = { open: boolean; setOpen: (arg: boolean) => any };
   const ModalStateManager = (props: {
     children: (arg: Props) => JSX.Element;

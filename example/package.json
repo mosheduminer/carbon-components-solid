@@ -3,21 +3,25 @@
   "scripts": {
     "dev": "solid-start dev",
     "build": "solid-start build",
-    "start": "solid-start start"
+    "start": "solid-start start",
+    "vite": "vite build --debug"
   },
   "private": true,
   "type": "module",
   "devDependencies": {
-    "sass": "1.43.4",
-    "solid-app-router": "^0.1.11",
-    "solid-js": "^1.2.2",
+    "sass": "^1.43.4",
+    "solid-app-router": "^0.1.12",
+    "solid-js": "^1.2.5",
     "solid-meta": "^0.27.2",
     "solid-start": "0.1.0-alpha.35",
     "solid-start-node": "0.1.0-alpha.35",
-    "typescript": "^4.4.3",
-    "vite": "^2.6.12"
+    "typescript": "^4.5.2",
+    "vite": "^2.6.14"
   },
   "engines": {
     "node": ">=12"
+  },
+  "dependencies": {
+    "esbuild-linux-64": "^0.13.13"
   }
 }

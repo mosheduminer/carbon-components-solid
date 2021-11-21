@@ -1,5 +1,5 @@
 import { Component, JSX, splitProps, mergeProps } from "solid-js";
-import { settings } from "carbon-components";
+import settings from "carbon-components/es/globals/js/settings";
 import { createId } from "./internal/id";
 import { usePrefix } from "./internal/usePrefix";
 const { prefix } = settings;

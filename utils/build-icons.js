@@ -1,71 +1,72 @@
 /// Adapted from https://github.com/amoutonbrady/solid-heroicons/blob/master/scripts/fetchIcons.ts
 
-const dd = require("dedent");
-const { join, parse } = require("path");
-const { pascalCase } = require("change-case");
-const { readdir, readFile, outputFile } = require("fs-extra");
-const { statSync } = require("fs");
-
-const SRC_OTHER = "../node_modules/@carbon/icons/svg";
-const SRC_16 = "../node_modules/@carbon/icons/svg/16";
-const SRC_20 = "../node_modules/@carbon/icons/svg/20";
-const SRC_24 = "../node_modules/@carbon/icons/svg/24";
-const SRC_32 = "../node_modules/@carbon/icons/svg/32";
-
-const SRC_DIRS = [SRC_OTHER, SRC_16, SRC_20, SRC_24, SRC_32];
-const NAMES = ["other", "16", "20", "24", "32"];
+const { join } = require("path");
+const { outputFile } = require("fs-extra");
 
 const BASE_OUTPUT = "../lib/src/icons";
 
-// Start the whole machinery
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+const icons = require("@carbon/icons");
 
-async function main() {
-  // Generate the icons in the proper folder
-  SRC_DIRS.map((dir, index) =>
-    generateIcons({ path: dir, name: NAMES[index], outline: false })
+const buildAttrs = (attrs) => {
+  const buffer = [];
+  Object.entries(attrs).forEach(([name, data]) => {
+    if (typeof data !== undefined) {
+      buffer.push(`${name}="${data}"`);
+    }
+  });
+  return buffer;
+};
+
+const buildClosedElemWithAttrs = (elem, attrs) => {
+  const buffer = [`<${elem}`];
+  buffer.push(...buildAttrs(attrs));
+  buffer.push("/>");
+  return buffer.join(" ");
+};
+
+const buildSVG = (iconData, name) => {
+  let buffer = [
+    `import type { JSX } from "solid-js";\nexport const ${name} = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <${iconData.elem} {...props} aria-label={props.description}`,
+  ];
+  buffer.push(buildAttrs(iconData.attrs).join(" "));
+  buffer.push(">");
+  buffer = [buffer.join(""), '<title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title>'];
+  iconData.content.forEach((content) =>
+    buffer.push(buildClosedElemWithAttrs(content.elem, content.attrs))
   );
-}
+  buffer.push(`</${iconData.elem}>\n`);
+  return buffer.join("");
+};
 
-async function generateIcons({ path, name, outline }) {
-  const icons = await readdir(path);
-  const exportedIcons = ['import type { JSX, Component } from "solid-js";'];
-
-  for (const icon of icons) {
-    if (statSync(join(path, icon)).isDirectory()) continue;
-    let iconName = pascalCase(parse(icon).name);
-    // iconName = ["export", "delete", "function", "package"].includes(iconName) ? `_${iconName}` : iconName;
-    iconName = Number.isNaN(Number.parseInt(iconName[0]))
-      ? iconName
-      : `_${iconName}`;
-    const iconSVG = await readFile(join(path, icon), { encoding: "utf-8" });
-
-    // Clean the SVG markup
-    const cleanedSVG = iconSVG
-      .split("\n")
-      .filter(Boolean)
-      .map((path) => path.replace(/fill="(#\w+)"/g, 'fill="transparent"'))
-      .join(" ");
-
-    const [cleanedSVG1, cleanedSVG2] = [
-      cleanedSVG.substring(0, 4),
-      cleanedSVG.substring(5),
-    ];
-
-    const code = [cleanedSVG1, "{...props}", cleanedSVG2].join(" ");
-    const iconPathsStr = dd`export const ${iconName}: Component<JSX.HTMLAttributes<SVGSVGElement>> = (props) => ${code};`;
-    exportedIcons.push(iconPathsStr);
+async function build() {
+  const builtIcons = {};
+  for ([name, iconData] of Object.entries(icons)) {
+    builtIcons[name] = buildSVG(iconData, name);
   }
-
-  const exportedIconsStr = exportedIcons.join("\n");
+  for ([name, codeString] of Object.entries(builtIcons)) {
+    await outputFile(
+      join(process.cwd(), BASE_OUTPUT, "icons", `${name}.tsx`),
+      codeString,
+      {
+        encoding: "utf-8",
+      }
+    );
+  }
+  const buffer = [];
+  for (name in icons) {
+    buffer.push(`export {${name}} from "./icons/${name}"`);
+  }
   await outputFile(
-    join(process.cwd(), BASE_OUTPUT, name, "index.tsx"),
-    exportedIconsStr,
+    join(process.cwd(), BASE_OUTPUT, "index.ts"),
+    buffer.join("\n"),
     {
       encoding: "utf-8",
     }
   );
 }
+
+// Start the whole machinery
+build().catch((e) => {
+  console.error(e);
+  process.exit(1);
+});

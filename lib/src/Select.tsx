@@ -1,7 +1,8 @@
 import { Component, splitProps, JSX, mergeProps, createMemo } from "solid-js";
-import { settings } from "carbon-components";
-import { ChevronDown, WarningFilled } from "./icons/16";
-import { WarningAltFilled } from "./icons/32";
+import settings from "carbon-components/es/globals/js/settings";
+import { WarningFilled16 } from "../icons/icons/WarningFilled16";
+import { WarningAltFilled16 } from "../icons/icons/WarningAltFilled16";
+import { ChevronDown16 } from "../icons/icons/ChevronDown16";
 
 const { prefix } = settings;
 
@@ -109,13 +110,13 @@ export const Select: Component<SelectProps> = (props) => {
         >
           {props.children}
         </select>
-        <ChevronDown className={`${prefix}--select__arrow`} />
+        <ChevronDown16 class={`${prefix}--select__arrow`} />
         {props.invalid && (
-          <WarningFilled className={`${prefix}--select__invalid-icon`} />
+          <WarningFilled16 class={`${prefix}--select__invalid-icon`} />
         )}
         {!props.invalid && props.warn && (
-          <WarningAltFilled
-            className={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
+          <WarningAltFilled16
+            class={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
           />
         )}
       </>

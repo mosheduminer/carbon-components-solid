@@ -10,7 +10,7 @@ import {
 import { matches } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
 import { ButtonKindsType } from "./types";
-import { settings } from "carbon-components";
+import settings from "carbon-components/es/globals/js/settings";
 import { composeEventHandlers } from "./internal/events";
 import { Dynamic } from "solid-js/web";
 import { createId } from "./internal/id";

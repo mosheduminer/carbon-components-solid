@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const LowSeverityGlyph = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M4 4H12V12H4z" /><path d="M12,4v8H4V4h8m1-1H3V13H13V3Z" /></svg>

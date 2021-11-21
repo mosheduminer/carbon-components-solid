@@ -1,5 +1,5 @@
 import { Component, mergeProps, JSX, splitProps } from "solid-js";
-import { settings } from "carbon-components";
+import settings from "carbon-components/es/globals/js/settings";
 import { Dynamic } from "solid-js/web";
 
 const { prefix } = settings;

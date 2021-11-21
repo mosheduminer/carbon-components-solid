@@ -9,12 +9,12 @@ import {
   createEffect,
   onCleanup,
 } from "solid-js";
-import { settings } from "carbon-components";
+import settings from "carbon-components/es/globals/js/settings";
 import { composeEventHandlers } from "./internal/events";
 import keys from "./internal/keyboard/keys";
 import { matches } from "./internal/keyboard/match";
-import wrapFocus, { elementOrParentIsFloatingMenu } from "./internal/wrapFocus";
-import { Close } from "./icons/32";
+import wrapFocus  from "./internal/wrapFocus";
+import { Close20 } from "../icons/icons/Close20";
 import { ButtonSet } from "./ButtonSet";
 import { Button } from "./Button";
 import { callEventHandlerUnion } from "./internal/callEventHandlerUnion";
@@ -219,7 +219,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
 };
 
 export type ModalHeaderProps = {
-  onClick?: JSX.EventHandlerUnion<HTMLDivElement, MouseEvent>;
+  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
   class?: string;
   closeClass?: string;
   closeIconClass?: string;
@@ -228,7 +228,7 @@ export type ModalHeaderProps = {
   labelClass?: string;
   title?: JSX.Element;
   titleClass?: string;
-} & JSX.HTMLAttributes<HTMLDivElement>;
+} & Omit<JSX.HTMLAttributes<HTMLDivElement>, "onClick">;
 
 export const ModalHeader = ((
   props: ModalHeaderProps
@@ -283,7 +283,7 @@ export const ModalHeader = ((
           aria-label={props.iconDescription}
           type="button"
         >
-          <Close
+          <Close20
             class={`${prefix}--modal-close__icon`}
             classList={{ [props.closeIconClass!]: !!props.closeIconClass }}
           />

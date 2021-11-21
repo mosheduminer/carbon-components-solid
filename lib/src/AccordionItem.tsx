@@ -7,8 +7,8 @@ import {
   createEffect,
   untrack,
 } from "solid-js";
-import { settings } from "carbon-components";
-import { ChevronRight } from "./icons/16";
+import settings from "carbon-components/es/globals/js/settings";
+import { ChevronRight16 } from "../icons/icons/ChevronRight16";
 import { match } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
 
@@ -97,7 +97,7 @@ export const AccordionItem: Component<AccordionItemProps> = (props) => {
         onKeyDown={onKeyDown}
         type="button"
       >
-        <ChevronRight class={`${prefix}--accordion__arrow`} />
+        <ChevronRight16 class={`${prefix}--accordion__arrow`} />
         <div class={`${prefix}--accordion__title`}>{props.title}</div>
       </button>
       <div class={`${prefix}--accordion__content`}>{props.children}</div>
