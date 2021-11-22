@@ -18,3 +18,7 @@ gitignore
 # System Files
 .DS_Store
 Thumbs.db
+
+# ignore generated stylesheet
+src/styles.css
+src/styles.css.map

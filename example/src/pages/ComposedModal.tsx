@@ -8,7 +8,7 @@ import {
   SelectItem,
   TextInput,
 } from "carbon-components-solid";
-import { Component, createEffect, createSignal, JSX } from "solid-js";
+import { Component, createSignal, JSX } from "solid-js";
 import { Portal } from "solid-js/web";
 
 export default function() {

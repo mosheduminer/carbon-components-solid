@@ -8,10 +8,10 @@ $css--default-type: true;
 $css--plex: true;
 
 // Include defaults typically provided through the `styles.scss` entrypoint
-@import 'carbon-components/scss/globals/scss/_css--reset.scss';
-@import 'carbon-components/scss/globals/scss/_css--font-face.scss';
-@import 'carbon-components/scss/globals/scss/_css--helpers.scss';
-@import 'carbon-components/scss/globals/scss/_css--body.scss';
+//@import 'carbon-components/scss/globals/scss/_css--reset.scss';
+//@import 'carbon-components/scss/globals/scss/_css--font-face.scss';
+//@import 'carbon-components/scss/globals/scss/_css--helpers.scss';
+//@import 'carbon-components/scss/globals/scss/_css--body.scss';
 
 // Optionally include the grid
 @import 'carbon-components/scss/globals/grid/_grid.scss';

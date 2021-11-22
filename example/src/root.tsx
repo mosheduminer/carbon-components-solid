@@ -2,7 +2,7 @@
 import { useNavigate } from "solid-app-router";
 import { Links, Meta, Outlet, Scripts } from "solid-start/components";
 import Selector from "~/components/Selector";
-import "./styles.scss";
+import "./styles.css";
 
 const components = ["Accordion", "Breadcrumb", "Button", "Checkbox", "ComposedModal", "Select"];
 
