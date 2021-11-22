@@ -9,21 +9,20 @@ import {
   createEffect,
   onCleanup,
 } from "solid-js";
-import settings from "carbon-components/es/globals/js/settings";
 import { composeEventHandlers } from "./internal/events";
 import keys from "./internal/keyboard/keys";
 import { matches } from "./internal/keyboard/match";
-import wrapFocus  from "./internal/wrapFocus";
+import wrapFocus from "./internal/wrapFocus";
 import { Close20 } from "../icons/icons/Close20";
 import { ButtonSet } from "./ButtonSet";
 import { Button } from "./Button";
 import { callEventHandlerUnion } from "./internal/callEventHandlerUnion";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
+import { createDerivedSignal } from "./internal/derivedSignal";
 
 export type ComposedModalProps = {
   "aria-label"?: string;
-  'aria-labelledby'?: string;
+  "aria-labelledby"?: string;
   class?: string;
   containerClass?: string;
   danger?: boolean;
@@ -56,11 +55,13 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
     "size",
   ]);
   props = mergeProps(
-    { onKeyDown: () => { }, selectorPrimaryFocus: "[data-modal-primary-focus]" },
+    { onKeyDown: () => {}, selectorPrimaryFocus: "[data-modal-primary-focus]" },
     props
   );
 
-  const [open, setOpen] = createSignal(true);
+  const prefix = usePrefix();
+
+  const [open, setOpen] = createDerivedSignal(() => props.open);
   let outerModal!: HTMLDivElement;
   let innerModal!: HTMLDivElement;
   let buttonRef: HTMLButtonElement;
@@ -138,33 +139,41 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
   ]);
 
   createEffect<boolean>((prev) => {
-    if (!prev && open()) {
+    const current = open();
+    if (!prev && current) {
       beingOpen = true;
-    } else if (prev !== open()) {
+    } else if (prev !== current) {
       beingOpen = false;
     }
-    if (prev !== open()) {
-      document.body.classList.toggle(`${prefix}--body--with-modal-open`, open());
+    if (prev !== current) {
+      document.body.classList.toggle(
+        `${prefix}--body--with-modal-open`,
+        current
+      );
     }
-    return open();
+    return current;
   });
 
   onCleanup(() => {
     document.body.classList.toggle(`${prefix}--body--with-modal-open`, false);
-  })
+  });
 
   const chlds = children(() => props.children);
   let ariaLabel: string | undefined;
-  const childrenWithProps = () => (chlds() as ((() => JSX.FunctionElement) | JSX.Element)[]).map((el) => {
-    if (Array.isArray(el)) {
-      ariaLabel = el[0] as string | undefined;
-      return (el[1] as (props: any) => JSX.FunctionElement)({ closeModal });
-    } else if (typeof el === "function") {
-      return (el as (props: any) => JSX.FunctionElement)({ closeModal, ref: buttonRef });
-    } else {
-      return el;
-    }
-  });
+  const childrenWithProps = () =>
+    (chlds() as ((() => JSX.FunctionElement) | JSX.Element)[]).map((el) => {
+      if (Array.isArray(el)) {
+        ariaLabel = el[0] as string | undefined;
+        return (el[1] as (props: any) => JSX.FunctionElement)({ closeModal });
+      } else if (typeof el === "function") {
+        return (el as (props: any) => JSX.FunctionElement)({
+          closeModal,
+          ref: buttonRef,
+        });
+      } else {
+        return el;
+      }
+    });
 
   return (
     <div
@@ -230,67 +239,67 @@ export type ModalHeaderProps = {
   titleClass?: string;
 } & Omit<JSX.HTMLAttributes<HTMLDivElement>, "onClick">;
 
-export const ModalHeader = ((
-  props: ModalHeaderProps
-) => {
-    let rest: JSX.HTMLAttributes<HTMLDivElement>;
-    [props, rest] = splitProps(props, [
-      "class",
-      "children",
-      "onClick",
-      "closeClass",
-      "closeIconClass",
-      "iconDescription",
-      "label",
-      "labelClass",
-      "title",
-      "titleClass",
-    ]);
-    props = mergeProps({ iconDescription: "Close", onClick: () => { } }, props);
-    return (innerProps: { closeModal: (e: MouseEvent) => any }) => (
-      [() => props.label, <div
-        classList={{
-          [props.class!]: !!props.class,
-        }}
-        class={`${prefix}--modal-header`}
-        {...rest}
-      >
-        {props.label && (
-          <h2
-            classList={{ [props.labelClass!]: !!props.labelClass }}
-            class={`${prefix}--modal-header__label ${prefix}--type-delta`}
-          >
-            {props.label}
-          </h2>
-        )}
-
-        {props.title && (
-          <h3
-            class={`${prefix}--modal-header__heading ${prefix}--type-beta`}
-            classList={{ [props.titleClass!]: !!props.titleClass }}
-          >
-            {props.title}
-          </h3>
-        )}
-
-        {props.children}
-
-        <button
-          onClick={composeEventHandlers([innerProps.closeModal, props.onClick])}
-          class={`${prefix}--modal-close`}
-          classList={{ [props.closeClass!]: !!props.closeClass }}
-          title={props.iconDescription}
-          aria-label={props.iconDescription}
-          type="button"
+export const ModalHeader = ((props: ModalHeaderProps) => {
+  const prefix = usePrefix();
+  let rest: JSX.HTMLAttributes<HTMLDivElement>;
+  [props, rest] = splitProps(props, [
+    "class",
+    "children",
+    "onClick",
+    "closeClass",
+    "closeIconClass",
+    "iconDescription",
+    "label",
+    "labelClass",
+    "title",
+    "titleClass",
+  ]);
+  props = mergeProps({ iconDescription: "Close", onClick: () => {} }, props);
+  return (innerProps: { closeModal: (e: MouseEvent) => any }) => [
+    () => props.label,
+    <div
+      classList={{
+        [props.class!]: !!props.class,
+      }}
+      class={`${prefix}--modal-header`}
+      {...rest}
+    >
+      {props.label && (
+        <h2
+          classList={{ [props.labelClass!]: !!props.labelClass }}
+          class={`${prefix}--modal-header__label ${prefix}--type-delta`}
         >
-          <Close20
-            class={`${prefix}--modal-close__icon`}
-            classList={{ [props.closeIconClass!]: !!props.closeIconClass }}
-          />
-        </button>
-      </div>]
-    );
-  }) as Component<ModalHeaderProps>
+          {props.label}
+        </h2>
+      )}
+
+      {props.title && (
+        <h3
+          class={`${prefix}--modal-header__heading ${prefix}--type-beta`}
+          classList={{ [props.titleClass!]: !!props.titleClass }}
+        >
+          {props.title}
+        </h3>
+      )}
+
+      {props.children}
+
+      <button
+        onClick={composeEventHandlers([innerProps.closeModal, props.onClick])}
+        class={`${prefix}--modal-close`}
+        classList={{ [props.closeClass!]: !!props.closeClass }}
+        title={props.iconDescription}
+        aria-label={props.iconDescription}
+        type="button"
+      >
+        <Close20
+          class={`${prefix}--modal-close__icon`}
+          classList={{ [props.closeIconClass!]: !!props.closeIconClass }}
+        />
+      </button>
+    </div>,
+  ];
+}) as Component<ModalHeaderProps>;
 
 export type ModalBodyProps = {
   ariaLabel?: string;
@@ -307,6 +316,7 @@ export const ModalBody: Component<ModalBodyProps> = (props) => {
     "hasForm",
     "hasScrollingContent",
   ]);
+  const prefix = usePrefix();
   const hasScrollingContentProps = () =>
     props.hasScrollingContent ? { tabIndex: 0, role: "region" } : {};
   return (
@@ -348,21 +358,36 @@ export type ModalFooterProps = {
 
 export const ModalFooter = ((props: ModalFooterProps) => {
   let rest: JSX.HTMLAttributes<HTMLDivElement>;
-  [props, rest] = splitProps(props, ["children", "class", "danger", "onRequestClose", "onRequestSubmit", "primaryButtonDisabled", "primaryButtonText", "primaryClass", "secondaryButtonText", "secondaryButtons", "secondaryClass"]);
+  [props, rest] = splitProps(props, [
+    "children",
+    "class",
+    "danger",
+    "onRequestClose",
+    "onRequestSubmit",
+    "primaryButtonDisabled",
+    "primaryButtonText",
+    "primaryClass",
+    "secondaryButtonText",
+    "secondaryButtons",
+    "secondaryClass",
+  ]);
   props = mergeProps(
-    { onRequestClose: () => { }, onRequestSubmit: () => { } },
+    { onRequestClose: () => {}, onRequestSubmit: () => {} },
     props
   );
 
-  const SecondaryButtonSet = (
-    innerProps: { closeModal: (e: MouseEvent) => any }
-  ) => {
-    const handleRequestClose = (evt: MouseEvent & {
-      currentTarget: HTMLElement;
-      target: Element;
-    }) => {
+  const SecondaryButtonSet = (innerProps: {
+    closeModal: (e: MouseEvent) => any;
+  }) => {
+    const handleRequestClose = (
+      evt: MouseEvent & {
+        currentTarget: HTMLElement;
+        target: Element;
+      }
+    ) => {
       innerProps.closeModal(evt);
-      if (props.onRequestClose) callEventHandlerUnion(props.onRequestClose, evt);
+      if (props.onRequestClose)
+        callEventHandlerUnion(props.onRequestClose, evt);
     };
 
     if (
@@ -402,30 +427,33 @@ export const ModalFooter = ((props: ModalFooterProps) => {
   return (innerProps: {
     ref: HTMLElement | ((e: HTMLElement) => any);
     closeModal: (e: MouseEvent) => any;
-  }) => (
-    <ButtonSet
-      classList={{
-        [`${prefix}--modal-footer`]: true,
-        [props.class!]: !!props.class,
-        [`${prefix}--modal-footer--three-button`]:
-          Array.isArray(props.secondaryButtons) &&
-          props.secondaryButtons.length === 2,
-      }}
-      {...rest}
-    >
-      <SecondaryButtonSet closeModal={innerProps.closeModal} />
-      {props.primaryButtonText && (
-        <Button
-          onClick={props.onRequestSubmit}
-          class={props.primaryClass}
-          disabled={props.primaryButtonDisabled}
-          kind={props.danger ? "danger" : "primary"}
-          ref={innerProps.ref}
-        >
-          {props.primaryButtonText}
-        </Button>
-      )}
-      {props.children}
-    </ButtonSet>
-  );
-}) as Component<ModalFooterProps>
+  }) => {
+    const prefix = usePrefix();
+    return (
+      <ButtonSet
+        classList={{
+          [`${prefix}--modal-footer`]: true,
+          [props.class!]: !!props.class,
+          [`${prefix}--modal-footer--three-button`]:
+            Array.isArray(props.secondaryButtons) &&
+            props.secondaryButtons.length === 2,
+        }}
+        {...rest}
+      >
+        <SecondaryButtonSet closeModal={innerProps.closeModal} />
+        {props.primaryButtonText && (
+          <Button
+            onClick={props.onRequestSubmit}
+            class={props.primaryClass}
+            disabled={props.primaryButtonDisabled}
+            kind={props.danger ? "danger" : "primary"}
+            ref={innerProps.ref}
+          >
+            {props.primaryButtonText}
+          </Button>
+        )}
+        {props.children}
+      </ButtonSet>
+    );
+  };
+}) as Component<ModalFooterProps>;
