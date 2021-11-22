@@ -34,7 +34,7 @@
     "solid-js": "^1.2.5",
     "solid-testing-library": "^0.2.1",
     "ts-jest": "^27.0.5",
-    "typescript": "^4.3.5"
+    "typescript": "^4.5.2"
   },
   "peerDependencies": {
     "@carbon/icons": "^10.32.0",
