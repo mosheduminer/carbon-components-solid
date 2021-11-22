@@ -8,6 +8,7 @@ import {
   For,
   createEffect,
   onCleanup,
+  mapArray,
 } from "solid-js";
 import { composeEventHandlers } from "./internal/events";
 import keys from "./internal/keyboard/keys";
@@ -55,7 +56,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
     "size",
   ]);
   props = mergeProps(
-    { onKeyDown: () => {}, selectorPrimaryFocus: "[data-modal-primary-focus]" },
+    { onKeyDown: () => { }, selectorPrimaryFocus: "[data-modal-primary-focus]" },
     props
   );
 
@@ -160,16 +161,18 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
 
   const chlds = children(() => props.children);
   let ariaLabel: string | undefined;
-  const childrenWithProps = () =>
-    (chlds() as ((() => JSX.FunctionElement) | JSX.Element)[]).map((el) => {
-      if (Array.isArray(el)) {
-        ariaLabel = el[0] as string | undefined;
-        return (el[1] as (props: any) => JSX.FunctionElement)({ closeModal });
-      } else if (typeof el === "function") {
-        return (el as (props: any) => JSX.FunctionElement)({
+  const childrenWithProps = mapArray(chlds as () => ((() => JSX.FunctionElement) | JSX.Element)[],
+    (el) => {
+      if (typeof el === "function") {
+        const ret = (el as (props: any) => JSX.FunctionElement)({
           closeModal,
           ref: buttonRef,
         });
+        if (Array.isArray(ret)) {
+          ariaLabel = ret[0] as string | undefined;
+          return ret[1];
+        }
+        return ret;
       } else {
         return el;
       }
@@ -254,7 +257,7 @@ export const ModalHeader = ((props: ModalHeaderProps) => {
     "title",
     "titleClass",
   ]);
-  props = mergeProps({ iconDescription: "Close", onClick: () => {} }, props);
+  props = mergeProps({ iconDescription: "Close", onClick: () => { } }, props);
   return (innerProps: { closeModal: (e: MouseEvent) => any }) => [
     () => props.label,
     <div
@@ -372,7 +375,7 @@ export const ModalFooter = ((props: ModalFooterProps) => {
     "secondaryClass",
   ]);
   props = mergeProps(
-    { onRequestClose: () => {}, onRequestSubmit: () => {} },
+    { onRequestClose: () => { }, onRequestSubmit: () => { } },
     props
   );
 
