@@ -3,8 +3,7 @@
   "scripts": {
     "dev": "solid-start dev",
     "build": "solid-start build",
-    "start": "solid-start start",
-    "vite": "vite build --debug"
+    "start": "solid-start start"
   },
   "private": true,
   "type": "module",
