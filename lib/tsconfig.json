@@ -18,7 +18,6 @@
   },
   "include": [
     "src",
-    "__tests__",
-    "icons"
+    "__tests__"
   ]
 }

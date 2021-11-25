@@ -21,7 +21,7 @@ export type CheckboxProps = {
     details: { checked: boolean; id: string }
   ) => any;
   title?: string;
-} & JSX.HTMLAttributes<HTMLInputElement>;
+} & Omit<JSX.HTMLAttributes<HTMLInputElement>, "onChange">;
 
 export const Checkbox: Component<CheckboxProps> = (props) => {
   const prefix = usePrefix();

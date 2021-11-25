@@ -1,5 +1,7 @@
+import { createSignal } from "solid-js";
 import { CheckmarkFilled16 } from "../../../lib/icons/icons/CheckmarkFilled16";
 import {
+  Checkbox,
   StructuredListBody,
   StructuredListCell,
   StructuredListHead,
@@ -10,6 +12,9 @@ import {
 import { usePrefix } from "../../../lib/src/internal/usePrefix";
 
 export default function () {
+  const [isFlush, setIsFlush] = createSignal(false);
+  const [isCondensed, setIsCondensed] = createSignal(false);
+  const [selection, setSelection] = createSignal(true);
   const prefix = usePrefix();
   const structuredListBodyRowGenerator = (numRows) => {
     return [...Array(numRows)].map((_, i) => (
@@ -41,18 +46,46 @@ export default function () {
     ));
   };
   return (
-    <StructuredListWrapper selection>
-      <StructuredListHead>
-        <StructuredListRow head>
-          <StructuredListCell head>ColumnA</StructuredListCell>
-          <StructuredListCell head>ColumnB</StructuredListCell>
-          <StructuredListCell head>ColumnC</StructuredListCell>
-          <StructuredListCell head>{""}</StructuredListCell>
-        </StructuredListRow>
-      </StructuredListHead>
-      <StructuredListBody>
-        {structuredListBodyRowGenerator(4)}
-      </StructuredListBody>
-    </StructuredListWrapper>
+    <>
+      <Checkbox
+        onChange={(e, details) => {
+          setSelection(details.checked);
+        }}
+        labelText="Selection"
+        id="selection-checkbox"
+        checked={selection()}
+      />
+      <Checkbox
+        onChange={(e, details) => {
+          setIsCondensed(details.checked);
+        }}
+        labelText="Condensed"
+        id="condensed-checkbox"
+      />
+      <Checkbox
+        onChange={(e, details) => {
+          setIsFlush(details.checked);
+        }}
+        labelText="Flush"
+        id="flush-checkbox"
+      />
+      <StructuredListWrapper
+        selection={selection()}
+        isCondensed={isCondensed()}
+        isFlush={isFlush()}
+      >
+        <StructuredListHead>
+          <StructuredListRow head>
+            <StructuredListCell head>ColumnA</StructuredListCell>
+            <StructuredListCell head>ColumnB</StructuredListCell>
+            <StructuredListCell head>ColumnC</StructuredListCell>
+            <StructuredListCell head>{""}</StructuredListCell>
+          </StructuredListRow>
+        </StructuredListHead>
+        <StructuredListBody>
+          {structuredListBodyRowGenerator(4)}
+        </StructuredListBody>
+      </StructuredListWrapper>
+    </>
   );
 }
