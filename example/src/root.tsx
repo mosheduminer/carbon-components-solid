@@ -4,7 +4,15 @@ import { Links, Meta, Outlet, Scripts } from "solid-start/components";
 import Selector from "~/components/Selector";
 import "./styles.css";
 
-const components = ["Accordion", "Breadcrumb", "Button", "Checkbox", "ComposedModal", "Select"];
+const components = [
+  "Accordion",
+  "Breadcrumb",
+  "Button",
+  "Checkbox",
+  "ComposedModal",
+  "Select",
+  "StructuredList",
+];
 
 const Page = () => {
   const navigator = useNavigate();
@@ -17,9 +25,16 @@ const Page = () => {
         <Links />
       </head>
       <body>
-        <Selector list={components} callback={(data) => navigator(data.name)} />
-        <Outlet />
-        <Scripts />
+        <div style="display: flex; justify-content: center;">
+          <div style="width: 80%">
+            <Selector
+              list={components}
+              callback={(data) => navigator(data.name)}
+            />
+            <Outlet />
+            <Scripts />
+          </div>
+        </div>
       </body>
     </html>
   );
