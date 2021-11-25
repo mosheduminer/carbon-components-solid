@@ -112,6 +112,7 @@ export const StructuredListRow: Component<StructuredListRowProps> = (props) => {
         <div
           role="row"
           {...rest}
+          class={`${prefix}--structured-list-row`}
           classList={{
             [`${prefix}--structured-list-row--header-row`]: props.head,
             [props.class!]: !!props.class,
