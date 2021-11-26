@@ -24,4 +24,5 @@ export * from "./Select";
 export * from "./SelectItemGroup";
 export * from "./SelectItem";
 export * from "./StructuredList";
+export * from "./Tag";
 export * from "./TextInput";

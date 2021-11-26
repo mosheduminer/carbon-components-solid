@@ -4,7 +4,7 @@ import { uniqueId } from "./internal/id";
 
 const { prefix } = settings;
 
-type ProgressBarProps = {
+export type ProgressBarProps = {
   class?: string;
   hideLabel?: boolean;
   label: string;
@@ -37,8 +37,8 @@ export const ProgressBar: Component<ProgressBarProps> = (props) => {
       class={`${prefix}--progress-bar`}
       classList={{
         [`${prefix}--progress-bar--indeterminate`]: indeterminate(),
+        [props.class!]: !!props.class,
       }}
-      className={props.class}
     >
       <span
         class={`${prefix}--progress-bar__label`}
@@ -50,7 +50,7 @@ export const ProgressBar: Component<ProgressBarProps> = (props) => {
         {props.label}
       </span>
       <div
-        className={`${prefix}--progress-bar__track`}
+        class={`${prefix}--progress-bar__track`}
         role="progressbar"
         aria-labelledby={labelId}
         aria-describedby={props.helperText ? helperId : undefined}
@@ -59,12 +59,12 @@ export const ProgressBar: Component<ProgressBarProps> = (props) => {
         aria-valuenow={!indeterminate() ? cappedValue() : undefined}
       >
         <div
-          className={`${prefix}--progress-bar__bar`}
+          class={`${prefix}--progress-bar__bar`}
           style={{ transform: `scaleX(${percentage()})` }}
         />
       </div>
       {props.helperText && (
-        <div id={helperId} className={`${prefix}--progress-bar__helper-text`}>
+        <div id={helperId} class={`${prefix}--progress-bar__helper-text`}>
           {props.helperText}
         </div>
       )}

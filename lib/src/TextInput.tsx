@@ -194,7 +194,7 @@ export const TextInput: Component<TextInputProps> = (props) => {
       {!props.inline ? (
         label
       ) : (
-        <div className={`${prefix}--text-input__label-helper-wrapper`}>
+        <div class={`${prefix}--text-input__label-helper-wrapper`}>
           {label}
           {!isFluid && helper}
         </div>
@@ -233,7 +233,7 @@ export const TextInput: Component<TextInputProps> = (props) => {
               warnId: normalizedProps().warnId,
             })}
           />
-          {isFluid && <hr className={`${prefix}--text-input__divider`} />}
+          {isFluid && <hr class={`${prefix}--text-input__divider`} />}
           {isFluid && !props.inline && normalizedProps().validation}
         </div>
         {!isFluid && !props.inline && (normalizedProps().validation || helper)}

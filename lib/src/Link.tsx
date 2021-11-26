@@ -33,7 +33,7 @@ export const Link: Component<LinkProps> = (props) => {
       {...rest}>
       {props.children}
       {!props.inline && props.renderIcon && (
-        <div className={`${prefix}--link__icon`}>
+        <div class={`${prefix}--link__icon`}>
           <props.renderIcon />
         </div>
       )}

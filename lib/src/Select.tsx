@@ -1,5 +1,5 @@
 import { Component, splitProps, JSX, mergeProps, createMemo } from "solid-js";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 import { WarningFilled16 } from "../icons/icons/WarningFilled16";
 import { WarningAltFilled16 } from "../icons/icons/WarningAltFilled16";
 import { ChevronDown16 } from "../icons/icons/ChevronDown16";
@@ -71,7 +71,7 @@ export const Select: Component<SelectProps> = (props) => {
       }
     })();
     return props.invalid || props.warn ? (
-      <div className={`${prefix}--form-requirement`} id={errorId}>
+      <div class={`${prefix}--form-requirement`} id={errorId}>
         {errorText}
       </div>
     ) : null;
@@ -151,9 +151,9 @@ export const Select: Component<SelectProps> = (props) => {
           </label>
         )}
         {props.inline && (
-          <div className={`${prefix}--select-input--inline__wrapper`}>
+          <div class={`${prefix}--select-input--inline__wrapper`}>
             <div
-              className={`${prefix}--select-input__wrapper`}
+              class={`${prefix}--select-input__wrapper`}
               data-invalid={props.invalid || null}
             >
               {input}
@@ -163,7 +163,7 @@ export const Select: Component<SelectProps> = (props) => {
         )}
         {!props.inline && (
           <div
-            className={`${prefix}--select-input__wrapper`}
+            class={`${prefix}--select-input__wrapper`}
             data-invalid={props.invalid || null}
           >
             {input}

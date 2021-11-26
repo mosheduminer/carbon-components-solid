@@ -4,13 +4,11 @@ import { Copy } from "./Copy";
 import { CopyButton } from "./CopyButton";
 import { Button } from "./Button";
 import { ChevronDown16 } from "../icons/icons/ChevronDown16";
-import settings from "carbon-components/es/globals/js/settings";
 import useResizeObserver from "./internal/ResizeObserver";
 import copy from "copy-to-clipboard";
 import debounce from "lodash.debounce";
 import { composeEventHandlers } from "./internal/events";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type CodeSnippetProps = {
   ariaLabel?: string;
@@ -164,6 +162,8 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
   });
 
   const handleCopyClick = (evt: MouseEvent) => composeEventHandlers([() => copy(props.children), props.onClick]);
+
+  const prefix = usePrefix();
 
   const classes = () => (
     {

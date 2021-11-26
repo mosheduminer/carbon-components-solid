@@ -13,6 +13,7 @@ const components = [
   "ProgressBar",
   "Select",
   "StructuredList",
+  "Tag",
 ];
 
 const Page = () => {

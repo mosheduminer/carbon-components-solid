@@ -41,7 +41,7 @@ describe("FluidForm", () => {
       const onSubmit = jest.fn();
       const { container: form1 } = render(() => (
         <FluidForm>
-          <button className="button" type="submit" onSubmit={onSubmit}>
+          <button class="button" type="submit" onSubmit={onSubmit}>
             Submit
           </button>
         </FluidForm>

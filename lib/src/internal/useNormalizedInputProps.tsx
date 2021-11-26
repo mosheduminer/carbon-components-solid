@@ -6,7 +6,7 @@ import { Component, createMemo, JSX } from "solid-js";
 import { EditOff16 } from "../../icons/icons/EditOff16";
 import { WarningAltFilled16 } from "../../icons/icons/WarningAltFilled16";
 import { WarningFilled16 } from "../../icons/icons/WarningFilled16";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 
 const { prefix } = settings;
 
@@ -47,7 +47,7 @@ export function useNormalizedInputProps(props: {
         normalizedProps.icon = WarningFilled16;
         normalizedProps.validation = (
           <div
-            className={`${prefix}--form-requirement`}
+            class={`${prefix}--form-requirement`}
             id={normalizedProps.invalidId}
           >
             {props.invalidText}
@@ -57,7 +57,7 @@ export function useNormalizedInputProps(props: {
         normalizedProps.icon = WarningAltFilled16;
         normalizedProps.validation = (
           <div
-            className={`${prefix}--form-requirement`}
+            class={`${prefix}--form-requirement`}
             id={normalizedProps.warnId}
           >
             {props.warnText}
