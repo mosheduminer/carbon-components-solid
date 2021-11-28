@@ -1,5 +1,5 @@
 import { Checkbox } from "carbon-components-solid";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 
 const { prefix } = settings;
 

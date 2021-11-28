@@ -6,7 +6,6 @@ export default defineConfig({
   optimizeDeps: {
     include: [
       "carbon-components",
-      "carbon-components/es/globals/js/settings",
       "warning",
       "flatpickr",
       "flatpickr/dist/l10n/index",
@@ -16,9 +15,4 @@ export default defineConfig({
       "lodash.findlast",
     ],
   },
-  ssr: {
-    noExternal: [
-      "carbon-components",
-    ],
-  }
 });

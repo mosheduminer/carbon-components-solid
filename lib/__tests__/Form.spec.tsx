@@ -1,6 +1,6 @@
 import { Form } from "../src/Form";
 import { render, fireEvent } from "solid-testing-library";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 
 const { prefix } = settings;
 

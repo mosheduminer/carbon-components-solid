@@ -12,7 +12,7 @@ import {
 } from "solid-js";
 import flatpickr from "flatpickr";
 import l10n from "flatpickr/dist/l10n/index";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 import { DatePickerInputProps } from "./DatePickerInput";
 import carbonFlatpickrAppendToPlugin from "./plugins/appendToPlugin";
 import carbonFlatpickrFixEventsPlugin from "./plugins/fixEventsPlugin";

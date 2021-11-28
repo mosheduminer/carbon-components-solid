@@ -1,4 +1,4 @@
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 import { Component, JSX, splitProps, mergeProps, For, Switch, Match } from "solid-js";
 
 const { prefix } = settings;

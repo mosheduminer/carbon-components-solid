@@ -6,7 +6,7 @@
  */
 
 import findLast from "lodash.findlast";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
   DOCUMENT_POSITION_BROAD_FOLLOWING,

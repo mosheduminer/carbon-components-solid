@@ -1,6 +1,6 @@
 import { Component, For, mergeProps, JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 const { prefix } = settings;
 
 export type AccordionProps = {

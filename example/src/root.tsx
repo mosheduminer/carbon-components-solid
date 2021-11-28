@@ -10,6 +10,7 @@ const components = [
   "Button",
   "Checkbox",
   "ComposedModal",
+  "PaginationNav",
   "ProgressBar",
   "Select",
   "StructuredList",
@@ -27,12 +28,12 @@ const Page = () => {
         <Links />
       </head>
       <body>
+        <Selector
+          list={components}
+          callback={(data) => navigator(data.name)}
+        />
         <div style="display: flex; justify-content: center;">
-          <div style="width: 80%">
-            <Selector
-              list={components}
-              callback={(data) => navigator(data.name)}
-            />
+          <div style="width: 80%; padding-top: 24px;">
             <Outlet />
             <Scripts />
           </div>

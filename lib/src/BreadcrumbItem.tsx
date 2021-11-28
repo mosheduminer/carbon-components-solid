@@ -9,7 +9,7 @@ import {
   Show,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 import { OverflowMenu } from "./OverflowMenu";
 import { Link } from "./Link";
 import { OverflowMenuHorizontal16 } from "../icons/icons/OverflowMenuHorizontal16";

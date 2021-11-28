@@ -1,6 +1,6 @@
 import { FormGroup } from "../src/FormGroup";
 import { render } from "solid-testing-library";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 
 const { prefix } = settings;
 

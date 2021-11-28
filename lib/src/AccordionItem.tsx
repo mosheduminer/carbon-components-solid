@@ -7,7 +7,7 @@ import {
   createEffect,
   untrack,
 } from "solid-js";
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 import { ChevronRight16 } from "../icons/icons/ChevronRight16";
 import { match } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";

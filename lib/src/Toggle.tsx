@@ -2,7 +2,7 @@ import { Component, JSX, mergeProps, splitProps } from "solid-js";
 import keys from "./internal/keyboard/keys";
 import { match } from "./internal/keyboard/match";
 
-import settings from "carbon-components/es/globals/js/settings";
+import { settings } from "carbon-components";
 import { createId } from "./internal/id";
 
 const { prefix } = settings;
