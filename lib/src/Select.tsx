@@ -8,7 +8,7 @@ const { prefix } = settings;
 
 export type SelectProps = {
   class?: string;
-  defaultValue?: any;
+  value?: any;
   disabled?: boolean;
   helperText?: JSX.Element;
   hideLabel?: boolean;
@@ -19,12 +19,11 @@ export type SelectProps = {
   labelText?: JSX.Element;
   light?: boolean;
   noLabel?: boolean;
-  onChange?: Function;
   size?: "sm" | "md" | "lg";
   warn?: boolean;
   warnText?: JSX.Element;
   ref?: HTMLSelectElement;
-} & JSX.HTMLAttributes<HTMLSelectElement>;
+} & JSX.SelectHTMLAttributes<HTMLSelectElement>;
 
 export const Select: Component<SelectProps> = (props) => {
   let other: JSX.HTMLAttributes<HTMLSelectElement>;
@@ -39,7 +38,6 @@ export const Select: Component<SelectProps> = (props) => {
     "hideLabel",
     "invalid",
     "invalidText",
-    "onChange",
     "helperText",
     "light",
     "size",
@@ -140,7 +138,7 @@ export const Select: Component<SelectProps> = (props) => {
       >
         {!props.noLabel && (
           <label
-            htmlFor={props.id}
+            for={props.id}
             class={`${prefix}--label`}
             classList={{
               [`${prefix}--visually-hidden`]: props.hideLabel,

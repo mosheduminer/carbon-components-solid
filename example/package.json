@@ -10,13 +10,13 @@
   "type": "module",
   "devDependencies": {
     "sass": "^1.43.4",
-    "solid-app-router": "^0.1.12",
-    "solid-js": "^1.2.5",
+    "solid-app-router": "^0.1.14",
+    "solid-js": "1.2.5",
     "solid-meta": "^0.27.2",
-    "solid-start": "0.1.0-alpha.35",
-    "solid-start-node": "0.1.0-alpha.35",
+    "solid-start": "0.1.0-alpha.44",
+    "solid-start-node": "0.1.0-alpha.44",
     "typescript": "^4.5.2",
-    "vite": "^2.6.14"
+    "vite": "2.7.4"
   },
   "engines": {
     "node": ">=12"

@@ -10,6 +10,7 @@ const components = [
   "Button",
   "Checkbox",
   "ComposedModal",
+  "Pagination",
   "PaginationNav",
   "ProgressBar",
   "Select",

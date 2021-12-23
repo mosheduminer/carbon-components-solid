@@ -18,6 +18,7 @@ export * from "./DangerButton";
 export * from "./DatePicker";
 export * from "./DatePickerInput";
 export * from "./FileUploader";
+export * from "./Pagination";
 export * from "./PaginationNav";
 export * from "./ProgressBar";
 export * from "./SkeletonText";
