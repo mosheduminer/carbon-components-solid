@@ -6,6 +6,7 @@ import {
   onCleanup,
   Show,
   mergeProps,
+  onMount,
 } from "solid-js";
 import { matches } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
@@ -183,7 +184,7 @@ export const Button: Component<ButtonProps> = (props) => {
       setIsHovered(false);
     }
   };
-  document.addEventListener("keydown", handleEscKeyDown);
+  onMount(() => document.addEventListener("keydown", handleEscKeyDown));
   onCleanup(() => document.removeEventListener("keydown", handleEscKeyDown));
   const assistiveId = createId();
 

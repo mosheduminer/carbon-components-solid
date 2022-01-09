@@ -1,6 +1,8 @@
-import { useNavigate } from "solid-app-router";
+import { useNavigate, useLocation } from "solid-app-router";
 
 export default function Home() {
-  const navigator = useNavigate();
-  navigator("Accordion")
+  if (useLocation().pathname === "/") {
+    const navigator = useNavigate();
+    navigator("Accordion")
+  }
 }

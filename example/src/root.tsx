@@ -15,7 +15,9 @@ const components = [
   "ProgressBar",
   "Select",
   "StructuredList",
+  "Tabs",
   "Tag",
+  // "UIShell",
 ];
 
 const Page = () => {

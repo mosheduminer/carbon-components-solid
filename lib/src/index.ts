@@ -26,5 +26,7 @@ export * from "./Select";
 export * from "./SelectItemGroup";
 export * from "./SelectItem";
 export * from "./StructuredList";
+export * from "./Tabs";
 export * from "./Tag";
 export * from "./TextInput";
+//export * from "./UIShell";

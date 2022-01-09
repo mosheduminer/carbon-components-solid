@@ -22,8 +22,9 @@
     "@types/jest-axe": "^3.5.2",
     "accessibility-checker": "^3.1.9",
     "axe-core": "^3.5.6",
+    "babel-plugin-solid-undestructure": "0.0.14",
     "babel-preset-solid": "^0.26.5",
-    "carbon-components": "^10.47.0",
+    "carbon-components": "^10.50.0",
     "copy-to-clipboard": "^3.3.1",
     "flatpickr": "^4.6.1",
     "jest": "^27.0.6",
@@ -39,7 +40,7 @@
   "peerDependencies": {
     "@carbon/icons": "^10.32.0",
     "babel-preset-solid": "^0.26.5",
-    "carbon-components": "^10.35.0",
+    "carbon-components": "^10.50.0",
     "copy-to-clipboard": "^3.3.1",
     "flatpickr": "^4.6.1",
     "solid-js": "^1.2.5"

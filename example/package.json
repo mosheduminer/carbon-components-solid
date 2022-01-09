@@ -4,7 +4,7 @@
     "dev": "solid-start dev",
     "build": "solid-start build",
     "start": "solid-start start",
-    "styles": "sass src/styles.scss src/styles.css --load-path=../lib/node_modules"
+    "styles": "sass src/styles.scss src/styles.css --load-path=../node_modules"
   },
   "private": true,
   "type": "module",
@@ -20,5 +20,8 @@
   },
   "engines": {
     "node": ">=12"
+  },
+  "dependencies": {
+    "vite-plugin-solid": "^2.1.1"
   }
 }

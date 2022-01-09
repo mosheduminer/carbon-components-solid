@@ -9,10 +9,13 @@ import { useLocation } from "solid-app-router";
 const Selector: Component<{
   list: string[];
   callback: (arg: ContentSwitcherOnChangeArgs) => any;
+  index?: number;
 }> = (props) => {
   const [index, setIndex] = createSignal<number>();
   createComputed(() => {
-    const path = useLocation().pathname.split("/").pop().split(".")[0];
+    const fullpath = useLocation().pathname.split("/").filter(val => val !== "");
+    const path = fullpath[(props.index || 0)];
+    console.log(path)
     setIndex(props.list.findIndex(val => val === path));  
   })
   return (
