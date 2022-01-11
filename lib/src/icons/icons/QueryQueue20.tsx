@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const QueryQueue20 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="20" height="20"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M10 6H28V8H10zM10 12H28V14H10zM15 18H28V20H15zM10 24H28V26H10zM4 14L11 19 4 24 4 14z" /></svg>

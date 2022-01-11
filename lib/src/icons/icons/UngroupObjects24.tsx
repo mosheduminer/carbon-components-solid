@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const UngroupObjects24 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="24" height="24"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M30,14V10H26v2H20V6h2V2H18V4H6V2H2V6H4V18H2v4H6V20h6v6H10v4h4V28H26v2h4V26H28V14ZM6,6H18V18H6ZM26,26H14V20h4v2h4V18H20V14h6Z" /></svg>

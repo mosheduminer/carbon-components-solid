@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const CloudLogging24 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="24" height="24"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M28 16v6H4V6H15V4H4A2 2 0 002 6V22a2 2 0 002 2h8v4H8v2H24V28H20V24h8a2 2 0 002-2V16zM18 28H14V24h4zM18 4H30V6H18z" /><path d="M18 8H30V10H18zM18 12H24V14H18z" /></svg>

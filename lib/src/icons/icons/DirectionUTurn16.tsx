@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const DirectionUTurn16 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="16" height="16"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M26.5859,19.5859,22,24.1719V12A8,8,0,0,0,6,12V28H8V12a6,6,0,0,1,12,0V24.1719l-4.5859-4.586L14,21l7,7,7-7Z" /></svg>

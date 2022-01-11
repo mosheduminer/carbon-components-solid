@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const GlyphCircleFillGlyph = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><circle cx="8" cy="8" r="6" /></svg>

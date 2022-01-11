@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const LetterFf20 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="20" height="20"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M16 11L16 9 8 9 8 23 10 23 10 17 15 17 15 15 10 15 10 11 16 11zM24 11V9H21a2 2 0 00-2 2v2H17v2h2v8h2V15h3V13H21V11z" /></svg>

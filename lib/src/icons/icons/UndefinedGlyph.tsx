@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const UndefinedGlyph = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M8,2.4142,13.5858,8,8,13.5858,2.4142,8,8,2.4142M8,1,1,8l7,7,7-7L8,1Z" /><path d="M8,2.4142,13.5858,8,8,13.5858,2.4142,8,8,2.4142" /></svg>
