@@ -1,3 +1,7 @@
+///TODO
+/// I added some hacks to this file so it should work.
+/// Those should be removed after the next release of carbon (stylesheets).
+
 /**
  * Copyright IBM Corp. 2016, 2018
  *
@@ -195,14 +199,22 @@ const TabList: Component<TabListProps> = ({
       aria-label={label}
       ref={ref}
       role="tablist"
-      class={`${prefix}--tabs`}
+      //class={`${prefix}--tabs`}
+      class={`${prefix}--tabs--scrollable__nav ${prefix}--tabs--scrollable`}
       classList={{
-        [`${prefix}--tabs--contained`]: contained,
+        //[`${prefix}--tabs--contained`]: contained,
+        [`${prefix}--tabs--scrollable--container`]: contained,
         [`${prefix}--tabs--light`]: light,
         [customClassName!]: !!customClassName,
       }}
       onKeyDown={onKeyDown}
     >
+      <style>
+        {`.bx--tabs--scrollable.bx--tabs--scrollable--container .bx--tabs--scrollable__nav-item--selected.bx--tabs--scrollable__nav-link {
+        box-shadow: inset 0 2px 0 0 #0f62fe;
+        line-height: calc(3rem - (0.5rem * 2));
+      }`}
+      </style>
       <For
         each={
           Array.isArray(childs())
@@ -252,10 +264,13 @@ const Tab: Component<TabProps> = ({
         //@ts-ignore
         id={`${baseId}-tab-${index()}`}
         role="tab"
-        class={`${prefix}--tabs__nav-item ${prefix}--tabs__nav-link`}
+        //class={`${prefix}--tabs__nav-item ${prefix}--tabs__nav-link`}
+        class={` ${prefix}--tabs--scrollable__nav-link ${prefix}--tabs--scrollable__nav-item`}
         classList={{
+          [`${prefix}--tabs--scrollable__nav-item--selected`]: selectedIndex() === index(),
           [`${prefix}--tabs__nav-item--selected`]: selectedIndex() === index(),
           [`${prefix}--tabs__nav-item--disabled`]: disabled,
+          [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
           [customClassName!]: !!customClassName,
         }}
         disabled={disabled}
