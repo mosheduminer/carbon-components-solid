@@ -15,4 +15,5 @@ export default defineConfig({
       "lodash.findlast",
     ],
   },
+  ssr: { noExternal: ['solid-js'] },
 });

@@ -10,11 +10,11 @@
   "type": "module",
   "devDependencies": {
     "sass": "^1.43.4",
-    "solid-app-router": "^0.1.14",
-    "solid-js": "1.2.5",
+    "solid-app-router": "^0.2.0",
+    "solid-js": "1.3.2",
     "solid-meta": "^0.27.2",
-    "solid-start": "0.1.0-alpha.44",
-    "solid-start-node": "0.1.0-alpha.44",
+    "solid-start": "0.1.0-alpha.51",
+    "solid-start-node": "0.1.0-alpha.51",
     "typescript": "^4.5.2",
     "vite": "2.7.4"
   },
@@ -22,6 +22,6 @@
     "node": ">=12"
   },
   "dependencies": {
-    "vite-plugin-solid": "^2.1.1"
+    "vite-plugin-solid": "^2.2.1"
   }
 }

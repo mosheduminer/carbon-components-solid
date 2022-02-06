@@ -14,7 +14,7 @@ import { composeEventHandlers } from "./internal/events";
 import keys from "./internal/keyboard/keys";
 import { matches } from "./internal/keyboard/match";
 import wrapFocus from "./internal/wrapFocus";
-import { Close20 } from "../icons/icons/Close20";
+import { Close20 } from "./icons/icons/Close20";
 import { ButtonSet } from "./ButtonSet";
 import { Button } from "./Button";
 import { callEventHandlerUnion } from "./internal/callEventHandlerUnion";

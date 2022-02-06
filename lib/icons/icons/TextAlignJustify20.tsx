@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const TextAlignJustify20 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="20" height="20"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M6 6H26V8H6zM6 12H26V14H6zM6 18H26V20H6zM6 24H26V26H6z" /></svg>

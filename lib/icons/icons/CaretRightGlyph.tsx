@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const CaretRightGlyph = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 8" fill="currentColor" width="5" height="8"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M0 0L5 4 0 8z" /></svg>

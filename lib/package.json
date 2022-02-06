@@ -30,9 +30,10 @@
     "jest": "^27.0.6",
     "regenerator-runtime": "^0.13.9",
     "rollup": "^2.59.0",
-    "rollup-preset-solid": "1.0.1",
+    "rollup-plugin-multi-input": "^1.3.1",
+    "rollup-preset-solid": "1.1.0",
     "solid-jest": "^0.2.0",
-    "solid-js": "^1.2.5",
+    "solid-js": "^1.3.2",
     "solid-testing-library": "^0.2.1",
     "ts-jest": "^27.0.5",
     "typescript": "^4.5.2"
@@ -43,7 +44,7 @@
     "carbon-components": "^10.50.0",
     "copy-to-clipboard": "^3.3.1",
     "flatpickr": "^4.6.1",
-    "solid-js": "^1.2.5"
+    "solid-js": "^1.3.2"
   },
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
@@ -67,7 +68,7 @@
       "require": "./icons/dist/cjs/index.js",
       "node": "./icons/dist/cjs/index.js"
     },
-    "./icons/": {
+    "./icons/icons/": {
       "solid": "./icons/dist/source/icons/",
       "import": "./icons/dist/esm/icons/",
       "browser": "./icons/dist/esm/icons/",

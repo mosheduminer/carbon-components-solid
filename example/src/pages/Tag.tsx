@@ -1,5 +1,5 @@
 import { Tag } from "../../../lib/src";
-import { Tag16 } from "../../../lib/icons/icons/Tag16";
+import { Tag16 } from "../../../lib/src/icons/icons/Tag16";
 
 const props = {
   get regular() {

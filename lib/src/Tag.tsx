@@ -1,6 +1,6 @@
 import { children, Component, JSX, Show, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { Close16 } from "../icons/icons/Close16";
+import { Close16 } from "./icons/icons/Close16";
 import { callEventHandlerUnion } from "./internal/callEventHandlerUnion";
 import { createId } from "./internal/id";
 import { usePrefix } from "./internal/usePrefix";

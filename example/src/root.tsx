@@ -17,10 +17,10 @@ const components = [
   "StructuredList",
   "Tabs",
   "Tag",
-  // "UIShell",
+  "UIShell",
 ];
 
-const Page = () => {
+export default function Root() {
   const navigator = useNavigate();
   return (
     <html lang="en">
@@ -45,11 +45,3 @@ const Page = () => {
     </html>
   );
 };
-
-export default function Root({ Start }) {
-  return (
-    <Start>
-      <Page />
-    </Start>
-  );
-}

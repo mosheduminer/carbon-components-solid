@@ -3,9 +3,9 @@
  */
 
 import { Component, createMemo, JSX } from "solid-js";
-import { EditOff16 } from "../../icons/icons/EditOff16";
-import { WarningAltFilled16 } from "../../icons/icons/WarningAltFilled16";
-import { WarningFilled16 } from "../../icons/icons/WarningFilled16";
+import { EditOff16 } from "../icons/icons/EditOff16";
+import { WarningAltFilled16 } from "../icons/icons/WarningAltFilled16";
+import { WarningFilled16 } from "../icons/icons/WarningFilled16";
 import { settings } from "carbon-components";
 
 const { prefix } = settings;

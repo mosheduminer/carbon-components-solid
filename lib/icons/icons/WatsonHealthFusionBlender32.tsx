@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const WatsonHealthFusionBlender32 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="32" height="32"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M20,12H17V4h3V2H12V4h3v8H12a2,2,0,0,0-2,2v4a2,2,0,0,0,2,2h3v8H12v2h8V28H17V20h3a2,2,0,0,0,2-2V14A2,2,0,0,0,20,12Zm-8,6V14h8v4Z" /></svg>

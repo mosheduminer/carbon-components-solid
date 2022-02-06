@@ -19,6 +19,8 @@ import {
   For,
   JSX,
   onMount,
+  mergeProps,
+  splitProps,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import type { Accessor, Setter } from "solid-js";
@@ -46,22 +48,20 @@ export type TabsProps = {
   defaultSelectedIndex?: number;
 };
 
-const Tabs: Component<TabsProps> = function ({
-  children,
-  defaultSelectedIndex = 0,
-  onChange,
-  selectedIndex: controlledSelectedIndex,
-}) {
+const Tabs: Component<TabsProps> = function (props) {
+  props = mergeProps({
+    defaultSelectedIndex: 0
+  }, props);
   const baseId = createFallbackId("ccs");
   // The active index is used to track the element which has focus in our tablist
-  const [activeIndex, setActiveIndex] = createSignal(defaultSelectedIndex);
+  const [activeIndex, setActiveIndex] = createSignal(props.defaultSelectedIndex!);
   // The selected index is used for the tab/panel pairing which is "visible"
   const [selectedIndex, setSelectedIndex] = useControllableState({
-    value: () => controlledSelectedIndex,
-    defaultValue: defaultSelectedIndex,
+    value: () => props.selectedIndex,
+    defaultValue: props.defaultSelectedIndex!,
     onChange: (value) => {
-      if (onChange) {
-        onChange({ selectedIndex: value });
+      if (props.onChange) {
+        props.onChange({ selectedIndex: value });
       }
     },
   });
@@ -69,13 +69,13 @@ const Tabs: Component<TabsProps> = function ({
   const value = {
     baseId,
     activeIndex,
-    defaultSelectedIndex,
+    defaultSelectedIndex: props.defaultSelectedIndex!,
     setActiveIndex,
     selectedIndex,
     setSelectedIndex,
   };
 
-  return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
+  return <TabsContext.Provider value={value}>{props.children}</TabsContext.Provider>;
 };
 
 function useEffectOnce(callback: Function) {
@@ -125,21 +125,17 @@ export type TabListProps = {
   scrollIntoView?: boolean;
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
-const TabList: Component<TabListProps> = ({
-  activation = "automatic",
-  "aria-label": label,
-  children,
-  class: customClassName,
-  light,
-  scrollIntoView,
-  contained = false,
-  ...rest
-}) => {
+const TabList: Component<TabListProps> = (props) => {
+  props = mergeProps({
+    activation: "automatic",
+    contained: false,
+  }, props);
+  const [, rest] = splitProps(props, ["activation", "aria-label", "children", "class", "light", "scrollIntoView", "contained"]);
   const prefix = usePrefix();
 
   return () => {
     let ref!: HTMLDivElement;
-    const childs = childrenHelper(() => children);
+    const childs = childrenHelper(() => props.children);
     const tabs: HTMLButtonElement[] = [];
     const tabsIndexes = useContext(TabsContext)!;
     function onKeyDown(event: KeyboardEvent) {
@@ -152,7 +148,7 @@ const TabList: Component<TabListProps> = ({
 
         const currentIndex = activeTabs.indexOf(
           tabs[
-          activation === "automatic"
+          props.activation === "automatic"
             ? tabsIndexes.selectedIndex()
             : tabsIndexes.activeIndex()
           ]
@@ -161,9 +157,9 @@ const TabList: Component<TabListProps> = ({
           activeTabs[getNextIndex(event, activeTabs.length, currentIndex)!]
         );
 
-        if (activation === "automatic") {
+        if (props.activation === "automatic") {
           tabsIndexes.setSelectedIndex(nextIndex);
-        } else if (activation === "manual") {
+        } else if (props.activation === "manual") {
           tabsIndexes.setActiveIndex(nextIndex);
         }
 
@@ -173,7 +169,7 @@ const TabList: Component<TabListProps> = ({
 
     useEffectOnce(() => {
       const tab = tabs[tabsIndexes.selectedIndex()];
-      if (scrollIntoView && tab) {
+      if (props.scrollIntoView && tab) {
         tab.scrollIntoView({
           block: "nearest",
           inline: "nearest",
@@ -196,16 +192,16 @@ const TabList: Component<TabListProps> = ({
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     return <div
       {...rest}
-      aria-label={label}
+      aria-label={props["aria-label"]}
       ref={ref}
       role="tablist"
       //class={`${prefix}--tabs`}
       class={`${prefix}--tabs--scrollable__nav ${prefix}--tabs--scrollable`}
       classList={{
         //[`${prefix}--tabs--contained`]: contained,
-        [`${prefix}--tabs--scrollable--container`]: contained,
-        [`${prefix}--tabs--light`]: light,
-        [customClassName!]: !!customClassName,
+        [`${prefix}--tabs--scrollable--container`]: props.contained,
+        [`${prefix}--tabs--light`]: props.light,
+        [props.class!]: !!props.class,
       }}
       onKeyDown={onKeyDown}
     >
@@ -240,25 +236,18 @@ export type TabProps = {
 } & JSX.HTMLAttributes<HTMLButtonElement>;
 
 //@ts-ignore
-const Tab: Component<TabProps> = ({
-  as = "button",
-  children,
-  class: customClassName,
-  disabled,
-  onClick,
-  onKeyDown,
-  ref,
-  ...rest
-}) => {
+const Tab: Component<TabProps> = (props) => {
+  props = mergeProps({ as: "button" }, props);
+  const [, rest] = splitProps(props, ["as", "children", "class", "disabled", "onClick", "onKeyDown", "ref"])
   return (index: Accessor<number>, ref: (arg: HTMLElement) => any) => {
     const prefix = usePrefix();
     const { selectedIndex, setSelectedIndex, baseId } = useContext(TabsContext)!;
     return (
       <Dynamic
-        component={as}
+        component={props.as}
         {...rest}
         aria-controls={`${baseId}-tabpanel-${index()}`}
-        aria-disabled={disabled}
+        aria-disabled={props.disabled}
         aria-selected={selectedIndex() === index()}
         ref={ref}
         //@ts-ignore
@@ -269,25 +258,25 @@ const Tab: Component<TabProps> = ({
         classList={{
           [`${prefix}--tabs--scrollable__nav-item--selected`]: selectedIndex() === index(),
           [`${prefix}--tabs__nav-item--selected`]: selectedIndex() === index(),
-          [`${prefix}--tabs__nav-item--disabled`]: disabled,
-          [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
-          [customClassName!]: !!customClassName,
+          [`${prefix}--tabs__nav-item--disabled`]: props.disabled,
+          [`${prefix}--tabs--scrollable__nav-item--disabled`]: props.disabled,
+          [props.class!]: !!props.class,
         }}
-        disabled={disabled}
+        disabled={props.disabled}
         onClick={(
           evt: MouseEvent & { currentTarget: HTMLElement; target: Element }
         ) => {
-          if (disabled) {
+          if (props.disabled) {
             return;
           }
           setSelectedIndex(index());
-          callEventHandlerUnion(onClick, evt);
+          callEventHandlerUnion(props.onClick, evt);
         }}
-        onKeyDown={onKeyDown}
+        onKeyDown={props.onKeyDown}
         tabIndex={selectedIndex() === index() ? "0" : "-1"}
         type="button"
       >
-        {children}
+        {props.children}
       </Dynamic>
     );
   };
@@ -299,12 +288,8 @@ export type TabPanelProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 //@ts-ignore
-const TabPanel: Component<TabPanelProps> = ({
-  children,
-  class: customClassName,
-  ref,
-  ...rest
-}) => {
+const TabPanel: Component<TabPanelProps> = (props) => {
+  const [, rest] = splitProps(props, ["children", "class", "ref"])
   return (index: Accessor<number>) => {
     const prefix = usePrefix();
     let panel!: HTMLDivElement;
@@ -325,24 +310,24 @@ const TabPanel: Component<TabPanelProps> = ({
         aria-labelledby={`${baseId}-tab-${index()}`}
         id={`${baseId}-tabpanel-${index()}`}
         class={`${prefix}--tab-content`}
-        classList={{ [customClassName!]: !!customClassName }}
+        classList={{ [props.class!]: !!props.class }}
         ref={(el) => {
           panel = el;
           //@ts-ignore
-          ref && ref(el);
+          props.ref && props.ref(el);
         }}
         role="tabpanel"
         tabIndex={tabIndex()}
         hidden={selectedIndex() !== index()}
       >
-        {children}
+        {props.children}
       </div>
     );
   };
 };
 
-const TabPanels: Component = ({ children }) => {
-  const childs = childrenHelper(() => children);
+const TabPanels: Component = (props) => {
+  const childs = childrenHelper(() => props.children);
   return () => (
     <For
       each={

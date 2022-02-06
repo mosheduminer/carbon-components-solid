@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const TextSmallCaps20 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="20" height="20"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M23 27L23 15 18 15 18 13 30 13 30 15 25 15 25 27 23 27z" /><path d="M11 27L11 8 2 8 2 6 22 6 22 8 13 8 13 27 11 27z" /></svg>

@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const DirectionLoopLeft20 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="20" height="20"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M16 20H18V28H16z" /><path d="M23,4a7.0078,7.0078,0,0,0-7,7v3h2V11a5,5,0,1,1,5,5H5.8281l4.586-4.5859L9,10,2,17l7,7,1.4141-1.4141L5.8281,18H23A7,7,0,0,0,23,4Z" /></svg>

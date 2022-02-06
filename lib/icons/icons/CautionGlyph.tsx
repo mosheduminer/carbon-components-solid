@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const CautionGlyph = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M12.3154,12H3.6846L8,4.0884,12.3154,12M14,13,8,2,2,13Z" /><path d="M12.315 12L3.685 12 8 4.088 12.315 12z" /></svg>

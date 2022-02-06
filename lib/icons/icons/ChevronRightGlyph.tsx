@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const ChevronRightGlyph = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6 10" fill="currentColor" width="6" height="10"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M6 5L1 10 0.3 9.3 4.6 5 0.3 0.7 1 0z" /></svg>

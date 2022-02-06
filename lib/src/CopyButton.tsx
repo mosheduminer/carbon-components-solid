@@ -1,6 +1,6 @@
 import { Component, splitProps, mergeProps, JSX } from "solid-js";
 import { Copy } from "./Copy";
-import { Copy16 } from "../icons/icons/Copy16";
+import { Copy16 } from "./icons/icons/Copy16";
 import { settings } from "carbon-components";
 
 const { prefix } = settings;

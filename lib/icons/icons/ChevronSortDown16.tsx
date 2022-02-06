@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const ChevronSortDown16 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M8 14L4.5 10.5 5.2 9.8 8 12.6 10.8 9.8 11.5 10.5z" /></svg>

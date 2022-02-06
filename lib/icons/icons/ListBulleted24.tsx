@@ -1,2 +1,0 @@
-import type { JSX } from "solid-js";
-export const ListBulleted24 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="24" height="24"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><circle cx="7" cy="9" r="3" /><circle cx="7" cy="23" r="3" /><path d="M16 22H30V24H16zM16 8H30V10H16z" /></svg>
