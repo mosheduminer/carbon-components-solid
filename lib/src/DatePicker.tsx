@@ -21,9 +21,9 @@ import { match } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
 import { key, Locale } from "flatpickr/dist/types/locale";
 import { Instance } from "flatpickr/dist/types/instance";
-import { WarningAltFilled16 } from "./icons/icons/WarningAltFilled16";
-import { Calendar16 } from "./icons/icons/Calendar16";
-import { WarningFilled16 } from "./icons/icons/WarningFilled16";
+import { WarningAltFilled16 } from "./icons/WarningAltFilled16";
+import { Calendar16 } from "./icons/Calendar16";
+import { WarningFilled16 } from "./icons/WarningFilled16";
 import { Hook } from "flatpickr/dist/types/options";
 
 const { prefix } = settings;

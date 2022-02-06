@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Close20 } from "../icons/icons/Close20";
-import { ChevronRight20 } from "../icons/icons/ChevronRight20";
+import { Close20 } from "../icons/Close20";
+import { ChevronRight20 } from "../icons/ChevronRight20";
 
 import { usePrefix } from "../internal/usePrefix";
 import { Component, JSX, mergeProps } from "solid-js";

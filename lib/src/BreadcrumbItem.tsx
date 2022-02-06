@@ -12,7 +12,7 @@ import { Dynamic } from "solid-js/web";
 import { settings } from "carbon-components";
 import { OverflowMenu } from "./OverflowMenu";
 import { Link } from "./Link";
-import { OverflowMenuHorizontal16 } from "./icons/icons/OverflowMenuHorizontal16";
+import { OverflowMenuHorizontal16 } from "./icons/OverflowMenuHorizontal16";
 
 const { prefix } = settings;
 

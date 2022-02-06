@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { CheckmarkFilled16 } from "../../../lib/src/icons/icons/CheckmarkFilled16";
+import { CheckmarkFilled16 } from "../../../lib/src/icons/CheckmarkFilled16";
 import {
   Checkbox,
   StructuredListBody,

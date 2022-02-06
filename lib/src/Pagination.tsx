@@ -10,8 +10,8 @@ import {
 } from "solid-js";
 import { Button } from "./Button";
 import { Select } from "./Select";
-import { CaretLeft16 } from "./icons/icons/CaretLeft16";
-import { CaretRight16 } from "./icons/icons/CaretRight16";
+import { CaretLeft16 } from "./icons/CaretLeft16";
+import { CaretRight16 } from "./icons/CaretRight16";
 import { equals } from "./internal/array";
 import { createFallbackId } from "./internal/id";
 import { usePrefix } from "./internal/usePrefix";

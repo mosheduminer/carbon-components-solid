@@ -11,9 +11,9 @@ import {
   Match,
   For,
 } from "solid-js";
-import { CheckmarkFilled16 } from "./icons/icons/CheckmarkFilled16";
-import { CloseFilled16 } from "./icons/icons/CloseFilled16";
-import { WarningFilled16 } from "./icons/icons/WarningFilled16";
+import { CheckmarkFilled16 } from "./icons/CheckmarkFilled16";
+import { CloseFilled16 } from "./icons/CloseFilled16";
+import { WarningFilled16 } from "./icons/WarningFilled16";
 import { Loading } from "./Loading";
 import { createId, uniqueId } from "./internal/id";
 import keys from "./internal/keyboard/keys";

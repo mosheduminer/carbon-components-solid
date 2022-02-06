@@ -18,11 +18,11 @@ import {
   SideNavMenu,
   SideNavMenuItem,
   SkipToContent,
-} from "../../../lib/src/UIShell";
-import { Search20 } from "../../../lib/src/icons/icons/Search20";
-import { Notification20 } from "../../../lib/src/icons/icons/Notification20";
-import { Fade16 } from "../../../lib/src/icons/icons/Fade16";
-import { AppSwitcher20 } from "../../../lib/src/icons/icons/AppSwitcher20";
+} from "carbon-components-solid/UIShell";
+import { Search20 } from "carbon-components-solid/icons/Search20";
+import { Notification20 } from "carbon-components-solid/icons/Notification20";
+import { Fade16 } from "carbon-components-solid/icons/Fade16";
+import { AppSwitcher20 } from "carbon-components-solid/icons/AppSwitcher20";
 
 export default function UIShell() {
   return (

@@ -1,6 +1,6 @@
 import { Component, JSX, splitProps } from "solid-js";
-import { Menu20 } from "../icons/icons/Menu20";
-import { Close20 } from "../icons/icons/Close20";
+import { Menu20 } from "../icons/Menu20";
+import { Close20 } from "../icons/Close20";
 import { usePrefix } from "../internal/usePrefix";
 
 export type HeaderMenuButtonProps = {

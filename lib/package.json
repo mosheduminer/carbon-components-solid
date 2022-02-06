@@ -49,31 +49,38 @@
   "source": "src/index.ts",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "solid": "./dist/source/src/index.js",
-      "import": "./dist/esm/src/index.js",
-      "browser": "./dist/esm/src/index.js",
-      "require": "./dist/cjs/src/index.js",
-      "node": "./dist/cjs/src/index.js"
+      "solid": "./dist/source/index.js",
+      "import": "./dist/esm/index.js",
+      "browser": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "node": "./dist/cjs/index.js"
+    },
+    "./UIShell": {
+      "solid": "./dist/source/UIShell/index.jsx",
+      "import": "./dist/esm/UIShell/index.js",
+      "browser": "./dist/esm/UIShell/index.js",
+      "require": "./dist/cjs/UIShell/index.js",
+      "node": "./dist/cjs/UIShell/index.js"
     },
     "./icons": {
-      "solid": "./icons/dist/source/index.js",
-      "import": "./icons/dist/esm/index.js",
-      "browser": "./icons/dist/esm/index.js",
-      "require": "./icons/dist/cjs/index.js",
-      "node": "./icons/dist/cjs/index.js"
+      "solid": "./dist/source/icons/index.js",
+      "import": "./dist/esm/icons/index.js",
+      "browser": "./dist/esm/icons/index.js",
+      "require": "./dist/cjs/icons/index.js",
+      "node": "./dist/cjs/icons/index.js"
     },
-    "./icons/icons/": {
-      "solid": "./icons/dist/source/icons/",
-      "import": "./icons/dist/esm/icons/",
-      "browser": "./icons/dist/esm/icons/",
-      "require": "./icons/dist/cjs/icons/",
-      "node": "./icons/dist/cjs/icons/"
+    "./icons/": {
+      "solid": "./dist/source/icons/",
+      "import": "./dist/esm/icons/",
+      "browser": "./dist/esm/icons/",
+      "require": "./dist/cjs/icons/",
+      "node": "./dist/cjs/icons/"
     }
   }
 }

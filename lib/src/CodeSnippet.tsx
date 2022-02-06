@@ -3,7 +3,7 @@ import { createId } from "./internal/id";
 import { Copy } from "./Copy";
 import { CopyButton } from "./CopyButton";
 import { Button } from "./Button";
-import { ChevronDown16 } from "./icons/icons/ChevronDown16";
+import { ChevronDown16 } from "./icons/ChevronDown16";
 import useResizeObserver from "./internal/ResizeObserver";
 import copy from "copy-to-clipboard";
 import debounce from "lodash.debounce";

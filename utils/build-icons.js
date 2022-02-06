@@ -45,7 +45,7 @@ async function build() {
   }
   for ([name, codeString] of Object.entries(builtIcons)) {
     await outputFile(
-      join(process.cwd(), BASE_OUTPUT, "icons", `${name}.tsx`),
+      join(process.cwd(), BASE_OUTPUT, `${name}.tsx`),
       codeString,
       {
         encoding: "utf-8",
@@ -54,7 +54,7 @@ async function build() {
   }
   const buffer = [];
   for (name in icons) {
-    buffer.push(`export {${name}} from "./icons/${name}"`);
+    buffer.push(`export {${name}} from "./${name}"`);
   }
   await outputFile(
     join(process.cwd(), BASE_OUTPUT, "index.ts"),

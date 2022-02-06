@@ -6,7 +6,7 @@ import {
   JSX,
   splitProps,
 } from "solid-js";
-import { ChevronDown16 } from "../icons/icons/ChevronDown16";
+import { ChevronDown16 } from "../icons/ChevronDown16";
 import keys from "../internal/keyboard/keys";
 import { matches } from "../internal/keyboard/match";
 import { usePrefix } from "../internal/usePrefix";

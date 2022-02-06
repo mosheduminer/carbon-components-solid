@@ -1,4 +1,4 @@
-import { ChevronDown20 } from "../icons/icons/ChevronDown20";
+import { ChevronDown20 } from "../icons/ChevronDown20";
 import { SideNavIcon } from "./SideNavIcon";
 import keys from "../internal/keyboard/keys";
 import { match } from "../internal/keyboard/match";

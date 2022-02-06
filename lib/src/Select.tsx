@@ -1,8 +1,8 @@
 import { Component, splitProps, JSX, mergeProps, createMemo } from "solid-js";
 import { settings } from "carbon-components";
-import { WarningFilled16 } from "./icons/icons/WarningFilled16";
-import { WarningAltFilled16 } from "./icons/icons/WarningAltFilled16";
-import { ChevronDown16 } from "./icons/icons/ChevronDown16";
+import { WarningFilled16 } from "./icons/WarningFilled16";
+import { WarningAltFilled16 } from "./icons/WarningAltFilled16";
+import { ChevronDown16 } from "./icons/ChevronDown16";
 
 const { prefix } = settings;
 

@@ -12,9 +12,9 @@ import {
   Switch,
 } from "solid-js";
 import { Button } from "./Button";
-import { CaretRight16 } from "./icons/icons/CaretRight16";
-import { CaretLeft16 } from "./icons/icons/CaretLeft16";
-import { OverflowMenuHorizontal16 } from "./icons/icons/OverflowMenuHorizontal16";
+import { CaretRight16 } from "./icons/CaretRight16";
+import { CaretLeft16 } from "./icons/CaretLeft16";
+import { OverflowMenuHorizontal16 } from "./icons/OverflowMenuHorizontal16";
 import { createDerivedSignal } from "./internal/derivedSignal";
 
 const { prefix } = settings;
