@@ -1,4 +1,4 @@
-import { Pagination } from "../../../lib/src";
+import { Pagination } from "carbon-components-solid";
 
 
 const props = {

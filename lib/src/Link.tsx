@@ -5,38 +5,53 @@ import { usePrefix } from "./internal/usePrefix";
 export type LinkProps = {
   class?: string;
   disabled?: boolean;
-  href: string;
+  href?: string;
   inline?: boolean;
   renderIcon?: Component;
   size?: "sm" | "md" | "lg";
   visited?: boolean;
-} & JSX.HTMLAttributes<HTMLParagraphElement> & JSX.AnchorHTMLAttributes<HTMLAnchorElement>;
+} & JSX.HTMLAttributes<HTMLParagraphElement> &
+  JSX.AnchorHTMLAttributes<HTMLAnchorElement>;
 
 export const Link: Component<LinkProps> = (props) => {
   const prefix = usePrefix();
-  let rest: JSX.HTMLAttributes<HTMLParagraphElement> | JSX.AnchorHTMLAttributes<HTMLAnchorElement>;
-  [props, rest] = splitProps(props, ["class", "children", "disabled", "href", "inline", "renderIcon", "size", "visited"]);
+  const [, rest] = splitProps(props, [
+    "class",
+    "children",
+    "disabled",
+    "href",
+    "inline",
+    "renderIcon",
+    "size",
+    "visited",
+  ]);
 
   return (
     <Dynamic
-      component={props.disabled ? 'p' : 'a'}
+      component={props.disabled ? "p" : "a"}
       href={props.disabled ? undefined : props.href}
-      class={`${prefix}--link`}
       classList={{
+        [`${prefix}--link`]: true,
         [props.class!]: !!props.class,
         [`${prefix}--link--disabled`]: props.disabled,
         [`${prefix}--link--inline`]: props.inline,
         [`${prefix}--link--visited`]: props.visited,
         [`${prefix}--link--${props.size}`]: props.size,
       }}
-      rel={(rest as JSX.AnchorHTMLAttributes<HTMLAnchorElement>).target === '_blank' ? 'noopener' : null}
-      {...rest}>
+      rel={
+        (rest as JSX.AnchorHTMLAttributes<HTMLAnchorElement>).target ===
+        "_blank"
+          ? "noopener"
+          : null
+      }
+      {...rest}
+    >
       {props.children}
       {!props.inline && props.renderIcon && (
         <div class={`${prefix}--link__icon`}>
-          <props.renderIcon />
+          <Dynamic component={props.renderIcon} />
         </div>
       )}
     </Dynamic>
   );
-}
+};

@@ -7,7 +7,7 @@ import {
   Select,
   SelectItem,
   TextInput,
-} from "../../../lib/src";
+} from "carbon-components-solid";
 import { Component, createSignal, JSX } from "solid-js";
 import { Portal } from "solid-js/web";
 

@@ -1,4 +1,4 @@
-import { PaginationNav } from "../../../lib/src";
+import { PaginationNav } from "carbon-components-solid";
 
 export default function () {
   return (

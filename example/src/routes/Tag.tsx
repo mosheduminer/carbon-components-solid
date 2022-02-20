@@ -1,5 +1,5 @@
-import { Tag } from "../../../lib/src";
-import { Tag16 } from "../../../lib/src/icons/Tag16";
+import { Tag } from "carbon-components-solid";
+import { Tag16 } from "carbon-components-solid/icons/Tag16";
 
 const props = {
   get regular() {

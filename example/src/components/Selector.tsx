@@ -15,7 +15,6 @@ const Selector: Component<{
   createComputed(() => {
     const fullpath = useLocation().pathname.split("/").filter(val => val !== "");
     const path = fullpath[(props.index || 0)];
-    console.log(path)
     setIndex(props.list.findIndex(val => val === path));  
   })
   return (

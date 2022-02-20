@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { CheckmarkFilled16 } from "../../../lib/src/icons/CheckmarkFilled16";
+import { CheckmarkFilled16 } from "carbon-components-solid/icons/CheckmarkFilled16";
 import {
   Checkbox,
   StructuredListBody,
@@ -8,14 +8,14 @@ import {
   StructuredListInput,
   StructuredListRow,
   StructuredListWrapper,
-} from "../../../lib/src";
-import { usePrefix } from "../../../lib/src/internal/usePrefix";
+} from "carbon-components-solid";
+//import { usePrefix } from "carbon-components-solid/src/internal/usePrefix";
 
 export default function () {
   const [isFlush, setIsFlush] = createSignal(false);
   const [isCondensed, setIsCondensed] = createSignal(false);
   const [selection, setSelection] = createSignal(true);
-  const prefix = usePrefix();
+  const prefix = "bx" // usePrefix();
   const structuredListBodyRowGenerator = (numRows) => {
     return [...Array(numRows)].map((_, i) => (
       <StructuredListRow label>

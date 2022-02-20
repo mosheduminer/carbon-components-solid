@@ -10,18 +10,18 @@
   "type": "module",
   "devDependencies": {
     "sass": "^1.43.4",
-    "solid-app-router": "^0.2.0",
-    "solid-js": "1.3.2",
-    "solid-meta": "^0.27.2",
-    "solid-start": "0.1.0-alpha.51",
-    "solid-start-node": "0.1.0-alpha.51",
+    "solid-app-router": "^0.3.0",
+    "solid-js": "^1.3.7",
+    "solid-meta": "^0.27.3",
+    "solid-start": "0.1.0-alpha.61",
+    "solid-start-node": "0.1.0-alpha.61",
     "typescript": "^4.5.2",
-    "vite": "2.7.4"
+    "vite": "2.8.4"
   },
   "engines": {
     "node": ">=12"
   },
   "dependencies": {
-    "vite-plugin-solid": "^2.2.1"
+    "vite-plugin-solid": "^2.2.5"
   }
 }

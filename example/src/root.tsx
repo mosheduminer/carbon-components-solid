@@ -1,6 +1,6 @@
 // @refresh reload
+import { Links, Meta, Routes, Scripts } from "solid-start/components";
 import { useNavigate } from "solid-app-router";
-import { Links, Meta, Outlet, Scripts } from "solid-start/components";
 import Selector from "~/components/Selector";
 import "./styles.css";
 
@@ -10,6 +10,7 @@ const components = [
   "Button",
   "Checkbox",
   "ComposedModal",
+  "DataTable",
   "Pagination",
   "PaginationNav",
   "ProgressBar",
@@ -37,7 +38,7 @@ export default function Root() {
         />
         <div style="display: flex; justify-content: center;">
           <div style="width: 80%; padding-top: 24px;">
-            <Outlet />
+            <Routes />
             <Scripts />
           </div>
         </div>

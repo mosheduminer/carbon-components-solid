@@ -13,6 +13,7 @@ export default defineConfig({
       "copy-to-clipboard",
       "lodash.debounce",
       "lodash.findlast",
+      "lodash.isequal",
     ],
   },
   ssr: { noExternal: ['solid-js'] },

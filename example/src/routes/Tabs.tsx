@@ -1,4 +1,4 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../../../lib/src";
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "carbon-components-solid";
 import { Button } from "carbon-components-solid";
 
 const Container = () => (
