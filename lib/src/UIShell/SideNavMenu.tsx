@@ -3,7 +3,14 @@ import { SideNavIcon } from "./SideNavIcon";
 import keys from "../internal/keyboard/keys";
 import { match } from "../internal/keyboard/match";
 import { usePrefix } from "../internal/usePrefix";
-import { Component, createSignal, mergeProps, createContext, Accessor } from "solid-js";
+import {
+  Component,
+  createSignal,
+  createComputed,
+  mergeProps,
+  createContext,
+  Accessor,
+} from "solid-js";
 import { Dynamic } from "solid-js/web";
 
 export type SideNavMenuProps = {
@@ -17,7 +24,8 @@ export type SideNavMenuProps = {
   title: string;
 };
 
-export const ActiveChildContext = createContext<[Accessor<number>, (cb: (arg: number) => number) => any]>();
+export const ActiveChildContext =
+  createContext<[Accessor<number>, (cb: (arg: number) => number) => any]>();
 
 export const SideNavMenu: Component<SideNavMenuProps> = (props) => {
   const prefix = usePrefix();
@@ -29,12 +37,14 @@ export const SideNavMenu: Component<SideNavMenuProps> = (props) => {
     },
     props
   );
-  const [state, setState] = createSignal({
+  const [state, setState] = createSignal<State>({
     isExpanded: props.defaultExpanded || false,
     wasPreviouslyExpanded: props.defaultExpanded || false,
   });
   const [activeChildrenCount, setActiveChildrenCount] = createSignal(0);
-  const derived = () => getDerivedStateFromProps(props, state());
+  createComputed(() =>
+    setState((state) => getDerivedStateFromProps(props, state))
+  );
   const handleToggleExpand = () => {
     setState((state) => ({ ...state, isExpanded: !state.isExpanded }));
   };
@@ -48,18 +58,23 @@ export const SideNavMenu: Component<SideNavMenuProps> = (props) => {
   const hasActiveChildren = () => activeChildrenCount() === 0;
 
   return (
-    <ActiveChildContext.Provider value={[activeChildrenCount, setActiveChildrenCount]}>
+    <ActiveChildContext.Provider
+      value={[activeChildrenCount, setActiveChildrenCount]}
+    >
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions*/}
-      <li classList={{
-        [`${prefix}--side-nav__item`]: true,
-        [`${prefix}--side-nav__item--active`]:
-          !!props.isActive || (hasActiveChildren() && !derived().isExpanded),
-        [`${prefix}--side-nav__item--icon`]: !!props.renderIcon,
-        [`${prefix}--side-nav__item--large`]: !!props.large,
-        [props.class!]: !!props.class,
-      }} onKeyDown={handleKeyDown}>
+      <li
+        classList={{
+          [`${prefix}--side-nav__item`]: true,
+          [`${prefix}--side-nav__item--active`]:
+            !!props.isActive || (hasActiveChildren() && !state().isExpanded),
+          [`${prefix}--side-nav__item--icon`]: !!props.renderIcon,
+          [`${prefix}--side-nav__item--large`]: !!props.large,
+          [props.class!]: !!props.class,
+        }}
+        onKeyDown={handleKeyDown}
+      >
         <button
-          aria-expanded={derived().isExpanded}
+          aria-expanded={!!state().isExpanded}
           className={`${prefix}--side-nav__submenu`}
           onClick={handleToggleExpand}
           ref={props.ref}
@@ -70,7 +85,9 @@ export const SideNavMenu: Component<SideNavMenuProps> = (props) => {
               <Dynamic component={props.renderIcon} />
             </SideNavIcon>
           )}
-          <span class={`${prefix}--side-nav__submenu-title`}>{props.title}</span>
+          <span class={`${prefix}--side-nav__submenu-title`}>
+            {props.title}
+          </span>
           <SideNavIcon class={`${prefix}--side-nav__submenu-chevron`} small>
             <ChevronDown20 />
           </SideNavIcon>

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ArrowLeft, ArrowRight } from './keys';
-import { match } from './match';
+import { ArrowLeft, ArrowRight } from "./keys";
+import { match } from "./match";
 
 /**
  * Various utilities to help with a11y work
@@ -24,7 +24,11 @@ import { match } from './match';
  * 	getNextIndex(keyCodes.RIGHT, 0, 4)
  */
 
-export const getNextIndex = (key: string | number | KeyboardEvent, index: number, arrayLength: number) => {
+export const getNextIndex = (
+  key: string | number | KeyboardEvent,
+  index: number,
+  arrayLength: number
+) => {
   if (match(key, ArrowRight)) {
     return (index + 1) % arrayLength;
   }
@@ -39,7 +43,7 @@ export const getNextIndex = (key: string | number | KeyboardEvent, index: number
  */
 export const DOCUMENT_POSITION_BROAD_PRECEDING =
   // Checks `typeof Node` for `react-docgen`
-  typeof Node !== 'undefined' &&
+  typeof Node !== "undefined" &&
   Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
 
 /**
@@ -48,7 +52,7 @@ export const DOCUMENT_POSITION_BROAD_PRECEDING =
  */
 export const DOCUMENT_POSITION_BROAD_FOLLOWING =
   // Checks `typeof Node` for `react-docgen`
-  typeof Node !== 'undefined' &&
+  typeof Node !== "undefined" &&
   Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
 /**

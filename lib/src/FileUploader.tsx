@@ -99,13 +99,11 @@ export const FileUploaderDropContainer: Component<FileUploaderDropContainerProps
       }, [] as (File & { invalidFileType?: boolean })[]);
     }
 
-    const handleChange: JSX.EventHandler<
-      HTMLInputElement,
-      Event | DragEvent
-    > = (event) => {
-      const addedFiles = validateFiles(event);
-      return props.onAddFiles?.(event, { addedFiles });
-    };
+    const handleChange: JSX.EventHandler<HTMLInputElement, Event | DragEvent> =
+      (event) => {
+        const addedFiles = validateFiles(event);
+        return props.onAddFiles?.(event, { addedFiles });
+      };
     return (
       <div
         class={`${prefix}--file`}
@@ -509,10 +507,12 @@ export const FileUploader: Component<FileUploaderProps> = (props) => {
   );
   const nodes: HTMLSpanElement[] = [];
   const [filenames, setFilenames] = createSignal<string[]>([]);
-  const [prevFilenameStatus, setPrevFilenameStatus] =
-    createSignal<string | undefined>(undefined);
-  const [filenameStatus, setFilenameStatus] =
-    createSignal<"edit" | "complete" | "uploading" | undefined>(undefined);
+  const [prevFilenameStatus, setPrevFilenameStatus] = createSignal<
+    string | undefined
+  >(undefined);
+  const [filenameStatus, setFilenameStatus] = createSignal<
+    "edit" | "complete" | "uploading" | undefined
+  >(undefined);
   createEffect(() => {
     if (prevFilenameStatus() !== props.filenameStatus) {
       setFilenameStatus(props.filenameStatus);

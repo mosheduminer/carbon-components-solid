@@ -3,7 +3,7 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
-    "format": "prettier -w \"src/**/*.{js,ts,json,css,tsx,jsx}\""
+    "format": "prettier -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"src/icons/*.ts*\""
   },
   "type": "module",
   "dependencies": {

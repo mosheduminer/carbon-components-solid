@@ -4,8 +4,8 @@ export const TableHead: Component<
   Omit<JSX.HTMLAttributes<HTMLTableElement>, "classList">
 > = (props) => {
   return (
-    <thead
-      classList={{ [props.class!]: !!props.class }}
-    >{props.children}</thead>
+    <thead classList={{ [props.class!]: !!props.class }}>
+      {props.children}
+    </thead>
   );
 };

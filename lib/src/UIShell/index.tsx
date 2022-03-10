@@ -44,7 +44,7 @@ export { SideNavLink } from "./SideNavLink";
 export type { SideNavLinkProps } from "./SideNavLink";
 export { SideNavLinkText } from "./SideNavLinkText";
 export type { SideNavLinkTextProps } from "./SideNavLinkText";
-export { SideNavMenu } from "./SideNavMenu"
-export type { SideNavMenuProps } from "./SideNavMenu"
-export { SideNavMenuItem } from "./SideNavMenuItem"
-export type { SideNavMenuItemProps } from "./SideNavMenuItem"
+export { SideNavMenu } from "./SideNavMenu";
+export type { SideNavMenuProps } from "./SideNavMenu";
+export { SideNavMenuItem } from "./SideNavMenuItem";
+export type { SideNavMenuItemProps } from "./SideNavMenuItem";

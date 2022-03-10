@@ -9,11 +9,14 @@ export type SkipToContentProps = {
 
 export const SkipToContent: Component<SkipToContentProps> = (props) => {
   const [, rest] = splitProps(props, ["class", "href", "tabIndex", "children"]);
-  props = mergeProps({
-    children: 'Skip to main content',
-    href: '#main-content',
-    tabIndex: '0',
-  }, props);
+  props = mergeProps(
+    {
+      children: "Skip to main content",
+      href: "#main-content",
+      tabIndex: "0",
+    },
+    props
+  );
   const prefix = usePrefix();
   return (
     <a

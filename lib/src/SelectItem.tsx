@@ -1,17 +1,12 @@
-import {
-  Component,
-  splitProps,
-  JSX,
-  mergeProps,
-} from "solid-js";
+import { Component, splitProps, JSX, mergeProps } from "solid-js";
 import { settings } from "carbon-components";
- 
+
 const { prefix } = settings;
 
 export type SelectItemProps = {
   class?: string;
   disabled?: boolean;
-  hidden? : boolean;
+  hidden?: boolean;
   text?: string;
   value?: any;
 } & JSX.OptionHTMLAttributes<HTMLOptionElement>;
@@ -24,23 +19,27 @@ export const SelectItem: Component<SelectItemProps> = (props) => {
     "disabled",
     "hidden",
     "text",
-    "value"
+    "value",
   ]);
-  props = mergeProps({
-    disabled: false,
-    hidden: false,
-    value: '',
-    text: '',
-  }, props);
+  props = mergeProps(
+    {
+      disabled: false,
+      hidden: false,
+      value: "",
+      text: "",
+    },
+    props
+  );
 
   return (
     <option
       {...other}
       class={`${prefix}--select-option`}
-      classList={{[props.class!]: !!props.class}}
+      classList={{ [props.class!]: !!props.class }}
       value={props.value}
       disabled={props.disabled}
-      hidden={props.hidden}>
+      hidden={props.hidden}
+    >
       {props.text}
     </option>
   );

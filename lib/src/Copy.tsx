@@ -1,4 +1,11 @@
-import { Component, splitProps, mergeProps, JSX, createSignal, onCleanup } from "solid-js";
+import {
+  Component,
+  splitProps,
+  mergeProps,
+  JSX,
+  createSignal,
+  onCleanup,
+} from "solid-js";
 import { composeEventHandlers } from "./internal/events";
 import { settings } from "carbon-components";
 import debounce from "lodash.debounce";
@@ -16,28 +23,39 @@ export type CopyProps = {
 
 export const Copy: Component<CopyProps> = (props) => {
   let rest: JSX.HTMLAttributes<HTMLButtonElement>;
-  [props, rest] = splitProps(props, ["children", "class", "classList", "feedback", "feedbackTimeout", "onAnimationEnd", "onClick", "disabled"]);
-  props = mergeProps({ feedback: "Copied!", feedbackTimeout: 2000, onClick: () => { } }, props);
+  [props, rest] = splitProps(props, [
+    "children",
+    "class",
+    "classList",
+    "feedback",
+    "feedbackTimeout",
+    "onAnimationEnd",
+    "onClick",
+    "disabled",
+  ]);
+  props = mergeProps(
+    { feedback: "Copied!", feedbackTimeout: 2000, onClick: () => {} },
+    props
+  );
 
-  const [animation, setAnimation] = createSignal('');
+  const [animation, setAnimation] = createSignal("");
 
   const handleFadeOut = debounce(() => {
-    setAnimation('fade-out');
+    setAnimation("fade-out");
   }, props.feedbackTimeout);
 
   const handleClick = () => {
-    setAnimation('fade-in');
+    setAnimation("fade-in");
     handleFadeOut();
   };
 
   const handleAnimationEnd = (event: AnimationEvent) => {
-    if (event.animationName === 'hide-feedback') {
-      setAnimation('');
+    if (event.animationName === "hide-feedback") {
+      setAnimation("");
     }
   };
 
   onCleanup(() => handleFadeOut.cancel());
-  
 
   return (
     <button
@@ -48,7 +66,7 @@ export const Copy: Component<CopyProps> = (props) => {
         [props.class!]: !!props.class,
         [`${prefix}--copy-btn--animating`]: !!animation(),
         [`${prefix}--copy-btn--${animation()}`]: !!animation(),
-        ...(props.classList || {})
+        ...(props.classList || {}),
       }}
       onClick={composeEventHandlers([props.onClick, handleClick])}
       onAnimationEnd={composeEventHandlers([
@@ -58,11 +76,13 @@ export const Copy: Component<CopyProps> = (props) => {
       {...rest}
       aria-live="polite"
       aria-label={
-        (!props.children && (animation() ? props.feedback : rest['aria-label'])) || undefined
+        (!props.children &&
+          (animation() ? props.feedback : rest["aria-label"])) ||
+        undefined
       }
     >
       {props.children}
-      {animation() ? props.feedback : rest['aria-label']}
+      {animation() ? props.feedback : rest["aria-label"]}
       <span
         aria-hidden="true"
         class={`${prefix}--assistive-text ${prefix}--copy-btn__feedback`}
@@ -70,5 +90,5 @@ export const Copy: Component<CopyProps> = (props) => {
         {props.feedback}
       </span>
     </button>
-  )
-}
+  );
+};

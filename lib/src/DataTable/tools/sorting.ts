@@ -1,5 +1,5 @@
-import { Cell, getCellId } from './cells';
-import { sortStates } from '../sorting';
+import { Cell, getCellId } from "./cells";
+import { sortStates } from "../sorting";
 
 /**
  * Compare two primitives to determine which comes first. Initially, this method
@@ -12,16 +12,20 @@ import { sortStates } from '../sorting';
  * @param {string} locale
  * @returns {number}
  */
-export const compare = (a: string | number, b: string | number, locale = 'en') => {
-  if (typeof a === 'number' && typeof b === 'number') {
+export const compare = (
+  a: string | number,
+  b: string | number,
+  locale = "en"
+) => {
+  if (typeof a === "number" && typeof b === "number") {
     return a - b;
   }
 
-  if (typeof a === 'string' && typeof b === 'string') {
+  if (typeof a === "string" && typeof b === "string") {
     return compareStrings(a, b, locale);
   }
 
-  return compareStrings('' + a, '' + b, locale);
+  return compareStrings("" + a, "" + b, locale);
 };
 
 /**
@@ -33,7 +37,7 @@ export const compare = (a: string | number, b: string | number, locale = 'en') =
  * @param {string} locale
  * @returns {number}
  */
-export const compareStrings = (a: string, b: string, locale = 'en') => {
+export const compareStrings = (a: string, b: string, locale = "en") => {
   // Only set `numeric: true` if the string only contains numbers
   // https://stackoverflow.com/a/175787
   //@ts-ignore
@@ -95,7 +99,11 @@ type SortStates = typeof sortStates;
 export const defaultSortRow = (
   cellA: string | number,
   cellB: string | number,
-  { sortDirection, sortStates, locale }: { sortDirection: string; sortStates: SortStates; locale: string }
+  {
+    sortDirection,
+    sortStates,
+    locale,
+  }: { sortDirection: string; sortStates: SortStates; locale: string }
 ) => {
   if (sortDirection === sortStates.ASC) {
     return compare(cellA, cellB, locale);

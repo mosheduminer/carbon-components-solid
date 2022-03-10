@@ -1,7 +1,7 @@
-import { DataTableProps } from './DataTable';
-import { initialSortState, getSortedState, sortStates } from './sorting';
-import { Cell, Header, Row } from './tools/cells';
-import normalize from './tools/normalize';
+import { DataTableProps } from "./DataTable";
+import { initialSortState, getSortedState, sortStates } from "./sorting";
+import { Cell, Header, Row } from "./tools/cells";
+import normalize from "./tools/normalize";
 
 export type State = {
   cellsById: { [key: string]: Cell };
@@ -9,7 +9,7 @@ export type State = {
   initialRowOrder: string[];
   sortDirection: keyof typeof sortStates;
   sortHeaderKey: string | null;
-  rowsById: { [key: string]: Row; };
+  rowsById: { [key: string]: Row };
   filterInputValue?: string | null;
   shouldShowBatchActions?: boolean;
   isExpandedAll?: boolean;
@@ -18,7 +18,7 @@ export type State = {
 export interface Props extends DataTableProps {
   rows: Row[];
   headers: Header[];
-};
+}
 
 /**
  * Helper to derive the next state from the given props and the

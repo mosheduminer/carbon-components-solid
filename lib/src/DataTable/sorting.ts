@@ -1,9 +1,8 @@
 export const sortStates = {
-  NONE: 'NONE',
-  DESC: 'DESC',
-  ASC: 'ASC',
+  NONE: "NONE",
+  DESC: "DESC",
+  ASC: "ASC",
 } as const;
-
 
 /**
  * Copyright IBM Corp. 2016, 2018
@@ -12,8 +11,8 @@ export const sortStates = {
  * LICENSE file in the root directory of this source tree.
  */
 
-import { sortRows } from './tools/sorting';
-import { State, Props } from './getDerivedStateFromProps';
+import { sortRows } from "./tools/sorting";
+import { State, Props } from "./getDerivedStateFromProps";
 
 // Our initialSortState should be `NONE`, unless a consumer has specified a
 // different initialSortState
@@ -28,16 +27,20 @@ export const initialSortState = sortStates.NONE;
  * @param {string} prevState the previous sort state of the table
  * @returns {string}
  */
-export const getNextSortDirection = (prevHeader: string, header: string | null, prevState: string) => {
+export const getNextSortDirection = (
+  prevHeader: string,
+  header: string | null,
+  prevState: string
+) => {
   // If the previous header is equivalent to the current header, we know that we
   // have to derive the next sort state from the previous sort state
   if (prevHeader === header) {
     // When transitioning, we know that the sequence of states is as follows:
     // NONE -> ASC -> DESC -> NONE
-    if (prevState === 'NONE') {
+    if (prevState === "NONE") {
       return sortStates.ASC;
     }
-    if (prevState === 'ASC') {
+    if (prevState === "ASC") {
       return sortStates.DESC;
     }
     return sortStates.NONE;
@@ -47,7 +50,11 @@ export const getNextSortDirection = (prevHeader: string, header: string | null, 
   return sortStates.ASC;
 };
 
-export const getNextSortState = (props: Props, state: State, { key }: { key: string }) => {
+export const getNextSortState = (
+  props: Props,
+  state: State,
+  { key }: { key: string }
+) => {
   const { sortDirection, sortHeaderKey } = state;
 
   const nextSortDirection = getNextSortDirection(
@@ -77,19 +84,24 @@ export const getNextSortState = (props: Props, state: State, { key }: { key: str
  * @param {string} sortDirection The sortState that we want to order by
  * @returns {object}
  */
-export const getSortedState = (props: Props, state: State, key: string, sortDirection: keyof typeof sortStates) => {
+export const getSortedState = (
+  props: Props,
+  state: State,
+  key: string,
+  sortDirection: keyof typeof sortStates
+) => {
   const { rowIds, cellsById, initialRowOrder } = state;
   const { locale, sortRow } = props;
   const nextRowIds =
     sortDirection !== sortStates.NONE
       ? sortRows({
-        rowIds,
-        cellsById,
-        sortDirection,
-        key,
-        locale: locale!,
-        sortRow: sortRow!,
-      })
+          rowIds,
+          cellsById,
+          sortDirection,
+          key,
+          locale: locale!,
+          sortRow: sortRow!,
+        })
       : initialRowOrder;
   return {
     sortHeaderKey: key,

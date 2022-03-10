@@ -1,7 +1,7 @@
 import { Link, LinkProps } from "./Link";
 import { SideNavIcon } from "./SideNavIcon";
 import { SideNavItem } from "./SideNavItem";
-import { SideNavLinkText } from './SideNavLinkText';
+import { SideNavLinkText } from "./SideNavLinkText";
 import { usePrefix } from "../internal/usePrefix";
 import { Component, JSX, mergeProps, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";

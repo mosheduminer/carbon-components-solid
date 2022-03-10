@@ -123,7 +123,9 @@ export const Search: Component<SearchProps> = (props) => {
     }
   });
 
-  const clearInput = (evt: Event & { currentTarget: HTMLElement; target: Element; }) => {
+  const clearInput = (
+    evt: Event & { currentTarget: HTMLElement; target: Element }
+  ) => {
     if (!props.value) {
       input.value = "";
     } else {
@@ -138,14 +140,18 @@ export const Search: Component<SearchProps> = (props) => {
     input.focus();
   };
 
-  const handleInput = (evt: Event & { currentTarget: HTMLInputElement; target: Element; }) => {
+  const handleInput = (
+    evt: Event & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
     setState((obj) => ({
       ...obj,
       hasContent: evt.currentTarget.value !== "",
     }));
   };
 
-  const handleKeyDown = (evt: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element; }) => {
+  const handleKeyDown = (
+    evt: KeyboardEvent & { currentTarget: HTMLInputElement; target: Element }
+  ) => {
     if (match(evt, keys.Escape)) {
       clearInput(evt);
     }

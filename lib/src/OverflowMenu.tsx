@@ -1,9 +1,9 @@
 import { Component, createSignal, mergeProps, splitProps, JSX } from "solid-js";
-import { settings } from 'carbon-components';
-import { OverflowMenuVertical16 } from './icons/OverflowMenuVertical16';
-import { uniqueId } from './internal/id';
-import { Menu } from './Menu';
-import keys from './internal/keyboard/keys';
+import { settings } from "carbon-components";
+import { OverflowMenuVertical16 } from "./icons/OverflowMenuVertical16";
+import { uniqueId } from "./internal/id";
+import { Menu } from "./Menu";
+import keys from "./internal/keyboard/keys";
 import { matches as keyCodeMatches } from "./internal/keyboard/match";
 import { Dynamic } from "solid-js/web";
 
@@ -15,17 +15,20 @@ export type OverflowMenuProps = {
   /**
    * Specify the size of the menu, from a list of available sizes.
    */
-  size?: 'sm' | 'md' | 'lg';
+  size?: "sm" | "md" | "lg";
 } & JSX.HTMLAttributes<HTMLButtonElement>;
 
 const { prefix } = settings;
 
-const defaultSize = 'md';
+const defaultSize = "md";
 
 export const OverflowMenu: Component<OverflowMenuProps> = (props) => {
-  props = mergeProps({ renderIcon: OverflowMenuVertical16, size: defaultSize }, props);
+  props = mergeProps(
+    { renderIcon: OverflowMenuVertical16, size: defaultSize },
+    props
+  );
   const [, rest] = splitProps(props, ["children", "renderIcon", "size"]);
-  const id = uniqueId('overflowmenu');
+  const id = uniqueId("overflowmenu");
   const [open, setOpen] = createSignal(false);
   const [position, setPosition] = createSignal([
     [0, 0],
@@ -35,12 +38,7 @@ export const OverflowMenu: Component<OverflowMenuProps> = (props) => {
 
   function openMenu() {
     if (triggerRef) {
-      const {
-        left,
-        top,
-        right,
-        bottom,
-      } = triggerRef.getBoundingClientRect();
+      const { left, top, right, bottom } = triggerRef.getBoundingClientRect();
       setPosition([
         [left, right],
         [top, bottom],
@@ -94,15 +92,19 @@ export const OverflowMenu: Component<OverflowMenuProps> = (props) => {
         classList={{
           [`${prefix}--overflow-menu`]: true,
           [`${prefix}--overflow-menu--open`]: open(),
-          [`${prefix}--overflow-menu--${props.size}`]: props.size !== defaultSize,
+          [`${prefix}--overflow-menu--${props.size}`]:
+            props.size !== defaultSize,
         }}
         onClick={handleClick}
         onMouseDown={handleMousedown}
         onKeyDown={handleKeyPress}
-        ref={triggerRef}>
-        <Dynamic component={props.renderIcon}
+        ref={triggerRef}
+      >
+        <Dynamic
+          component={props.renderIcon}
           //@ts-ignore
-          class={`${prefix}--overflow-menu__icon`} />
+          class={`${prefix}--overflow-menu__icon`}
+        />
       </button>
       <Menu
         id={id}
@@ -110,9 +112,10 @@ export const OverflowMenu: Component<OverflowMenuProps> = (props) => {
         open={open()}
         onClose={closeMenu}
         x={position()[0]}
-        y={position()[1]}>
+        y={position()[1]}
+      >
         {props.children}
       </Menu>
     </div>
   );
-}
+};

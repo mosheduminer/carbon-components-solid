@@ -40,43 +40,51 @@ export const Checkbox: Component<CheckboxProps> = (props) => {
     "title",
   ]);
   props = mergeProps(
-    { indeterminate: false, onChange: () => { }, title: "", id: createId() },
+    { indeterminate: false, onChange: () => {}, title: "", id: createId() },
     props
   );
 
-  return (<div class={`${prefix}--form-item ${prefix}--checkbox-wrapper`} classList={{[props.class!]: !!props.class}}>
-    <input
-      {...rest}
-      type="checkbox"
-      onChange={(evt) => {
-        props.onChange!(evt, { checked: evt.currentTarget.checked, id: props.id! });
-      }}
-      class={`${prefix}--checkbox`}
-      id={props.id}
-      ref={(el) => {
-        if (el) {
-          el.indeterminate = !!props.indeterminate;
-        }
-        if (typeof props.ref === "function") {
-          props.ref(el);
-        } else {
-          props.ref = el;
-        }
-      }}
-    />
-    <label
-      for={props.id}
-      class={`${prefix}--checkbox-label`}
-      title={props.title || undefined}
+  return (
+    <div
+      class={`${prefix}--form-item ${prefix}--checkbox-wrapper`}
+      classList={{ [props.class!]: !!props.class }}
     >
-      <span
-        class={`${prefix}--checkbox-label-text`}
-        classList={{
-          [`${prefix}--visually-hidden`]: props.hideLabel,
+      <input
+        {...rest}
+        type="checkbox"
+        onChange={(evt) => {
+          props.onChange!(evt, {
+            checked: evt.currentTarget.checked,
+            id: props.id!,
+          });
         }}
+        class={`${prefix}--checkbox`}
+        id={props.id}
+        ref={(el) => {
+          if (el) {
+            el.indeterminate = !!props.indeterminate;
+          }
+          if (typeof props.ref === "function") {
+            props.ref(el);
+          } else {
+            props.ref = el;
+          }
+        }}
+      />
+      <label
+        for={props.id}
+        class={`${prefix}--checkbox-label`}
+        title={props.title || undefined}
       >
-        {props.labelText}
-      </span>
-    </label>
-  </div>);
+        <span
+          class={`${prefix}--checkbox-label-text`}
+          classList={{
+            [`${prefix}--visually-hidden`]: props.hideLabel,
+          }}
+        >
+          {props.labelText}
+        </span>
+      </label>
+    </div>
+  );
 };

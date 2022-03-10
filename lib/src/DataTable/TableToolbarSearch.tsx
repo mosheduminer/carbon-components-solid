@@ -145,7 +145,7 @@ export const TableToolbarSearch: Component<TableToolbarSearchProps> = (
       tabIndex: "0",
       translateWithId,
       persistent: false,
-      onClear: () => { },
+      onClear: () => {},
     },
     props
   );

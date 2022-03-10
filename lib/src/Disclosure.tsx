@@ -4,8 +4,8 @@ export const useDisclosure = (id: string) => {
   const [open, setOpen] = createSignal(false);
 
   const buttonProps = {
-    'aria-controls': id,
-    'aria-expanded': open,
+    "aria-controls": id,
+    "aria-expanded": open,
     onClick() {
       setOpen(!open);
     },
@@ -19,4 +19,4 @@ export const useDisclosure = (id: string) => {
     contentProps,
     open,
   };
-}
+};

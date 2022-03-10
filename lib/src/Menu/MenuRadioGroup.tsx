@@ -1,6 +1,6 @@
-import { mergeProps } from 'solid-js';
-import { MenuGroup } from './MenuGroup';
-import { MenuRadioGroupOptions } from './MenuRadioGroupOptions';
+import { mergeProps } from "solid-js";
+import { MenuGroup } from "./MenuGroup";
+import { MenuRadioGroupOptions } from "./MenuRadioGroupOptions";
 
 export type MenuRadioGroupProps = {
   /**
@@ -22,7 +22,7 @@ export type MenuRadioGroupProps = {
 };
 
 export function MenuRadioGroup(props: MenuRadioGroupProps) {
-  props = mergeProps({ onChange: () => { } }, props);
+  props = mergeProps({ onChange: () => {} }, props);
   return (
     <MenuGroup label={props.label}>
       <MenuRadioGroupOptions

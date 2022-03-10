@@ -22,7 +22,13 @@ export type MenuItemProps = {
 };
 
 export const MenuItem: Component<MenuItemProps> = (props) => {
-  const [, rest] = splitProps(props, ["children", "disabled", "kind", "label", "shortcut"]);
+  const [, rest] = splitProps(props, [
+    "children",
+    "disabled",
+    "kind",
+    "label",
+    "shortcut",
+  ]);
   return (
     <MenuOption
       {...rest}

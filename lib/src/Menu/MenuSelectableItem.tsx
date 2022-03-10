@@ -1,6 +1,6 @@
-import { JSX, createSignal } from 'solid-js';
-import { Checkmark16 } from '../icons/Checkmark16';
-import { MenuOption } from './MenuOption';
+import { JSX, createSignal } from "solid-js";
+import { Checkmark16 } from "../icons/Checkmark16";
+import { MenuOption } from "./MenuOption";
 
 export type MenuSelectableItemProps = {
   /**
@@ -21,7 +21,7 @@ export function MenuSelectableItem(props: MenuSelectableItemProps) {
   const [checked, setChecked] = createSignal(props.initialChecked);
 
   function handleClick() {
-    setChecked(v => !v);
+    setChecked((v) => !v);
     props.onChange(!checked);
   }
 

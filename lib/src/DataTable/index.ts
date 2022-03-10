@@ -18,7 +18,7 @@ export { TableToolbar } from "./TableToolbar";
 export { TableToolbarAction } from "./TableToolbarAction";
 export { TableToolbarContent } from "./TableToolbarContent";
 export { TableToolbarMenu } from "./TableToolbarMenu";
-export {TableToolbarSearch} from "./TableToolbarSearch";
+export { TableToolbarSearch } from "./TableToolbarSearch";
 
 export type { DataTableProps, DataTableRenderProps } from "./DataTable";
 export type { TableProps } from "./Table";

@@ -60,12 +60,7 @@ export const Loading: Component<LoadingProps> = (props) => {
             r="44"
           />
         ) : undefined}
-        <circle
-          class={`${prefix}--loading__stroke`}
-          cx="50%"
-          cy="50%"
-          r="44"
-        />
+        <circle class={`${prefix}--loading__stroke`} cx="50%" cy="50%" r="44" />
       </svg>
     </div>
   );

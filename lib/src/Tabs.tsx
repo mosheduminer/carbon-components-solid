@@ -49,12 +49,17 @@ export type TabsProps = {
 };
 
 const Tabs: Component<TabsProps> = function (props) {
-  props = mergeProps({
-    defaultSelectedIndex: 0
-  }, props);
+  props = mergeProps(
+    {
+      defaultSelectedIndex: 0,
+    },
+    props
+  );
   const baseId = createFallbackId("ccs");
   // The active index is used to track the element which has focus in our tablist
-  const [activeIndex, setActiveIndex] = createSignal(props.defaultSelectedIndex!);
+  const [activeIndex, setActiveIndex] = createSignal(
+    props.defaultSelectedIndex!
+  );
   // The selected index is used for the tab/panel pairing which is "visible"
   const [selectedIndex, setSelectedIndex] = useControllableState({
     value: () => props.selectedIndex,
@@ -75,7 +80,9 @@ const Tabs: Component<TabsProps> = function (props) {
     setSelectedIndex,
   };
 
-  return <TabsContext.Provider value={value}>{props.children}</TabsContext.Provider>;
+  return (
+    <TabsContext.Provider value={value}>{props.children}</TabsContext.Provider>
+  );
 };
 
 function useEffectOnce(callback: Function) {
@@ -126,11 +133,22 @@ export type TabListProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 const TabList: Component<TabListProps> = (props) => {
-  props = mergeProps({
-    activation: "automatic",
-    contained: false,
-  }, props);
-  const [, rest] = splitProps(props, ["activation", "aria-label", "children", "class", "light", "scrollIntoView", "contained"]);
+  props = mergeProps(
+    {
+      activation: "automatic",
+      contained: false,
+    },
+    props
+  );
+  const [, rest] = splitProps(props, [
+    "activation",
+    "aria-label",
+    "children",
+    "class",
+    "light",
+    "scrollIntoView",
+    "contained",
+  ]);
   const prefix = usePrefix();
 
   return () => {
@@ -148,9 +166,9 @@ const TabList: Component<TabListProps> = (props) => {
 
         const currentIndex = activeTabs.indexOf(
           tabs[
-          props.activation === "automatic"
-            ? tabsIndexes.selectedIndex()
-            : tabsIndexes.activeIndex()
+            props.activation === "automatic"
+              ? tabsIndexes.selectedIndex()
+              : tabsIndexes.activeIndex()
           ]
         );
         const nextIndex = tabs.indexOf(
@@ -190,40 +208,42 @@ const TabList: Component<TabListProps> = (props) => {
       }
     });
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
-    return <div
-      {...rest}
-      aria-label={props["aria-label"]}
-      ref={ref}
-      role="tablist"
-      //class={`${prefix}--tabs`}
-      class={`${prefix}--tabs--scrollable__nav ${prefix}--tabs--scrollable`}
-      classList={{
-        //[`${prefix}--tabs--contained`]: contained,
-        [`${prefix}--tabs--scrollable--container`]: props.contained,
-        [`${prefix}--tabs--light`]: props.light,
-        [props.class!]: !!props.class,
-      }}
-      onKeyDown={onKeyDown}
-    >
-      <style>
-        {`.bx--tabs--scrollable.bx--tabs--scrollable--container .bx--tabs--scrollable__nav-item--selected.bx--tabs--scrollable__nav-link {
+    return (
+      <div
+        {...rest}
+        aria-label={props["aria-label"]}
+        ref={ref}
+        role="tablist"
+        //class={`${prefix}--tabs`}
+        class={`${prefix}--tabs--scrollable__nav ${prefix}--tabs--scrollable`}
+        classList={{
+          //[`${prefix}--tabs--contained`]: contained,
+          [`${prefix}--tabs--scrollable--container`]: props.contained,
+          [`${prefix}--tabs--light`]: props.light,
+          [props.class!]: !!props.class,
+        }}
+        onKeyDown={onKeyDown}
+      >
+        <style>
+          {`.bx--tabs--scrollable.bx--tabs--scrollable--container .bx--tabs--scrollable__nav-item--selected.bx--tabs--scrollable__nav-link {
         box-shadow: inset 0 2px 0 0 #0f62fe;
         line-height: calc(3rem - (0.5rem * 2));
       }`}
-      </style>
-      <For
-        each={
-          Array.isArray(childs())
-            ? (childs() as Function[])
-            : [childs() as Function]
-        }
-      >
-        {(child, index) => {
-          return child(index, (el: HTMLButtonElement) => tabs.push(el));
-        }}
-      </For>
-    </div>
-  }
+        </style>
+        <For
+          each={
+            Array.isArray(childs())
+              ? (childs() as Function[])
+              : [childs() as Function]
+          }
+        >
+          {(child, index) => {
+            return child(index, (el: HTMLButtonElement) => tabs.push(el));
+          }}
+        </For>
+      </div>
+    );
+  };
 };
 
 export type TabProps = {
@@ -238,10 +258,19 @@ export type TabProps = {
 //@ts-ignore
 const Tab: Component<TabProps> = (props) => {
   props = mergeProps({ as: "button" }, props);
-  const [, rest] = splitProps(props, ["as", "children", "class", "disabled", "onClick", "onKeyDown", "ref"])
+  const [, rest] = splitProps(props, [
+    "as",
+    "children",
+    "class",
+    "disabled",
+    "onClick",
+    "onKeyDown",
+    "ref",
+  ]);
   return (index: Accessor<number>, ref: (arg: HTMLElement) => any) => {
     const prefix = usePrefix();
-    const { selectedIndex, setSelectedIndex, baseId } = useContext(TabsContext)!;
+    const { selectedIndex, setSelectedIndex, baseId } =
+      useContext(TabsContext)!;
     return (
       <Dynamic
         component={props.as}
@@ -256,7 +285,8 @@ const Tab: Component<TabProps> = (props) => {
         //class={`${prefix}--tabs__nav-item ${prefix}--tabs__nav-link`}
         class={` ${prefix}--tabs--scrollable__nav-link ${prefix}--tabs--scrollable__nav-item`}
         classList={{
-          [`${prefix}--tabs--scrollable__nav-item--selected`]: selectedIndex() === index(),
+          [`${prefix}--tabs--scrollable__nav-item--selected`]:
+            selectedIndex() === index(),
           [`${prefix}--tabs__nav-item--selected`]: selectedIndex() === index(),
           [`${prefix}--tabs__nav-item--disabled`]: props.disabled,
           [`${prefix}--tabs--scrollable__nav-item--disabled`]: props.disabled,
@@ -289,7 +319,7 @@ export type TabPanelProps = {
 
 //@ts-ignore
 const TabPanel: Component<TabPanelProps> = (props) => {
-  const [, rest] = splitProps(props, ["children", "class", "ref"])
+  const [, rest] = splitProps(props, ["children", "class", "ref"]);
   return (index: Accessor<number>) => {
     const prefix = usePrefix();
     let panel!: HTMLDivElement;

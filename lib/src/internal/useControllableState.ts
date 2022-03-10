@@ -5,9 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Accessor, createEffect, createMemo, createSignal, untrack } from 'solid-js';
+import {
+  Accessor,
+  createEffect,
+  createMemo,
+  createSignal,
+  untrack,
+} from "solid-js";
 import type { Setter } from "solid-js";
-import { warning } from './warning';
+import { warning } from "./warning";
 
 /**
  * This custom hook simplifies the behavior of a component if it has state that
@@ -32,7 +38,7 @@ import { warning } from './warning';
  */
 export function useControllableState<T>({
   defaultValue,
-  name = () => 'custom',
+  name = () => "custom",
   onChange,
   value,
 }: {
@@ -52,8 +58,8 @@ export function useControllableState<T>({
   function setState(stateOrUpdater: T | ((arg: T) => T)) {
     const value: T =
       typeof stateOrUpdater === "function"
-        //@ts-ignore
-        ? stateOrUpdater(untrack(signal))
+        ? //@ts-ignore
+          stateOrUpdater(untrack(signal))
         : stateOrUpdater;
 
     if (controlled === false) {
@@ -74,11 +80,11 @@ export function useControllableState<T>({
     if (controlled === false && controlledValue) {
       warning(
         false,
-        'A component is changing an uncontrolled %s component to be controlled. ' +
-        'This is likely caused by the value changing to a defined value ' +
-        'from undefined. Decide between using a controlled or uncontrolled ' +
-        'value for the lifetime of the component. ' +
-        'More info: https://reactjs.org/link/controlled-components',
+        "A component is changing an uncontrolled %s component to be controlled. " +
+          "This is likely caused by the value changing to a defined value " +
+          "from undefined. Decide between using a controlled or uncontrolled " +
+          "value for the lifetime of the component. " +
+          "More info: https://reactjs.org/link/controlled-components",
         name()
       );
     }
@@ -88,11 +94,11 @@ export function useControllableState<T>({
     if (controlled === true && !controlledValue) {
       warning(
         false,
-        'A component is changing a controlled %s component to be uncontrolled. ' +
-        'This is likely caused by the value changing to an undefined value ' +
-        'from a defined one. Decide between using a controlled or ' +
-        'uncontrolled value for the lifetime of the component. ' +
-        'More info: https://reactjs.org/link/controlled-components',
+        "A component is changing a controlled %s component to be uncontrolled. " +
+          "This is likely caused by the value changing to an undefined value " +
+          "from a defined one. Decide between using a controlled or " +
+          "uncontrolled value for the lifetime of the component. " +
+          "More info: https://reactjs.org/link/controlled-components",
         name()
       );
     }

@@ -149,11 +149,14 @@ export const TableHeader: Component<TableHeaderProps> = (props) => {
       aria-sort={props.isSortable ? ariaSort() : undefined}
       {...rest}
     >
-      <Show when={props.isSortable} fallback={
-        <Show when={childs()}>
-          <div class={`${prefix}--table-header-label`}>{childs()}</div>
-        </Show>
-      }>
+      <Show
+        when={props.isSortable}
+        fallback={
+          <Show when={childs()}>
+            <div class={`${prefix}--table-header-label`}>{childs()}</div>
+          </Show>
+        }
+      >
         <div style={{ display: "none" }} id={uniqueId}>
           {sortDescription()}
         </div>

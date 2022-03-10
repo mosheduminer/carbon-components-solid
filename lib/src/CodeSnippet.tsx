@@ -1,4 +1,12 @@
-import { Component, createSignal, JSX, mergeProps, splitProps, Switch, Match } from "solid-js";
+import {
+  Component,
+  createSignal,
+  JSX,
+  mergeProps,
+  splitProps,
+  Switch,
+  Match,
+} from "solid-js";
 import { createId } from "./internal/id";
 import { Copy } from "./Copy";
 import { CopyButton } from "./CopyButton";
@@ -131,7 +139,7 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
 
   const ref = useResizeObserver({
     onResize: () => {
-      if (codeContentRef && props.type === 'multi') {
+      if (codeContentRef && props.type === "multi") {
         const { height } = codeContentRef.getBoundingClientRect();
 
         if (
@@ -153,108 +161,126 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
         }
       }
       if (
-        (codeContentRef && props.type === 'multi') ||
-        (codeContainerRef && props.type === 'single')
+        (codeContentRef && props.type === "multi") ||
+        (codeContainerRef && props.type === "single")
       ) {
         debounce(handleScroll, 200);
       }
-    }
+    },
   });
 
-  const handleCopyClick = (evt: MouseEvent) => composeEventHandlers([() => copy(props.children), props.onClick]);
+  const handleCopyClick = (evt: MouseEvent) =>
+    composeEventHandlers([() => copy(props.children), props.onClick]);
 
   const prefix = usePrefix();
 
-  const classes = () => (
-    {
-      [props.class!]: !!props.class,
-      [`${prefix}--snippet--${props.type}`]: !!props.type,
-      [`${prefix}--snippet--disabled`]: props.type !== 'inline' && props.disabled,
-      [`${prefix}--snippet--expand`]: expandedCode(),
-      [`${prefix}--snippet--light`]: props.light,
-      [`${prefix}--snippet--no-copy`]: props.hideCopyButton,
-      [`${prefix}--snippet--wraptext`]: props.wrapText,
-    }
-  );
+  const classes = () => ({
+    [props.class!]: !!props.class,
+    [`${prefix}--snippet--${props.type}`]: !!props.type,
+    [`${prefix}--snippet--disabled`]: props.type !== "inline" && props.disabled,
+    [`${prefix}--snippet--expand`]: expandedCode(),
+    [`${prefix}--snippet--light`]: props.light,
+    [`${prefix}--snippet--no-copy`]: props.hideCopyButton,
+    [`${prefix}--snippet--wraptext`]: props.wrapText,
+  });
 
-  const expandCodeBtnText = () => expandedCode() ? props.showLessText : props.showMoreText;
+  const expandCodeBtnText = () =>
+    expandedCode() ? props.showLessText : props.showMoreText;
 
   const styles = () => {
     const styles: { "min-height"?: string; "max-height"?: string } = {};
     if (expandedCode()) {
       if (props.maxExpandedNumberOfRows! > 0) {
-        styles["max-height"] = `${props.maxExpandedNumberOfRows! * rowHeightInPixels}px`;
+        styles["max-height"] = `${
+          props.maxExpandedNumberOfRows! * rowHeightInPixels
+        }px`;
       }
       if (props.minExpandedNumberOfRows! > 0) {
-        styles["min-height"] = `${props.minExpandedNumberOfRows! * rowHeightInPixels}px`;
+        styles["min-height"] = `${
+          props.minExpandedNumberOfRows! * rowHeightInPixels
+        }px`;
       }
     } else {
       if (props.maxCollapsedNumberOfRows! > 0) {
-        styles["max-height"] = `${props.maxCollapsedNumberOfRows! * rowHeightInPixels}px`;
+        styles["max-height"] = `${
+          props.maxCollapsedNumberOfRows! * rowHeightInPixels
+        }px`;
       }
       if (props.minCollapsedNumberOfRows! > 0) {
-        styles["min-height"] = `${props.minCollapsedNumberOfRows! * rowHeightInPixels}px`;
+        styles["min-height"] = `${
+          props.minCollapsedNumberOfRows! * rowHeightInPixels
+        }px`;
       }
     }
     return styles;
-  }
+  };
 
   return (
-    <Switch fallback={
-      <div {...rest as JSX.HTMLAttributes<HTMLDivElement>} class={`${prefix}--snippet`} classList={classes()}>
+    <Switch
+      fallback={
         <div
-          ref={codeContainerRef}
-          role={props.type === 'single' ? 'textbox' : undefined}
-          tabIndex={props.type === 'single' && !props.disabled ? 0 : undefined}
-          class={`${prefix}--snippet-container`}
-          aria-label={props.ariaLabel || 'code-snippet'}
-          onScroll={(props.type === 'single' && handleScroll) || undefined}
-          style={styles()}>
-          <pre
-            ref={codeContentRef}
-            onScroll={(props.type === 'multi' && handleScroll) || undefined}>
-            <code>{props.children}</code>
-          </pre>
-        </div>
-        {/**
-         * left overflow indicator must come after the snippet due to z-index and
-         * snippet focus border overlap
-         */}
-        {hasLeftOverflow() && (
-          <div class={`${prefix}--snippet__overflow-indicator--left`} />
-        )}
-        {hasRightOverflow() && (
-          <div class={`${prefix}--snippet__overflow-indicator--right`} />
-        )}
-        {!props.hideCopyButton && (
-          <CopyButton
-            disabled={props.disabled}
-            onClick={handleCopyClick}
-            feedback={props.feedback}
-            feedbackTimeout={props.feedbackTimeout}
-            iconDescription={props.copyButtonDescription}
-          />
-        )}
-        {shouldShowMoreLessBtn() && (
-          <Button
-            kind="ghost"
-            size="field"
-            class={`${prefix}--snippet-btn--expand`}
-            disabled={props.disabled}
-            onClick={() => setExpandedCode(!expandedCode)}
+          {...(rest as JSX.HTMLAttributes<HTMLDivElement>)}
+          class={`${prefix}--snippet`}
+          classList={classes()}
+        >
+          <div
+            ref={codeContainerRef}
+            role={props.type === "single" ? "textbox" : undefined}
+            tabIndex={
+              props.type === "single" && !props.disabled ? 0 : undefined
+            }
+            class={`${prefix}--snippet-container`}
+            aria-label={props.ariaLabel || "code-snippet"}
+            onScroll={(props.type === "single" && handleScroll) || undefined}
+            style={styles()}
           >
-            <span class={`${prefix}--snippet-btn--text`}>
-              {expandCodeBtnText()}
-            </span>
-            <ChevronDown16
-              aria-label={expandCodeBtnText()}
-              class={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
-              role="img"
+            <pre
+              ref={codeContentRef}
+              onScroll={(props.type === "multi" && handleScroll) || undefined}
+            >
+              <code>{props.children}</code>
+            </pre>
+          </div>
+          {/**
+           * left overflow indicator must come after the snippet due to z-index and
+           * snippet focus border overlap
+           */}
+          {hasLeftOverflow() && (
+            <div class={`${prefix}--snippet__overflow-indicator--left`} />
+          )}
+          {hasRightOverflow() && (
+            <div class={`${prefix}--snippet__overflow-indicator--right`} />
+          )}
+          {!props.hideCopyButton && (
+            <CopyButton
+              disabled={props.disabled}
+              onClick={handleCopyClick}
+              feedback={props.feedback}
+              feedbackTimeout={props.feedbackTimeout}
+              iconDescription={props.copyButtonDescription}
             />
-          </Button>
-        )}
-      </div>
-    }>
+          )}
+          {shouldShowMoreLessBtn() && (
+            <Button
+              kind="ghost"
+              size="field"
+              class={`${prefix}--snippet-btn--expand`}
+              disabled={props.disabled}
+              onClick={() => setExpandedCode(!expandedCode)}
+            >
+              <span class={`${prefix}--snippet-btn--text`}>
+                {expandCodeBtnText()}
+              </span>
+              <ChevronDown16
+                aria-label={expandCodeBtnText()}
+                class={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
+                role="img"
+              />
+            </Button>
+          )}
+        </div>
+      }
+    >
       <Match when={props.type === "inline" && props.hideCopyButton}>
         <span class={`${prefix}--snippet`} classList={classes()}>
           <code id={uid}>{props.children}</code>
@@ -262,7 +288,7 @@ export const CodeSnippet: Component<CodeSnippetProps> = (props) => {
       </Match>
       <Match when={props.type === "inline"}>
         <Copy
-          {...rest as JSX.HTMLAttributes<HTMLButtonElement>}
+          {...(rest as JSX.HTMLAttributes<HTMLButtonElement>)}
           onClick={handleCopyClick}
           classList={classes()}
           class={`${prefix}--snippet`}

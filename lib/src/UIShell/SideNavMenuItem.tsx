@@ -1,4 +1,9 @@
-import { Component, createComputed, createEffect, on, splitProps } from "solid-js";
+import {
+  Component,
+  createEffect,
+  on,
+  splitProps,
+} from "solid-js";
 import { useContext } from "solid-js";
 import { SideNavLinkText } from "./SideNavLinkText";
 import { Link, LinkProps } from "./Link";

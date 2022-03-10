@@ -42,7 +42,10 @@ export type ButtonProps = {
 
 const dangerButtonVariants = ["danger", "danger--tertiary", "danger--ghost"];
 
-const buttonImage = (renderIcon?: Component<{class?: string}>, iconDescription?: string) => (
+const buttonImage = (
+  renderIcon?: Component<{ class?: string }>,
+  iconDescription?: string
+) => (
   <Show when={renderIcon}>
     <Dynamic
       component={renderIcon}

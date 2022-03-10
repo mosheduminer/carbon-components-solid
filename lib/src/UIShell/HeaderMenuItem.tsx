@@ -44,9 +44,7 @@ export const HeaderMenuItem: Component<HeaderMenuItemProps> = (props) => {
         }}
         tabIndex={0}
       >
-        <span class={`${prefix}--text-truncate--end`}>
-          {props.children}
-        </span>
+        <span class={`${prefix}--text-truncate--end`}>{props.children}</span>
       </Link>
     </li>
   );

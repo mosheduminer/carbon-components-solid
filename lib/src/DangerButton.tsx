@@ -1,5 +1,7 @@
-import { Button, ButtonProps } from './Button';
+import { Button, ButtonProps } from "./Button";
 
-export const DangerButton = (props: ButtonProps) => <Button kind="danger" {...props} />;
+export const DangerButton = (props: ButtonProps) => (
+  <Button kind="danger" {...props} />
+);
 
 export default DangerButton;

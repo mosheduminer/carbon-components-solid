@@ -22,17 +22,17 @@ export const defaultFilterRows = ({
 }: {
   rowIds: string[];
   headers: Header[];
-  cellsById: {[key: string]: Cell};
+  cellsById: { [key: string]: Cell };
   inputValue: string;
   getCellId: (rowId: string, key: string) => string;
 }) =>
   rowIds.filter((rowId) =>
     headers.some(({ key }) => {
       const id = getCellId(rowId, key);
-      if (typeof cellsById[id].value === 'boolean') {
+      if (typeof cellsById[id].value === "boolean") {
         return false;
       }
-      return ('' + cellsById[id].value)
+      return ("" + cellsById[id].value)
         .toLowerCase()
         .includes(inputValue.toLowerCase());
     })

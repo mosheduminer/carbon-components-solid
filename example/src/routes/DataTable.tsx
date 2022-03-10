@@ -28,9 +28,11 @@ const Usage = () => {
                 <TableSelectAll {...props.getSelectionProps()} />
                 <For each={props.headers}>
                   {(header) => {
-                    return <TableHeader {...props.getHeaderProps({ header })}>
-                      {header.header}
-                    </TableHeader>
+                    return (
+                      <TableHeader {...props.getHeaderProps({ header })}>
+                        {header.header}
+                      </TableHeader>
+                    );
                   }}
                 </For>
               </TableRow>

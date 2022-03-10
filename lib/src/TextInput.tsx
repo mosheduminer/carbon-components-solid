@@ -43,7 +43,6 @@ export const textInputProps = ({
 
 type TextInputProps = {
   class?: string;
-  defaultValue?: string | number;
   disabled?: boolean;
   helperText?: JSX.Element;
   hideLabel?: boolean;
@@ -57,7 +56,7 @@ type TextInputProps = {
   onClick?: JSX.EventHandlerUnion<HTMLInputElement, MouseEvent>;
   placeholder?: string;
   readOnly?: boolean;
-  ref?: HTMLInputElement;
+  ref?: HTMLInputElement | ((el: HTMLInputElement) => any);
   size?: "sm" | "md" | "lg";
   type?: string;
   value?: string | number;
@@ -70,7 +69,6 @@ export const TextInput: Component<TextInputProps> = (props) => {
   [props, rest] = splitProps(props, [
     "children",
     "class",
-    "defaultValue",
     "disabled",
     "helperText",
     "hideLabel",
@@ -95,8 +93,8 @@ export const TextInput: Component<TextInputProps> = (props) => {
     {
       disabled: false,
       type: "text",
-      onInput: () => { },
-      onClick: () => { },
+      onInput: () => {},
+      onClick: () => {},
       invalid: false,
       invalidText: "",
       warn: false,
@@ -232,6 +230,7 @@ export const TextInput: Component<TextInputProps> = (props) => {
               warn: normalizedProps().warn,
               warnId: normalizedProps().warnId,
             })}
+            value={props.value}
           />
           {isFluid && <hr class={`${prefix}--text-input__divider`} />}
           {isFluid && !props.inline && normalizedProps().validation}

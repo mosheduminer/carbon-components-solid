@@ -1,5 +1,3 @@
 ///TODO
 
-export const ExpandableSearch = () => {
-    
-}
+export const ExpandableSearch = () => {};

@@ -4,7 +4,7 @@
  * https://github.com/carbon-design-system/carbon/blob/main/LICENSE.
  */
 
-import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
+import rangePlugin from "flatpickr/dist/plugins/rangePlugin";
 import { DateOption, Plugin } from "flatpickr/dist/types/options";
 
 /**
@@ -15,7 +15,12 @@ import { DateOption, Plugin } from "flatpickr/dist/types/options";
  *   * A logic to ensure `fp.setDate()` call won't end up with "startDate to endDate" set to the first `<input>`
  */
 export default (config: { input: HTMLInputElement }): Plugin => {
-  const factory = rangePlugin(Object.assign({ position: 'left' }, config) as { position: "left", input: HTMLInputElement });
+  const factory = rangePlugin(
+    Object.assign({ position: "left" }, config) as {
+      position: "left";
+      input: HTMLInputElement;
+    }
+  );
   return (fp) => {
     const origSetDate = fp.setDate;
 
@@ -30,8 +35,11 @@ export default (config: { input: HTMLInputElement }): Plugin => {
           [inputFrom, inputTo].forEach((input, i) => {
             if (input) {
               input.value = !(dates as DateOption[])[i]
-                ? ''
-                : fp.formatDate(new Date((dates as DateOption[])[i]), fp.config.dateFormat);
+                ? ""
+                : fp.formatDate(
+                    new Date((dates as DateOption[])[i]),
+                    fp.config.dateFormat
+                  );
             }
           });
         }
@@ -43,7 +51,7 @@ export default (config: { input: HTMLInputElement }): Plugin => {
 
     return Object.assign(origRangePlugin, {
       onReady: [init, origOnReady],
-      onPreCalendarPosition() { },
+      onPreCalendarPosition() {},
     });
   };
 };

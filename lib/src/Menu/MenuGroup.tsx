@@ -15,4 +15,4 @@ export const MenuGroup: Component<MenuGroupProps> = (props) => {
       </ul>
     </li>
   );
-}
+};

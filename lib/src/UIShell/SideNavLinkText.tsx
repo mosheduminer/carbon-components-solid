@@ -15,7 +15,6 @@ export type SideNavLinkTextProps = {
 export const SideNavLinkText: Component<SideNavLinkTextProps> = (props) => {
   const prefix = usePrefix();
   const [, rest] = splitProps(props, ["children", "class"]);
-  console.log(props.children)
   return (
     <span
       {...rest}

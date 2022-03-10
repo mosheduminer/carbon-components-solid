@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Cell, getCellId, Header, Row } from './cells';
+import { Cell, getCellId, Header, Row } from "./cells";
 
 /**
  * Normalize a collection of rows with the given headers.
@@ -14,7 +14,11 @@ import { Cell, getCellId, Header, Row } from './cells';
  * @param {Array<object>} headers
  * @returns {object}
  */
-const normalize = (rows: Row[], headers: Header[], prevState: { rowsById?: { [key: string]: Row } } = {}) => {
+const normalize = (
+  rows: Row[],
+  headers: Header[],
+  prevState: { rowsById?: { [key: string]: Row } } = {}
+) => {
   const { rowsById: prevRowsByIds } = prevState;
   const rowIds = new Array(rows.length);
   const rowsById: { [key: string]: Row } = {};

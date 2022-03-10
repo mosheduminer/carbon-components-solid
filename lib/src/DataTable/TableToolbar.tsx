@@ -1,5 +1,5 @@
-import { settings } from 'carbon-components';
-import { mergeProps, splitProps, Component } from 'solid-js';
+import { settings } from "carbon-components";
+import { mergeProps, splitProps, Component } from "solid-js";
 
 const { prefix } = settings;
 
@@ -13,19 +13,25 @@ export type TableToolbarProps = {
   /**
    * `normal` Change the row height of table
    */
-  size?: 'sm' | 'lg';
+  size?: "sm" | "lg";
 };
 
 export const TableToolbar: Component<TableToolbarProps> = (props) => {
-  props = mergeProps({
-    'aria-label': 'data table toolbar',
-  }, props);
+  props = mergeProps(
+    {
+      "aria-label": "data table toolbar",
+    },
+    props
+  );
   const [, rest] = splitProps(props, ["size", "children"]);
   return (
-    <section {...rest} classList={{
-      [`${prefix}--table-toolbar`]: true,
-      [`${prefix}--table-toolbar--${props.size}`]: !!props.size,
-    }}>
+    <section
+      {...rest}
+      classList={{
+        [`${prefix}--table-toolbar`]: true,
+        [`${prefix}--table-toolbar--${props.size}`]: !!props.size,
+      }}
+    >
       {props.children}
     </section>
   );

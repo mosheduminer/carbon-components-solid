@@ -74,9 +74,7 @@ export type RadioButtonProps = {
    * Specify the value of the <RadioButton>
    */
   value: number | string;
-
-  ref?: HTMLInputElement;
-};
+} & JSX.HTMLAttributes<HTMLInputElement>;
 
 export const RadioButton: Component<RadioButtonProps> = (props) => {
   props = mergeProps(
@@ -92,7 +90,6 @@ export const RadioButton: Component<RadioButtonProps> = (props) => {
     "class",
     "labelText",
     "labelPosition",
-    "ref",
     "hideLabel",
   ]);
   const prefix = usePrefix();
@@ -116,7 +113,6 @@ export const RadioButton: Component<RadioButtonProps> = (props) => {
           props.onInput?.(props.value, props.name, evt);
         }}
         id={uid()}
-        ref={props.ref}
       />
       <label for={uid()} class={`${prefix}--radio-button__label`}>
         <span class={`${prefix}--radio-button__appearance`} />

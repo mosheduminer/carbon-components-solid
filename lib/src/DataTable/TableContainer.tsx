@@ -1,5 +1,5 @@
-import { settings } from 'carbon-components';
-import { Component, splitProps } from 'solid-js';
+import { settings } from "carbon-components";
+import { Component, splitProps } from "solid-js";
 import type { JSX } from "solid-js";
 
 const { prefix } = settings;
@@ -25,13 +25,24 @@ export type TableContainerProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const TableContainer: Component<TableContainerProps> = (props) => {
-  const [, rest] = splitProps(props, ["class", "children", "title", "description", "stickyHeader", "useStaticWidth"]);
+  const [, rest] = splitProps(props, [
+    "class",
+    "children",
+    "title",
+    "description",
+    "stickyHeader",
+    "useStaticWidth",
+  ]);
   return (
-    <div {...rest} class={`${prefix}--data-table-container`} classList={{
-      [`${prefix}--data-table--max-width`]: props.stickyHeader,
-      [`${prefix}--data-table-container--static`]: props.useStaticWidth,
-      [props.class!]: !!props.class,
-    }}>
+    <div
+      {...rest}
+      class={`${prefix}--data-table-container`}
+      classList={{
+        [`${prefix}--data-table--max-width`]: props.stickyHeader,
+        [`${prefix}--data-table-container--static`]: props.useStaticWidth,
+        [props.class!]: !!props.class,
+      }}
+    >
       {props.title && (
         <div class={`${prefix}--data-table-header`}>
           <h4 class={`${prefix}--data-table-header__title`}>{props.title}</h4>

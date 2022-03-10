@@ -5,10 +5,10 @@ import { createEffect, createSignal, onCleanup } from "solid-js";
  * @returns {object} Props object to pass onto Menu component
  */
 export function useContextMenu(trigger: Node = document): {
-  open: () => boolean,
-  position: () => [number, number],
-  autoclose: () => boolean,
-  onClose: () => any,
+  open: () => boolean;
+  position: () => [number, number];
+  autoclose: () => boolean;
+  onClose: () => any;
 } {
   const [open, setOpen] = createSignal(false);
   const [canBeClosed, setCanBeClosed] = createSignal(false);
@@ -31,7 +31,7 @@ export function useContextMenu(trigger: Node = document): {
     // a 50ms delay after mouseup event was called.
 
     document.addEventListener(
-      'mouseup',
+      "mouseup",
       () => {
         setTimeout(() => {
           setCanBeClosed(true);
@@ -41,7 +41,7 @@ export function useContextMenu(trigger: Node = document): {
     );
 
     document.addEventListener(
-      'click',
+      "click",
       () => {
         setCanBeClosed(true);
       },
@@ -59,15 +59,15 @@ export function useContextMenu(trigger: Node = document): {
       trigger instanceof Document ||
       trigger instanceof Window
     ) {
-      trigger.addEventListener('contextmenu', openContextMenu);
+      trigger.addEventListener("contextmenu", openContextMenu);
 
       onCleanup(() => {
         return () => {
-          trigger.removeEventListener('contextmenu', openContextMenu);
+          trigger.removeEventListener("contextmenu", openContextMenu);
         };
-      })
+      });
     }
-  })
+  });
   return {
     open,
     position,

@@ -95,15 +95,15 @@ export type DataTableProps = {
    *  The previous terms (`compact`, `short`, `normal`, and `tall`) will be removed in the next major release.
    */
   size?:
-  | "compact"
-  | "short"
-  | "normal"
-  | "tall"
-  | "xs"
-  | "sm"
-  | "md"
-  | "lg"
-  | "xl";
+    | "compact"
+    | "short"
+    | "normal"
+    | "tall"
+    | "xs"
+    | "sm"
+    | "md"
+    | "lg"
+    | "xl";
   /**
    * Optional hook to manually control sorting of the rows.
    */
@@ -206,7 +206,7 @@ class DataTableInternal {
     this.instanceId = getInstanceId();
     createComputed<Props | DataTableProps>((prevProps) => {
       if (prevProps === undefined) {
-        return {...props};
+        return { ...props };
       }
       const rowIds = props.rows.map((row) => row.id);
       const prevRowIds = prevProps.rows.map((row) => row.id);
@@ -223,13 +223,13 @@ class DataTableInternal {
       if (!isEqual(prevHeaders, headers)) {
         //@ts-ignore
         setState((state) => getDerivedStateFromProps(props, state));
-        return { ...props };;
+        return { ...props };
       }
 
       if (!isEqual(prevProps.rows, props.rows)) {
         //@ts-ignore
         setState((state) => getDerivedStateFromProps(props, state));
-        return { ...props };;
+        return { ...props };
       }
       return { ...props };
     });
@@ -313,8 +313,8 @@ class DataTableInternal {
         this.handleOnExpandAll,
         onClick
           ? this.handleOnExpandHeaderClick(onClick, {
-            isExpanded,
-          })
+              isExpanded,
+            })
           : undefined,
       ]),
     };
@@ -334,7 +334,8 @@ class DataTableInternal {
     ) => any,
     sortParams: {}
   ) => {
-    return (e: MouseEvent & { currentTarget: HTMLElement; target: Element; }) => onClick(e, sortParams);
+    return (e: MouseEvent & { currentTarget: HTMLElement; target: Element }) =>
+      onClick(e, sortParams);
   };
 
   /**
@@ -447,11 +448,10 @@ class DataTableInternal {
   getToolbarProps = (props = {}) => {
     const { size } = this.props;
     // Remove compact, short in V11
-    let isSmall =
-      size === "xs" || size === "sm";
+    let isSmall = size === "xs" || size === "sm";
     return {
       ...props,
-      size: isSmall ? "sm" as const : "lg" as const,
+      size: isSmall ? ("sm" as const) : ("lg" as const),
     };
   };
 
@@ -519,12 +519,12 @@ class DataTableInternal {
     const filteredRowIds =
       typeof this.state.filterInputValue === "string"
         ? this.props.filterRows!({
-          rowIds: this.state.rowIds,
-          headers: this.props.headers,
-          cellsById: this.state.cellsById,
-          inputValue: this.state.filterInputValue,
-          getCellId,
-        })
+            rowIds: this.state.rowIds,
+            headers: this.props.headers,
+            cellsById: this.state.cellsById,
+            inputValue: this.state.filterInputValue,
+            getCellId,
+          })
         : this.state.rowIds;
     if (filteredRowIds.length == 0) {
       return [];
@@ -740,38 +740,43 @@ class DataTableInternal {
     const filteredRowIds = () =>
       typeof state.filterInputValue === "string"
         ? filterRows!({
-          rowIds: state.rowIds,
-          headers,
-          cellsById: state.cellsById,
-          inputValue: state.filterInputValue,
-          getCellId,
-        })
+            rowIds: state.rowIds,
+            headers,
+            cellsById: state.cellsById,
+            inputValue: state.filterInputValue,
+            getCellId,
+          })
         : state.rowIds;
 
-    return <Dynamic component={this.props.children} // Data derived from state
-      rows={denormalize(filteredRowIds(), state.rowsById, state.cellsById)}
-      headers={this.props.headers}
-      selectedRows={denormalize(this.getSelectedRows(), state.rowsById, state.cellsById)}
-
-      // Prop accessors/getters
-      getHeaderProps={this.getHeaderProps}
-      getExpandHeaderProps={this.getExpandHeaderProps}
-      getRowProps={this.getRowProps}
-      getSelectionProps={this.getSelectionProps}
-      getToolbarProps={this.getToolbarProps}
-      getBatchActionProps={this.getBatchActionProps}
-      getTableProps={this.getTableProps}
-      getTableContainerProps={this.getTableContainerProps}
-
-      // Custom event handlers
-      onInputChange={this.handleOnInputValueChange}
-
-      // Expose internal state change actions
-      sortBy={(headerKey: string) => this.handleSortBy(headerKey)()}
-      selectAll={this.handleSelectAll}
-      selectRow={(rowId: string) => this.handleOnSelectRow(rowId)()}
-      expandRow={(rowId: string) => this.handleOnExpandRow(rowId)()}
-      expandAll={this.handleOnExpandAll}
-      radio={this.props.radio} />
+    return (
+      <Dynamic
+        component={this.props.children} // Data derived from state
+        rows={denormalize(filteredRowIds(), state.rowsById, state.cellsById)}
+        headers={this.props.headers}
+        selectedRows={denormalize(
+          this.getSelectedRows(),
+          state.rowsById,
+          state.cellsById
+        )}
+        // Prop accessors/getters
+        getHeaderProps={this.getHeaderProps}
+        getExpandHeaderProps={this.getExpandHeaderProps}
+        getRowProps={this.getRowProps}
+        getSelectionProps={this.getSelectionProps}
+        getToolbarProps={this.getToolbarProps}
+        getBatchActionProps={this.getBatchActionProps}
+        getTableProps={this.getTableProps}
+        getTableContainerProps={this.getTableContainerProps}
+        // Custom event handlers
+        onInputChange={this.handleOnInputValueChange}
+        // Expose internal state change actions
+        sortBy={(headerKey: string) => this.handleSortBy(headerKey)()}
+        selectAll={this.handleSelectAll}
+        selectRow={(rowId: string) => this.handleOnSelectRow(rowId)()}
+        expandRow={(rowId: string) => this.handleOnExpandRow(rowId)()}
+        expandAll={this.handleOnExpandAll}
+        radio={this.props.radio}
+      />
+    );
   }
 }

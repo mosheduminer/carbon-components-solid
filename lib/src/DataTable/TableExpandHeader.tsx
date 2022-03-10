@@ -40,13 +40,13 @@ export const TableExpandHeader: Component<TableExpandHeaderProps> = (props) => {
     "expandIconDescription",
     "children",
   ]);
-  const previousValue = () => props.isExpanded ? "collapsed" : undefined;
+  const previousValue = () => (props.isExpanded ? "collapsed" : undefined);
 
   return (
     <th
       scope="col"
       class={`${prefix}--table-expand`}
-      classList={{[props.class!]: !!props.class}}
+      classList={{ [props.class!]: !!props.class }}
       data-previous-value={previousValue()}
       {...rest}
     >

@@ -50,16 +50,20 @@ export const Toggle: Component<ToggleProps> = (props) => {
   );
   let inputRef!: HTMLInputElement;
   return (
-    <div class={`${prefix}--form-item`} classList={{[props.class!]: !!props.class}}>
+    <div
+      class={`${prefix}--form-item`}
+      classList={{ [props.class!]: !!props.class }}
+    >
       {/*
       // @ts-ignore */}
-      <input defaultChecked={props.defaultToggled}
+      <input
+        defaultChecked={props.defaultToggled}
         {...rest}
         aria-label={undefined}
         type="checkbox"
         id={props.id}
         class={`${prefix}--toggle-input`}
-        classList={{[`${prefix}--toggle-input--small`]: !!props.size}}
+        classList={{ [`${prefix}--toggle-input--small`]: !!props.size }}
         checked={props.toggled}
         onInput={(evt) => {
           props.onInput && props.onInput(evt);

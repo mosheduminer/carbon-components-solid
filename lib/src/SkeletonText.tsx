@@ -1,5 +1,13 @@
 import { settings } from "carbon-components";
-import { Component, JSX, splitProps, mergeProps, For, Switch, Match } from "solid-js";
+import {
+  Component,
+  JSX,
+  splitProps,
+  mergeProps,
+  For,
+  Switch,
+  Match,
+} from "solid-js";
 
 const { prefix } = settings;
 
@@ -19,57 +27,86 @@ export interface SkeletonTextProps {
 
 export const SkeletonText: Component<SkeletonTextProps> = (allProps) => {
   let rest: JSX.HTMLAttributes<HTMLParagraphElement>;
-  [allProps, rest] = splitProps(allProps, ["paragraph", "width", "lineCount", "heading", "class"]);
-  const props: Required<SkeletonTextProps> = mergeProps({ paragraph: false, heading: false, lineCount: 3, width: "100%", class: "" }, allProps);
+  [allProps, rest] = splitProps(allProps, [
+    "paragraph",
+    "width",
+    "lineCount",
+    "heading",
+    "class",
+  ]);
+  const props: Required<SkeletonTextProps> = mergeProps(
+    {
+      paragraph: false,
+      heading: false,
+      lineCount: 3,
+      width: "100%",
+      class: "",
+    },
+    allProps
+  );
 
   const widthNum = () => parseInt(props.width, 10);
 
-  const widthPx = () => props.width.includes('px');
+  const widthPx = () => props.width.includes("px");
 
-  const widthPercent = () => props.width.includes('%');
+  const widthPercent = () => props.width.includes("%");
 
-  return <Switch fallback={
-    <p class={`${prefix}--skeleton__text`}
-      classList={{
-        [`${prefix}--skeleton__heading`]: props.heading,
-        [props.class]: props.class !== undefined,
-      }} style={{ width: props.width }} {...rest} />
-  }>
-    <Match when={widthPercent() && props.paragraph}>
-      <div>
-        <For each={Array(props.lineCount)}>
-          {(_, i) => (
-            <p
-              class={`${prefix}--skeleton__text`}
-              classList={{
-                [`${prefix}--skeleton__heading`]: props.heading,
-                //@ts-ignore
-                [props.class]: props.class !== undefined,
-              }}
-              style={{ width: `calc(${props.width} - ${getRandomInt(0, 75, i()) + 'px'})` }}
-              {...rest}
-            />
-          )}
-        </For>
-      </div>
-    </Match>
-    <Match when={widthPx() && props.paragraph}>
-      <div>
-        <For each={Array(props.lineCount)}>
-          {(_, i) => (
-            <p
-              class={`${prefix}--skeleton__text`}
-              classList={{
-                [`${prefix}--skeleton__heading`]: props.heading,
-                //@ts-ignore
-                [props.class]: props.class !== undefined,
-              }}
-              style={{ width: getRandomInt(widthNum() - 75, widthNum(), i()) + 'px' }}
-              {...rest}
-            />
-          )}
-        </For>
-      </div>
-    </Match>
-  </Switch>
+  return (
+    <Switch
+      fallback={
+        <p
+          class={`${prefix}--skeleton__text`}
+          classList={{
+            [`${prefix}--skeleton__heading`]: props.heading,
+            [props.class]: props.class !== undefined,
+          }}
+          style={{ width: props.width }}
+          {...rest}
+        />
+      }
+    >
+      <Match when={widthPercent() && props.paragraph}>
+        <div>
+          <For each={Array(props.lineCount)}>
+            {(_, i) => (
+              <p
+                class={`${prefix}--skeleton__text`}
+                classList={{
+                  [`${prefix}--skeleton__heading`]: props.heading,
+                  //@ts-ignore
+                  [props.class]: props.class !== undefined,
+                }}
+                style={{
+                  width: `calc(${props.width} - ${
+                    getRandomInt(0, 75, i()) + "px"
+                  })`,
+                }}
+                {...rest}
+              />
+            )}
+          </For>
+        </div>
+      </Match>
+      <Match when={widthPx() && props.paragraph}>
+        <div>
+          <For each={Array(props.lineCount)}>
+            {(_, i) => (
+              <p
+                class={`${prefix}--skeleton__text`}
+                classList={{
+                  [`${prefix}--skeleton__heading`]: props.heading,
+                  //@ts-ignore
+                  [props.class]: props.class !== undefined,
+                }}
+                style={{
+                  width: getRandomInt(widthNum() - 75, widthNum(), i()) + "px",
+                }}
+                {...rest}
+              />
+            )}
+          </For>
+        </div>
+      </Match>
+    </Switch>
+  );
 };

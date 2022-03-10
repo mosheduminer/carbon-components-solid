@@ -8,7 +8,8 @@ import type { JSX } from "solid-js";
  * @param {string} header
  * @returns {string}
  */
-export const getCellId = (rowId: string, header: string): string => `${rowId}:${header}`;
+export const getCellId = (rowId: string, header: string): string =>
+  `${rowId}:${header}`;
 
 export type Cell = {
   id: string;
@@ -33,4 +34,4 @@ export type Row = {
   isExpanded: boolean;
   disabled: boolean;
   cells: Cell[];
-}
+};

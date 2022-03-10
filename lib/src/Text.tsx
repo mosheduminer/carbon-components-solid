@@ -11,13 +11,12 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 
-const TextDirectionContext =
-  createContext<
-    Accessor<{
-      direction?: Directions;
-      getTextDirection?: (text: string | string[] | undefined) => Directions;
-    }>
-  >();
+const TextDirectionContext = createContext<
+  Accessor<{
+    direction?: Directions;
+    getTextDirection?: (text: string | string[] | undefined) => Directions;
+  }>
+>();
 
 export const TextDirection: Component<TextDirectionProps> = (props) => {
   props = mergeProps({ dir: "auto" }, props);
@@ -53,7 +52,7 @@ export type TextDirectionProps = {
 
 export const Text: Component<TextProps> = (props) => {
   props = mergeProps({ as: "span", dir: "auto" }, props);
-  const [, rest] = splitProps(props, ["as", "dir", "children"])
+  const [, rest] = splitProps(props, ["as", "dir", "children"]);
   const context = useContext(TextDirectionContext);
   const textProps = {} as { dir?: Directions };
   const childs = children(() => props.children);
@@ -115,7 +114,11 @@ export type TextProps = {
 } & JSX.HTMLAttributes<HTMLElement>;
 
 function getTextFromChildren(children: JSX.Element) {
-  if (typeof children === "string" || children === undefined || children === null) {
+  if (
+    typeof children === "string" ||
+    children === undefined ||
+    children === null
+  ) {
     return children?.toString();
   }
 

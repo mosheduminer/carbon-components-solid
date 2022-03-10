@@ -56,7 +56,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
     "size",
   ]);
   props = mergeProps(
-    { onKeyDown: () => { }, selectorPrimaryFocus: "[data-modal-primary-focus]" },
+    { onKeyDown: () => {}, selectorPrimaryFocus: "[data-modal-primary-focus]" },
     props
   );
 
@@ -161,7 +161,8 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
 
   const chlds = children(() => props.children);
   let ariaLabel: string | undefined;
-  const childrenWithProps = mapArray(chlds as () => ((() => JSX.FunctionElement) | JSX.Element)[],
+  const childrenWithProps = mapArray(
+    chlds as () => ((() => JSX.FunctionElement) | JSX.Element)[],
     (el) => {
       if (typeof el === "function") {
         const ret = (el as (props: any) => JSX.FunctionElement)({
@@ -176,7 +177,8 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
       } else {
         return el;
       }
-    });
+    }
+  );
 
   return (
     <div
@@ -257,7 +259,7 @@ export const ModalHeader = ((props: ModalHeaderProps) => {
     "title",
     "titleClass",
   ]);
-  props = mergeProps({ iconDescription: "Close", onClick: () => { } }, props);
+  props = mergeProps({ iconDescription: "Close", onClick: () => {} }, props);
   return (innerProps: { closeModal: (e: MouseEvent) => any }) => [
     () => props.label,
     <div
@@ -375,7 +377,7 @@ export const ModalFooter = ((props: ModalFooterProps) => {
     "secondaryClass",
   ]);
   props = mergeProps(
-    { onRequestClose: () => { }, onRequestSubmit: () => { } },
+    { onRequestClose: () => {}, onRequestSubmit: () => {} },
     props
   );
 

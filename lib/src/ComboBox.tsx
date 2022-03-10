@@ -30,5 +30,5 @@ export type ComboBoxProps = {
 };
 
 export const ComboBox: Component<ComboBoxProps> = (props) => {
-  return <></>
-}
+  return <></>;
+};

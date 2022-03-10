@@ -230,7 +230,7 @@ export const MenuOption: Component<MenuOptionProps> = (props) => {
             indented={props.indented || indented?.()}
           />
           <Menu
-            level={(props.level || level?.()) as number + 1}
+            level={((props.level || level?.()) as number) + 1}
             open={submenuOpen()}
             onClose={() => setSubmenuOpen(false)}
             x={submenuPosition[0]}

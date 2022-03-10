@@ -1,6 +1,9 @@
 import type { Key } from "./keys";
 
-export function matches(event: KeyboardEvent | number | string, keysToMatch: Key[]): boolean {
+export function matches(
+  event: KeyboardEvent | number | string,
+  keysToMatch: Key[]
+): boolean {
   for (let i = 0; i < keysToMatch.length; i++) {
     if (match(event, keysToMatch[i])) {
       return true;
@@ -9,12 +12,15 @@ export function matches(event: KeyboardEvent | number | string, keysToMatch: Key
   return false;
 }
 
-export function match(eventOrCode: KeyboardEvent | number | string, { key, which, keyCode }: Partial<Key> = {}): boolean {
-  if (typeof eventOrCode === 'string') {
+export function match(
+  eventOrCode: KeyboardEvent | number | string,
+  { key, which, keyCode }: Partial<Key> = {}
+): boolean {
+  if (typeof eventOrCode === "string") {
     return eventOrCode === key;
   }
 
-  if (typeof eventOrCode === 'number') {
+  if (typeof eventOrCode === "number") {
     return eventOrCode === which || eventOrCode === keyCode;
   }
 
@@ -30,7 +36,7 @@ export function match(eventOrCode: KeyboardEvent | number | string, { key, which
 }
 
 export function getCharacterFor(eventOrCode: KeyboardEvent | number): string {
-  if (typeof eventOrCode === 'number') {
+  if (typeof eventOrCode === "number") {
     return String.fromCharCode(eventOrCode);
   }
 
