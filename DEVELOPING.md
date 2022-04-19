@@ -9,4 +9,4 @@ Use [AccordionItem](lib/src/AccordionItem.tsx) as a reference.
 + instead of `cx` from classnames, use solid's `classList`. Sometimes it will be usefull to extract the classList to a variable, if so, just remember to define it as a function (`() => {"class": true}`), so it remains reactive.
 + Don't port deprecated components, they contain `warning(didWarnAboutDeprecation,...` or something similar in the source code.
 + Use class instead of className.
-+ Use `onInput` instead of `onChange`.
++ Use `onInput` instead of `onChange` for text input elements.

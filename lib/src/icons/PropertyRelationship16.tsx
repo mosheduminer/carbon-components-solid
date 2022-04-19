@@ -1,0 +1,2 @@
+import type { JSX } from "solid-js";
+export const PropertyRelationship16 = (props: JSX.HTMLAttributes<SVGSVGElement> & {iconTitle?: string; description?: string;}) => <svg {...props} aria-label={props.description}xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor" width="16" height="16"><title>{typeof props.iconTitle === "undefined" ? props.description : props.iconTitle}</title><path d="M30 16L22 24 20.6 22.6 27.2 16 20.6 9.4 22 8zM12 15H20V17H12zM2 16L10 8 11.4 9.4 4.8 16 11.4 22.6 10 24z" /></svg>
