@@ -1,9 +1,7 @@
-import { settings } from "carbon-components";
 import { OverflowMenu } from "../OverflowMenu";
 import { Settings16 } from "../icons/Settings16";
 import { Component, mergeProps, splitProps } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type TableToolbarMenuProps = {
   /**
@@ -21,6 +19,7 @@ export type TableToolbarMenuProps = {
 };
 
 export const TableToolbarMenu: Component<TableToolbarMenuProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     {
       renderIcon: Settings16,

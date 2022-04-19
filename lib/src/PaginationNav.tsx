@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import {
   Component,
   createEffect,
@@ -16,8 +15,7 @@ import { CaretRight16 } from "./icons/CaretRight16";
 import { CaretLeft16 } from "./icons/CaretLeft16";
 import { OverflowMenuHorizontal16 } from "./icons/OverflowMenuHorizontal16";
 import { createDerivedSignal } from "./internal/derivedSignal";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 const translationIds = {
   "carbon.pagination-nav.next": "Next",
@@ -87,6 +85,7 @@ export type PaginationNavProps = {
 };
 
 export const PaginationNav: Component<PaginationNavProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps({ translateWithId }, props);
   const [, rest] = splitProps(props, [
     "children",
@@ -307,6 +306,7 @@ type PaginationOverflowProps = {
 };
 
 const PaginationOverflow: Component<PaginationOverflowProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps({ translateWithId }, props);
   return (
     <Switch>
@@ -368,6 +368,7 @@ type PaginationItemProps = {
 };
 
 const PaginationItem: Component<PaginationItemProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps({ translateWithId }, props);
   const itemLabel = props.translateWithId("carbon.pagination-nav.item");
 
@@ -404,6 +405,7 @@ type DirectionButtonProps = {
 };
 
 const DirectionButton: Component<DirectionButtonProps> = (props) => {
+  const prefix = usePrefix();
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
       <Button

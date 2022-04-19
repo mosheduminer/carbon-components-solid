@@ -233,8 +233,8 @@ const TabList: Component<TabListProps> = (props) => {
         <For
           each={
             Array.isArray(childs())
-              ? (childs() as Function[])
-              : [childs() as Function]
+              ? (childs() as unknown as Function[])
+              : [childs() as unknown as Function]
           }
         >
           {(child, index) => {
@@ -362,8 +362,8 @@ const TabPanels: Component = (props) => {
     <For
       each={
         Array.isArray(childs())
-          ? (childs() as Function[])
-          : [childs() as Function]
+          ? (childs() as unknown as Function[])
+          : [childs() as unknown as Function]
       }
     >
       {(child, index) => {

@@ -1,8 +1,6 @@
-import { settings } from "carbon-components";
 import { Component, splitProps } from "solid-js";
 import type { JSX } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type TableContainerProps = {
   class?: string;
@@ -25,6 +23,7 @@ export type TableContainerProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const TableContainer: Component<TableContainerProps> = (props) => {
+  const prefix = usePrefix();
   const [, rest] = splitProps(props, [
     "class",
     "children",

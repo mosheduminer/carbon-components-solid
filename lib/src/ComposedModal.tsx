@@ -120,6 +120,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
         currentActiveNode: currentActiveNode as Element,
         oldActiveNode: oldActiveNode as Element,
         selectorsFloatingMenus: selectorsFloatingMenus!,
+        prefix,
       });
     }
   };
@@ -139,7 +140,7 @@ export const ComposedModal: Component<ComposedModalProps> = (props) => {
     props.onKeyDown!,
   ]);
 
-  createEffect<boolean>((prev) => {
+  createEffect<boolean | undefined>((prev) => {
     const current = open();
     if (!prev && current) {
       beingOpen = true;

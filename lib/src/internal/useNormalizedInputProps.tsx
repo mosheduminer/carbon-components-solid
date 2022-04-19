@@ -6,9 +6,6 @@ import { Component, createMemo, JSX } from "solid-js";
 import { EditOff16 } from "../icons/EditOff16";
 import { WarningAltFilled16 } from "../icons/WarningAltFilled16";
 import { WarningFilled16 } from "../icons/WarningFilled16";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
 
 export function useNormalizedInputProps(props: {
   id: string;
@@ -18,7 +15,7 @@ export function useNormalizedInputProps(props: {
   invalidText?: JSX.Element;
   warn?: boolean;
   warnText?: JSX.Element;
-}) {
+}, prefix: string) {
   return createMemo(() => {
     const normalizedProps: {
       disabled: boolean | undefined;

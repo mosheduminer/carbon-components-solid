@@ -1,7 +1,5 @@
-import { settings } from "carbon-components";
 import { Component, mergeProps, Show, splitProps } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type TableProps = {
   class?: string;
@@ -43,6 +41,7 @@ export type TableProps = {
 };
 
 export const Table: Component<TableProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     {
       isSortable: false,

@@ -2,15 +2,12 @@ import { Component, JSX, mergeProps, splitProps } from "solid-js";
 import keys from "./internal/keyboard/keys";
 import { match } from "./internal/keyboard/match";
 
-import { settings } from "carbon-components";
 import { createId } from "./internal/id";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type ToggleProps = {
   "aria-label"?: string;
   class: string;
-  defaultToggled?: boolean;
   id: string;
   labelA?: JSX.Element;
   labelB?: JSX.Element;
@@ -22,12 +19,12 @@ export type ToggleProps = {
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
 export const Toggle: Component<ToggleProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLInputElement>;
   [props, rest] = splitProps(props, [
     "aria-label",
     "children",
     "class",
-    "defaultToggled",
     "id",
     "labelA",
     "labelB",
@@ -57,7 +54,6 @@ export const Toggle: Component<ToggleProps> = (props) => {
       {/*
       // @ts-ignore */}
       <input
-        defaultChecked={props.defaultToggled}
         {...rest}
         aria-label={undefined}
         type="checkbox"

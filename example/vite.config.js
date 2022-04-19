@@ -1,11 +1,11 @@
 import { defineConfig } from "vite";
 import solid from "solid-start";
+import staticAdapter from "solid-start-static";
 
 export default defineConfig({
-  plugins: [solid()],
+  plugins: [solid({ adapter: staticAdapter() })],
   optimizeDeps: {
     include: [
-      "carbon-components",
       "warning",
       "flatpickr",
       "flatpickr/dist/l10n/index",
@@ -16,5 +16,17 @@ export default defineConfig({
       "lodash.isequal",
     ],
   },
-  ssr: { noExternal: ['solid-js'] },
+  ssr: {
+    noExternal: [
+      "solid-js",
+      "warning",
+      "flatpickr",
+      "flatpickr/dist/l10n/index",
+      "flatpickr/dist/plugins/rangePlugin",
+      "copy-to-clipboard",
+      "lodash.debounce",
+      "lodash.findlast",
+      "lodash.isequal",
+    ],
+  },
 });

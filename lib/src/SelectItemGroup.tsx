@@ -1,7 +1,5 @@
-import { settings } from "carbon-components";
 import { Component, JSX, splitProps, mergeProps } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type SelectItemGroupProps = {
   class?: string;
@@ -10,6 +8,7 @@ export type SelectItemGroupProps = {
 } & JSX.OptgroupHTMLAttributes<HTMLOptGroupElement>;
 
 export const SelectItemGroup: Component<SelectItemGroupProps> = (props) => {
+  const prefix = usePrefix();
   let other: JSX.OptgroupHTMLAttributes<HTMLOptGroupElement>;
   [props, other] = splitProps(props, [
     "class",

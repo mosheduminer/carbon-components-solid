@@ -1,8 +1,7 @@
 import { Form } from "../src/Form";
 import { render, fireEvent } from "solid-testing-library";
-import { settings } from "carbon-components";
 
-const { prefix } = settings;
+const prefix = "cds";
 
 describe("Form", () => {
   describe("Renders as expected", () => {

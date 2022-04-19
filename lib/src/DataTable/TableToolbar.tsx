@@ -1,7 +1,5 @@
-import { settings } from "carbon-components";
 import { mergeProps, splitProps, Component } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type TableToolbarProps = {
   /**
@@ -17,6 +15,7 @@ export type TableToolbarProps = {
 };
 
 export const TableToolbar: Component<TableToolbarProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     {
       "aria-label": "data table toolbar",

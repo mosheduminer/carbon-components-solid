@@ -1,7 +1,5 @@
 import { Component, JSX, splitProps } from "solid-js";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type BreadcrumbProps = {
   "aria-label"?: string;
@@ -11,6 +9,7 @@ export type BreadcrumbProps = {
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const Breadcrumb: Component<BreadcrumbProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLElement>;
   [props, rest] = splitProps(props, [
     "class",

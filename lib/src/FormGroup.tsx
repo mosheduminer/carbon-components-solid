@@ -1,7 +1,5 @@
-import { settings } from "carbon-components";
 import { Component, JSX, mergeProps, splitProps } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type FormGroupProps = {
   class?: string;
@@ -14,6 +12,7 @@ export type FormGroupProps = {
 } & JSX.HTMLAttributes<HTMLFieldSetElement>;
 
 export const FormGroup: Component<FormGroupProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLFieldSetElement>;
   [props, rest] = splitProps(props, [
     "class",

@@ -14,10 +14,6 @@ $css--plex: true;
 //@import 'carbon-components/scss/globals/scss/_css--body.scss';
 
 // Optionally include the grid
-@import "carbon-components/scss/globals/grid/_grid.scss";
+@use "carbon-components/scss/grid";
 
-// Optionally include components that you need
-// @import 'carbon-components/scss/components/loading/loading';
-// @import 'carbon-components/scss/components/accordion/accordion';
-
-@import "carbon-components/scss/globals/scss/styles.scss";
+@use "carbon-components";

@@ -1,12 +1,13 @@
 // @refresh reload
-import { Links, Meta, Routes, Scripts } from "solid-start/components";
+import { Links, Meta, Routes, Scripts } from "solid-start/root";
+import { ErrorBoundary } from "solid-start/error-boundary";
 import { useNavigate } from "solid-app-router";
 import Selector from "~/components/Selector";
 import "./styles.css";
 
 const components = [
   "Accordion",
-  "Breadcrumb",
+  // "Breadcrumb",
   "Button",
   "Checkbox",
   "ComposedModal",
@@ -16,7 +17,7 @@ const components = [
   "ProgressBar",
   "Select",
   "StructuredList",
-  "Tabs",
+  // "Tabs",
   "Tag",
   "UIShell",
 ];
@@ -32,17 +33,16 @@ export default function Root() {
         <Links />
       </head>
       <body>
-        <Selector
-          list={components}
-          callback={(data) => navigator(data.name)}
-        />
-        <div style="display: flex; justify-content: center;">
-          <div style="width: 80%; padding-top: 24px;">
-            <Routes />
-            <Scripts />
+        <Selector list={components} callback={(data) => navigator(data.name)} />
+        <ErrorBoundary>
+          <div style="display: flex; justify-content: center;">
+            <div style="width: 80%; padding-top: 24px;">
+              <Routes />
+              <Scripts />
+            </div>
           </div>
-        </div>
+        </ErrorBoundary>
       </body>
     </html>
   );
-};
+}

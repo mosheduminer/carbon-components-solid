@@ -1,8 +1,6 @@
 import { Component, JSX, splitProps, mergeProps } from "solid-js";
-import { settings } from "carbon-components";
 import { createId } from "./internal/id";
 import { usePrefix } from "./internal/usePrefix";
-const { prefix } = settings;
 
 export type CheckboxProps = {
   checked?: boolean;

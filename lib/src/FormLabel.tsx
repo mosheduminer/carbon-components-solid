@@ -1,7 +1,5 @@
 import { Component, JSX, splitProps } from "solid-js";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type FormLabelProps = {
   id?: string;
@@ -9,6 +7,7 @@ export type FormLabelProps = {
 } & JSX.HTMLAttributes<HTMLLabelElement>;
 
 export const FormLabel: Component<FormLabelProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLLabelElement>;
   [props, rest] = splitProps(props, ["class", "children", "id"]);
   return (

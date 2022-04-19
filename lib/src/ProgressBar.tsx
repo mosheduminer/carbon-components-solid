@@ -1,8 +1,6 @@
-import { settings } from "carbon-components";
 import { Component } from "solid-js";
 import { uniqueId } from "./internal/id";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type ProgressBarProps = {
   class?: string;
@@ -14,6 +12,7 @@ export type ProgressBarProps = {
 };
 
 export const ProgressBar: Component<ProgressBarProps> = (props) => {
+  const prefix = usePrefix();
   const labelId = uniqueId("progress-bar");
   const helperId = uniqueId("progress-bar-helper");
 

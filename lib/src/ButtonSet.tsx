@@ -1,7 +1,5 @@
 import { Component, JSX, splitProps } from "solid-js";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type ButtonSetProps = {
   stacked?: boolean;
@@ -9,8 +7,8 @@ export type ButtonSetProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const ButtonSet: Component<ButtonSetProps> = (props) => {
-  let rest: JSX.HTMLAttributes<HTMLDivElement>;
-  [props, rest] = splitProps(props, ["stacked", "children", "class", "ref"]);
+  const prefix = usePrefix();
+  const [, rest] = splitProps(props, ["stacked", "children", "class", "ref"]);
   return (
     <div
       classList={{

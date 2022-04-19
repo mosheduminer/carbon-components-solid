@@ -1,8 +1,6 @@
 import { Component, JSX, mergeProps, splitProps } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type ContentProps = {
   class?: string;
@@ -12,6 +10,7 @@ export type ContentProps = {
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const Content: Component<ContentProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps({ component: "main" }, props);
   const [, rest] = splitProps(props, ["class", "component"]);
   return (

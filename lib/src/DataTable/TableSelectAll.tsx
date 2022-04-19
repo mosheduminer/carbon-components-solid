@@ -1,8 +1,6 @@
-import { settings } from "carbon-components";
 import { Component, JSX, mergeProps } from "solid-js";
 import { InlineCheckbox } from "../InlineCheckbox";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type TableSelectAllProps = {
   /**
@@ -40,6 +38,7 @@ export type TableSelectAllProps = {
 };
 
 export const TableSelectAll: Component<TableSelectAllProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     {
       "aria-label": "Select all rows in the table",

@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import keys from "../internal/keyboard/keys";
 import { match } from "../internal/keyboard/match";
 
@@ -28,8 +27,7 @@ import {
 } from "solid-js";
 import { Portal } from "solid-js/web";
 import { callEventHandlerUnion } from "../internal/callEventHandlerUnion";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 const margin = 16; // distance to keep to body edges, in px
 const defaultSize = "sm";
@@ -74,6 +72,7 @@ export type MenuProps = {
 } & JSX.HTMLAttributes<HTMLUListElement>;
 
 export const Menu: Component<MenuProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     {
       level: 1,
@@ -140,7 +139,7 @@ export const Menu: Component<MenuProps> = (props) => {
 
     if (!isRootMenu()) {
       const { width: parentWidth } =
-        getParentMenu(rootRef)?.getBoundingClientRect()!;
+        getParentMenu(rootRef, prefix)?.getBoundingClientRect()!;
 
       targetBoundaries[2] -= parentWidth;
     }
@@ -211,14 +210,14 @@ export const Menu: Component<MenuProps> = (props) => {
       const currentNode = event.target as HTMLElement;
 
       if (match(event, keys.ArrowUp)) {
-        nodeToFocus = getNextNode(currentNode, -1);
+        nodeToFocus = getNextNode(currentNode, -1, prefix);
       } else if (match(event, keys.ArrowDown)) {
-        nodeToFocus = getNextNode(currentNode, 1);
+        nodeToFocus = getNextNode(currentNode, 1, prefix);
       } else if (match(event, keys.ArrowLeft)) {
-        nodeToFocus = getParentNode(currentNode);
+        nodeToFocus = getParentNode(currentNode, prefix);
       }
     } else if (event.target.tagName === "UL") {
-      const validNodes = getValidNodes(event.target as HTMLElement);
+      const validNodes = getValidNodes(event.target as HTMLElement, prefix);
 
       if (validNodes.length > 0 && match(event, keys.ArrowUp)) {
         nodeToFocus = validNodes[validNodes.length - 1];
@@ -238,7 +237,7 @@ export const Menu: Component<MenuProps> = (props) => {
       target: Element;
     }
   ) {
-    if (!clickedElementHasSubnodes(event) && event.target.tagName !== "UL") {
+    if (!clickedElementHasSubnodes(event, prefix) && event.target.tagName !== "UL") {
       close(event.type);
     } else {
       event.stopPropagation();
@@ -282,7 +281,7 @@ export const Menu: Component<MenuProps> = (props) => {
           if (isRootMenu()) {
             rootRef.focus();
           } else {
-            const parentMenu = getParentMenu(rootRef);
+            const parentMenu = getParentMenu(rootRef, prefix);
 
             if (parentMenu) {
               localDirection = Number(

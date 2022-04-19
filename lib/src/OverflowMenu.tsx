@@ -1,11 +1,11 @@
 import { Component, createSignal, mergeProps, splitProps, JSX } from "solid-js";
-import { settings } from "carbon-components";
 import { OverflowMenuVertical16 } from "./icons/OverflowMenuVertical16";
 import { uniqueId } from "./internal/id";
 import { Menu } from "./Menu";
 import keys from "./internal/keyboard/keys";
 import { matches as keyCodeMatches } from "./internal/keyboard/match";
 import { Dynamic } from "solid-js/web";
+import { usePrefix } from "./internal/usePrefix";
 
 export type OverflowMenuProps = {
   /**
@@ -18,11 +18,10 @@ export type OverflowMenuProps = {
   size?: "sm" | "md" | "lg";
 } & JSX.HTMLAttributes<HTMLButtonElement>;
 
-const { prefix } = settings;
-
 const defaultSize = "md";
 
 export const OverflowMenu: Component<OverflowMenuProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     { renderIcon: OverflowMenuVertical16, size: defaultSize },
     props

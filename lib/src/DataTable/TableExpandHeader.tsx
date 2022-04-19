@@ -1,8 +1,6 @@
 import { ChevronRight16 } from "../icons/ChevronRight16";
-import { settings } from "carbon-components";
 import { splitProps, Component, JSX } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type TableExpandHeaderProps = {
   /**
@@ -31,6 +29,7 @@ export type TableExpandHeaderProps = {
 };
 
 export const TableExpandHeader: Component<TableExpandHeaderProps> = (props) => {
+  const prefix = usePrefix();
   const [, rest] = splitProps(props, [
     "ariaLabel",
     "class",

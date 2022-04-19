@@ -1,10 +1,8 @@
-import { settings } from "carbon-components";
 import { Button } from "../Button";
 import { TableActionList } from "./TableActionList";
 import { Text } from "../Text";
 import { Component, createSignal, JSX, mergeProps, splitProps } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export const translationKeys = {
   "carbon.table.batch.cancel": "Cancel",
@@ -34,6 +32,7 @@ export type TableBatchActionsProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const TableBatchActions: Component<TableBatchActionsProps> = (props) => {
+  const prefix = usePrefix();
   const [isScrolling, setIsScrolling] = createSignal(false);
   props = mergeProps({ translateWithId }, props);
   const [, rest] = splitProps(props, [

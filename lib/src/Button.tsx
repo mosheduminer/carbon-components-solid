@@ -11,12 +11,10 @@ import {
 import { matches } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
 import { ButtonKindsType } from "./types";
-import { settings } from "carbon-components";
 import { composeEventHandlers } from "./internal/events";
 import { Dynamic } from "solid-js/web";
 import { createId } from "./internal/id";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type ButtonProps = {
   dangerDescription?: string;
@@ -45,18 +43,22 @@ const dangerButtonVariants = ["danger", "danger--tertiary", "danger--ghost"];
 const buttonImage = (
   renderIcon?: Component<{ class?: string }>,
   iconDescription?: string
-) => (
-  <Show when={renderIcon}>
-    <Dynamic
-      component={renderIcon}
-      aria-label={iconDescription}
-      class={`${prefix}--btn__icon`}
-      aria-hidden="true"
-    />
-  </Show>
-);
+) => {
+  const prefix = usePrefix();
+  return (
+    <Show when={renderIcon}>
+      <Dynamic
+        component={renderIcon}
+        aria-label={iconDescription}
+        class={`${prefix}--btn__icon`}
+        aria-hidden="true"
+      />
+    </Show>
+  );
+};
 
 export const Button: Component<ButtonProps> = (props) => {
+  const prefix = usePrefix();
   let rest: Omit<JSX.HTMLAttributes<HTMLElement>, "ref">;
   [props, rest] = splitProps(props, [
     "children",

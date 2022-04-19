@@ -1,7 +1,5 @@
-import { settings } from "carbon-components";
-import { Component, JSX, mergeProps } from "solid-js";
-
-const { prefix } = settings;
+import { Component, mergeProps } from "solid-js";
+import { usePrefix } from "../internal/usePrefix";
 
 export type HeaderSideNavItemsProps = {
   class?: string;
@@ -11,6 +9,7 @@ export type HeaderSideNavItemsProps = {
 export const HeaderSideNavItems: Component<HeaderSideNavItemsProps> = (
   props
 ) => {
+  const prefix = usePrefix();
   props = mergeProps({ hasDivider: false }, props);
   return (
     <div

@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import { ArrowsVertical20 as Arrows } from "../icons/ArrowsVertical20";
 import { ArrowUp20 as Arrow } from "../icons/ArrowUp20";
 import { sortStates } from "./sorting";
@@ -6,14 +5,12 @@ import { uniqueId as createUniqueId } from "../internal/id";
 import {
   children,
   Component,
-  createEffect,
   JSX,
   mergeProps,
   Show,
   splitProps,
 } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export const translationKeys = {
   buttonDescription: "carbon.table.header.icon.description",
@@ -104,6 +101,7 @@ export type TableHeaderProps = {
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const TableHeader: Component<TableHeaderProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     {
       isSortable: false,

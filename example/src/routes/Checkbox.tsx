@@ -1,7 +1,6 @@
 import { Checkbox } from "carbon-components-solid";
-import { settings } from "carbon-components";
 
-const { prefix } = settings;
+const prefix = "cds";
 
 export default function () {
   return (

@@ -1,8 +1,6 @@
-import { settings } from "carbon-components";
 import { Component, JSX, splitProps } from "solid-js";
 import { Button } from "../Button";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type HeaderGlobalActionProps = {
   children: JSX.Element;
@@ -26,6 +24,7 @@ export type HeaderGlobalActionProps = {
 export const HeaderGlobalAction: Component<HeaderGlobalActionProps> = (
   props
 ) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLButtonElement>;
   [props, rest] = splitProps(props, [
     "aria-label",

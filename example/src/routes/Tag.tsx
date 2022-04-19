@@ -6,13 +6,13 @@ const props = {
     return {
       title: "Clear Filter",
       type: "gray" as const,
-    }
+    };
   },
   get filter() {
     return {
       ...this.regular,
-      onClick: () => { },
-      onClose: () => { },
+      onClick: () => {},
+      onClose: () => {},
     };
   },
   get icon() {
@@ -27,14 +27,12 @@ export default function () {
   return (
     <>
       <div>
-        <>
-          <Tag class="some-class" {...props.regular}>
-            This is a tag
-          </Tag>
-          <Tag class="some-class" {...props.regular} onClick={() => { }}>
-            This is an interactive tag
-          </Tag>
-        </>
+        <Tag class="some-class" {...props.regular}>
+          This is a tag
+        </Tag>
+        <Tag class="some-class" {...props.regular} onClick={() => {}}>
+          This is an interactive tag
+        </Tag>
       </div>
       <div>
         <Tag class="some-class" {...props.filter} filter>

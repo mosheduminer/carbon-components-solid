@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import {
   Component,
   createEffect,
@@ -9,9 +8,9 @@ import {
   splitProps,
 } from "solid-js";
 import { callEventHandlerUnion } from "../internal/callEventHandlerUnion";
+import { usePrefix } from "../internal/usePrefix";
 import { Search } from "../Search";
 
-const { prefix } = settings;
 const translationKeys = {
   "carbon.table.toolbar.search.label": "Filter table",
   "carbon.table.toolbar.search.placeholder": "Filter table",
@@ -122,6 +121,7 @@ export type TableToolbarSearchProps = {
 export const TableToolbarSearch: Component<TableToolbarSearchProps> = (
   props
 ) => {
+  const prefix = usePrefix();
   const [, rest] = splitProps(props, [
     "class",
     "searchContainerClass",

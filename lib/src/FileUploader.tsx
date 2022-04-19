@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import {
   Component,
   createEffect,
@@ -19,8 +18,7 @@ import { createId, uniqueId } from "./internal/id";
 import keys from "./internal/keyboard/keys";
 import { matches } from "./internal/keyboard/match";
 import { ButtonKindsType } from "./types";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type FileUploaderDropContainerProps = {
   accept?: string[];
@@ -44,6 +42,7 @@ export type FileUploaderDropContainerProps = {
 
 export const FileUploaderDropContainer: Component<FileUploaderDropContainerProps> =
   (props) => {
+    const prefix = usePrefix();
     let rest: JSX.HTMLAttributes<HTMLLabelElement>;
     [props, rest] = splitProps(props, [
       "accept",
@@ -203,8 +202,8 @@ export type FileUploaderButtonProps = {
 export const FileUploaderButton: Component<FileUploaderButtonProps> = (
   props
 ) => {
-  let rest!: JSX.HTMLAttributes<HTMLLabelElement>;
-  splitProps(props, [
+  const prefix = usePrefix();
+  const [, rest] = splitProps(props, [
     "accept",
     "buttonKind",
     "children",
@@ -319,6 +318,7 @@ export type FilenameProps = {
 } & (JSX.HTMLAttributes<HTMLButtonElement> | JSX.HTMLAttributes<SVGSVGElement>);
 
 export const Filename: Component<FilenameProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLElement> | JSX.HTMLAttributes<SVGSVGElement>;
   //@ts-ignore
   [props, rest] = splitProps(props, [
@@ -388,6 +388,7 @@ export type FileUploaderItemProps = {
 } & JSX.HTMLAttributes<HTMLSpanElement>;
 
 export const FileUploaderItem: Component<FileUploaderItemProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLSpanElement>;
   [props, rest] = splitProps(props, [
     "errorBody",
@@ -475,6 +476,7 @@ export type FileUploaderProps = {
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const FileUploader: Component<FileUploaderProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLElement>;
   [props, rest] = splitProps(props, [
     "accept",

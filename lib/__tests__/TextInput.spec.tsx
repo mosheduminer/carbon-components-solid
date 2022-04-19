@@ -1,15 +1,13 @@
 import { TextInput } from "../src/TextInput";
 import { render } from "solid-testing-library";
 import { fireEvent } from "@testing-library/dom";
-import { settings } from "carbon-components";
 import {
   createComponent,
-  createEffect,
   createSignal,
   mergeProps,
 } from "solid-js";
 
-const { prefix } = settings;
+const prefix = "cds";
 
 const getContainer = (props: () => { [key: string]: any } = () => ({})) =>
   render(() => {

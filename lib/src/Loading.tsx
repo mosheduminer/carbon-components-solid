@@ -1,8 +1,6 @@
 import { Component, JSX, splitProps, mergeProps } from "solid-js";
-import { settings } from "carbon-components";
 import { createId } from "./internal/id";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type LoadingProps = {
   active?: boolean;
@@ -14,6 +12,7 @@ export type LoadingProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const Loading: Component<LoadingProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLDivElement>;
   [props, rest] = splitProps(props, [
     "active",

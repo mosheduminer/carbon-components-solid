@@ -1,7 +1,6 @@
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export function MenuDivider() {
-  return <li role="separator" className={`${prefix}--menu-divider`} />;
+  const prefix = usePrefix();
+  return <li role="separator" class={`${prefix}--menu-divider`} />;
 }

@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import {
   Component,
   JSX,
@@ -8,8 +7,7 @@ import {
   Switch,
   Match,
 } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 const randoms = [0.973051493507435, 0.15334737213558558, 0.5671034553053769];
 
@@ -26,6 +24,7 @@ export interface SkeletonTextProps {
 }
 
 export const SkeletonText: Component<SkeletonTextProps> = (allProps) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLParagraphElement>;
   [allProps, rest] = splitProps(allProps, [
     "paragraph",

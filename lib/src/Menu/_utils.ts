@@ -1,7 +1,3 @@
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
-
 export function resetFocus(el: HTMLElement) {
   if (el) {
     Array.from(el.querySelectorAll('[tabindex="0"]') ?? []).forEach((node) => {
@@ -17,7 +13,7 @@ export function focusNode(node: HTMLElement | null) {
   }
 }
 
-export function getValidNodes(list: HTMLElement) {
+export function getValidNodes(list: HTMLElement, prefix: string) {
   const { level } = list.dataset;
 
   let nodes: Element[] = [];
@@ -36,9 +32,9 @@ export function getValidNodes(list: HTMLElement) {
   );
 }
 
-export function getNextNode(current: HTMLElement, direction: number) {
-  const menu = getParentMenu(current) as HTMLElement;
-  const nodes = getValidNodes(menu);
+export function getNextNode(current: HTMLElement, direction: number, prefix: string) {
+  const menu = getParentMenu(current, prefix) as HTMLElement;
+  const nodes = getValidNodes(menu, prefix);
   const currentIndex = nodes.indexOf(current);
 
   const nextNode = nodes[currentIndex + direction];
@@ -46,11 +42,11 @@ export function getNextNode(current: HTMLElement, direction: number) {
   return nextNode || null;
 }
 
-export function getFirstSubNode(node: Element) {
+export function getFirstSubNode(node: Element, prefix: string) {
   const submenu = node.querySelector(`ul.${prefix}--menu`) as HTMLElement;
 
   if (submenu) {
-    const subnodes = getValidNodes(submenu);
+    const subnodes = getValidNodes(submenu, prefix);
 
     return subnodes[0] || null;
   }
@@ -58,7 +54,7 @@ export function getFirstSubNode(node: Element) {
   return null;
 }
 
-export function getParentNode(node: Node) {
+export function getParentNode(node: Node, prefix: string) {
   if (node) {
     const parentNode = (node.parentNode as Element).closest(
       `li.${prefix}--menu-option`
@@ -82,7 +78,7 @@ export function getSubMenuOffset(node: HTMLElement) {
   return 0;
 }
 
-export function getParentMenu(el: HTMLElement) {
+export function getParentMenu(el: HTMLElement, prefix: string) {
   if (el) {
     const parentMenu = (el.parentNode as HTMLElement).closest(
       `ul.${prefix}--menu`
@@ -94,13 +90,13 @@ export function getParentMenu(el: HTMLElement) {
   return null;
 }
 
-export function clickedElementHasSubnodes(e: Event) {
+export function clickedElementHasSubnodes(e: Event, prefix: string) {
   if (e) {
     const closestFocusableElement = (e.target as HTMLElement).closest(
       "[tabindex]"
     );
     if (closestFocusableElement?.tagName === "LI") {
-      return getFirstSubNode(closestFocusableElement) !== null;
+      return getFirstSubNode(closestFocusableElement, prefix) !== null;
     }
   }
 

@@ -1,8 +1,7 @@
 import { FormGroup } from "../src/FormGroup";
 import { render } from "solid-testing-library";
-import { settings } from "carbon-components";
 
-const { prefix } = settings;
+const prefix = "cds";
 
 describe("FormGroup", () => {
   describe("Renders as expected", () => {

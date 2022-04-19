@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import { CaretRight16 } from "../icons/CaretRight16";
 import keys from "../internal/keyboard/keys";
 import { match } from "../internal/keyboard/match";
@@ -22,8 +21,7 @@ import {
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { callEventHandlerUnion } from "../internal/callEventHandlerUnion";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 const hoverIntentDelay = 150; // in ms
 
@@ -51,6 +49,7 @@ export type MenuOptionContentProps = {
 };
 
 function MenuOptionContent(props: MenuOptionContentProps) {
+  const prefix = usePrefix()
   return (
     <div
       classList={{
@@ -113,6 +112,7 @@ export type MenuOptionProps = {
 } & JSX.HTMLAttributes<HTMLLIElement>;
 
 export const MenuOption: Component<MenuOptionProps> = (props) => {
+  const prefix = usePrefix();
   const [, rest] = splitProps(props, [
     "children",
     "disabled",
@@ -155,7 +155,7 @@ export const MenuOption: Component<MenuOptionProps> = (props) => {
 
   function handleMouseEnter() {
     if (childs())
-      hoverIntentTimeout = setTimeout(openSubmenu, hoverIntentDelay);
+      hoverIntentTimeout = setTimeout(openSubmenu, hoverIntentDelay) as unknown as number;
   }
 
   function handleMouseLeave() {

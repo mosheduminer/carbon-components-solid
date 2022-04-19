@@ -6,12 +6,10 @@ import {
   splitProps,
   useContext,
 } from "solid-js";
-import { settings } from "carbon-components";
+import { usePrefix } from "./internal/usePrefix";
 //import { useFeatureFlag } from '../FeatureFlags';
 
 const useFeatureFlag = (arg: string) => ({ cssGrid: false });
-
-const { prefix } = settings;
 
 const SubgridContext = createContext(false);
 
@@ -24,6 +22,7 @@ export type GridProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const Grid: Component<GridProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLDivElement>;
   [props, rest] = splitProps(props, [
     "children",

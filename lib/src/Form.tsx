@@ -1,13 +1,12 @@
 import { Component, JSX, splitProps } from "solid-js";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type FormProps = {
   class?: string;
 } & JSX.HTMLAttributes<HTMLFormElement>;
 
 export const Form: Component<FormProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLFormElement>;
   [props, rest] = splitProps(props, ["class", "children"]);
   return (

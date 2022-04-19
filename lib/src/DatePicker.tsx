@@ -12,7 +12,6 @@ import {
 } from "solid-js";
 import flatpickr from "flatpickr";
 import l10n from "flatpickr/dist/l10n/index";
-import { settings } from "carbon-components";
 import { DatePickerInputProps } from "./DatePickerInput";
 import carbonFlatpickrAppendToPlugin from "./plugins/appendToPlugin";
 import carbonFlatpickrFixEventsPlugin from "./plugins/fixEventsPlugin";
@@ -25,8 +24,7 @@ import { WarningAltFilled16 } from "./icons/WarningAltFilled16";
 import { Calendar16 } from "./icons/Calendar16";
 import { WarningFilled16 } from "./icons/WarningFilled16";
 import { Hook } from "flatpickr/dist/types/options";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((day, index) => {
@@ -126,6 +124,7 @@ const carbonFlatpickrMonthSelectPlugin =
   };
 
 const updateClassNames = (calendar: Instance) => {
+  const prefix = usePrefix();
   const calendarContainer = calendar.calendarContainer;
   const daysContainer = calendar.days;
   if (calendarContainer && daysContainer) {
@@ -203,6 +202,7 @@ export type DatePickerProps = {
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
 export const DatePicker: Component<DatePickerProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLDivElement>;
   [props, rest] = splitProps(props, [
     "allowInput",

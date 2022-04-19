@@ -1,4 +1,4 @@
-import { Component, createComputed, createSignal, For } from "solid-js";
+import { Component, createComputed, createSignal, For, onMount } from "solid-js";
 import {
   ContentSwitch,
   ContentSwitcher,
@@ -17,8 +17,13 @@ const Selector: Component<{
     const path = fullpath[(props.index || 0)];
     setIndex(props.list.findIndex(val => val === path));  
   })
+  // Ugly hack to work around SSR issue right now.
+  const [trigger, setTrigger] = createSignal(undefined, {equals: false});
+  onMount(() => {
+    setTimeout(setTrigger, 10)
+  })
   return (
-    <ContentSwitcher selectedIndex={index()} onChange={props.callback}>
+    () => trigger() || <ContentSwitcher selectedIndex={index()} onChange={props.callback}>
       <For each={props.list}>
         {(item) => {
           return <ContentSwitch name={item} text={item} />;

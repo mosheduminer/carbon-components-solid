@@ -1,4 +1,3 @@
-import { settings } from "carbon-components";
 import {
   Component,
   createSignal,
@@ -13,8 +12,7 @@ import keys from "./internal/keyboard/keys";
 import { matches } from "./internal/keyboard/match";
 import { getNextIndex } from "./internal/keyboard/navigation";
 import { composeEventHandlers } from "./internal/events";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type ContentSwitcherOnChangeArgs = {
   index: number;
@@ -32,6 +30,7 @@ export type ContentSwitcherProps = {
 };
 
 export const ContentSwitcher: Component<ContentSwitcherProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLDivElement>;
   [props, rest] = splitProps(props, [
     "children",

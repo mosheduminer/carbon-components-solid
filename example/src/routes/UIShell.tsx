@@ -22,7 +22,7 @@ import {
 import { Search20 } from "carbon-components-solid/icons/Search20";
 import { Notification20 } from "carbon-components-solid/icons/Notification20";
 import { Fade16 } from "carbon-components-solid/icons/Fade16";
-import { AppSwitcher20 } from "carbon-components-solid/icons/AppSwitcher20";
+import { Switcher20 } from "carbon-components-solid/icons/Switcher20";
 
 export default function UIShell() {
   return (
@@ -60,7 +60,7 @@ export default function UIShell() {
                 aria-label="App Switcher"
                 tooltipAlignment="end"
               >
-                <AppSwitcher20 />
+                <Switcher20 />
               </HeaderGlobalAction>
             </HeaderGlobalBar>
             <SideNav

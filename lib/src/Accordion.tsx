@@ -1,7 +1,6 @@
 import { Component, For, mergeProps, JSX } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { settings } from "carbon-components";
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type AccordionProps = {
   align?: "start" | "end";
@@ -12,6 +11,7 @@ export type AccordionProps = {
 
 export const Accordion: Component<AccordionProps> = (props) => {
   props = mergeProps({ align: "end" }, props);
+  const prefix = usePrefix();
 
   return (
     <ul

@@ -1,6 +1,5 @@
 import { Search16 } from "./icons/Search16";
 import { Close16 } from "./icons/Close16";
-import { settings } from "carbon-components";
 import { composeEventHandlers } from "./internal/events";
 import keys from "./internal/keyboard/keys";
 import { match } from "./internal/keyboard/match";
@@ -14,8 +13,7 @@ import {
   splitProps,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type SearchProps = {
   /**
@@ -84,6 +82,7 @@ export type SearchProps = {
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
 export const Search: Component<SearchProps> = (props) => {
+  const prefix = usePrefix();
   props = mergeProps(
     {
       type: "text",

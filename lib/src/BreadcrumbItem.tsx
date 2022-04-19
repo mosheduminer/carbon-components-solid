@@ -9,12 +9,10 @@ import {
   Show,
 } from "solid-js";
 import { Dynamic } from "solid-js/web";
-import { settings } from "carbon-components";
+import { usePrefix } from "./internal/usePrefix";
 import { OverflowMenu } from "./OverflowMenu";
 import { Link } from "./Link";
 import { OverflowMenuHorizontal16 } from "./icons/OverflowMenuHorizontal16";
-
-const { prefix } = settings;
 
 export type BreadcrumbItemProps = {
   "aria-current"?: string | boolean;
@@ -25,6 +23,7 @@ export type BreadcrumbItemProps = {
 } & JSX.HTMLAttributes<HTMLLIElement>;
 
 export const BreadcrumbItem: Component<BreadcrumbItemProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLLIElement>;
   [props, rest] = splitProps(props, [
     "aria-current",

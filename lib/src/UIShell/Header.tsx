@@ -1,7 +1,5 @@
-import { settings } from "carbon-components";
 import { Component, JSX, splitProps } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export type HeaderProps = {
   class?: string;
@@ -10,6 +8,7 @@ export type HeaderProps = {
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const Header: Component<HeaderProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLElement>;
   [props, rest] = splitProps(props, ["children", "class"]);
   if (!rest["aria-label"] && !rest["aria-labelledby"]) {

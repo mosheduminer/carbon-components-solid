@@ -106,7 +106,7 @@ export const TextInput: Component<TextInputProps> = (props) => {
     props
   );
   const prefix = usePrefix();
-  const normalizedProps = useNormalizedInputProps(props);
+  const normalizedProps = useNormalizedInputProps(props, prefix);
   const customClassName = () => props.class ?? `${prefix}--text__input`;
   const textInputClasses = () => ({
     [`${prefix}--text-input`]: true,

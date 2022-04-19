@@ -1,8 +1,6 @@
 import { Component, mergeProps, JSX, splitProps } from "solid-js";
-import { settings } from "carbon-components";
 import { Dynamic } from "solid-js/web";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type AspectRatioProps = {
   as?: Component | string;
@@ -11,6 +9,7 @@ export type AspectRatioProps = {
 } & JSX.HTMLAttributes<HTMLElement>;
 
 export const AspectRatio: Component<AspectRatioProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLElement>;
   [props, rest] = splitProps(props, ["class", "children", "as", "ratio"]);
   props = mergeProps({ as: "div", ratio: "1x1" }, props);

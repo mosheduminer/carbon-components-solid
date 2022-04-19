@@ -7,10 +7,8 @@ import {
   onCleanup,
 } from "solid-js";
 import { composeEventHandlers } from "./internal/events";
-import { settings } from "carbon-components";
 import debounce from "lodash.debounce";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type CopyProps = {
   class?: string;
@@ -22,6 +20,7 @@ export type CopyProps = {
 } & JSX.HTMLAttributes<HTMLButtonElement>;
 
 export const Copy: Component<CopyProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLButtonElement>;
   [props, rest] = splitProps(props, [
     "children",

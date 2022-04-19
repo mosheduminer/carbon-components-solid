@@ -1,9 +1,7 @@
 import { Component, splitProps, mergeProps, JSX } from "solid-js";
 import { Copy } from "./Copy";
 import { Copy16 } from "./icons/Copy16";
-import { settings } from "carbon-components";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type CopyButtonProps = {
   class?: string;
@@ -15,6 +13,7 @@ export type CopyButtonProps = {
 } & JSX.HTMLAttributes<HTMLButtonElement>;
 
 export const CopyButton: Component<CopyButtonProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLButtonElement>;
   [props, rest] = splitProps(props, [
     "class",

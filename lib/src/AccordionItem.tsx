@@ -7,12 +7,10 @@ import {
   createEffect,
   untrack,
 } from "solid-js";
-import { settings } from "carbon-components";
 import { ChevronRight16 } from "./icons/ChevronRight16";
 import { match } from "./internal/keyboard/match";
 import keys from "./internal/keyboard/keys";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type AccordionItemProps = {
   handleAnimationEnd?: JSX.EventHandler<HTMLLIElement, AnimationEvent>;
@@ -24,6 +22,7 @@ export type AccordionItemProps = {
 } & Omit<JSX.HTMLAttributes<HTMLLIElement>, "title">;
 
 export const AccordionItem: Component<AccordionItemProps> = (props) => {
+  const prefix = usePrefix();
   let rest: JSX.HTMLAttributes<HTMLLIElement>;
   [props, rest] = splitProps(props, [
     "class",

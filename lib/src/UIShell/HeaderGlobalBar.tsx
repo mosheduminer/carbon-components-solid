@@ -1,11 +1,10 @@
-import { settings } from "carbon-components";
 import { Component, JSX } from "solid-js";
-
-const { prefix } = settings;
+import { usePrefix } from "../internal/usePrefix";
 
 export const HeaderGlobalBar: Component<JSX.HTMLAttributes<HTMLDivElement>> = (
   props
 ) => {
+  const prefix = usePrefix();
   return (
     <div class={`${prefix}--header__global`} {...props}>
       {props.children}

@@ -1,10 +1,8 @@
 import { Component, splitProps, JSX, mergeProps, createMemo } from "solid-js";
-import { settings } from "carbon-components";
 import { WarningFilled16 } from "./icons/WarningFilled16";
 import { WarningAltFilled16 } from "./icons/WarningAltFilled16";
 import { ChevronDown16 } from "./icons/ChevronDown16";
-
-const { prefix } = settings;
+import { usePrefix } from "./internal/usePrefix";
 
 export type SelectProps = {
   class?: string;
@@ -26,6 +24,7 @@ export type SelectProps = {
 } & JSX.SelectHTMLAttributes<HTMLSelectElement>;
 
 export const Select: Component<SelectProps> = (props) => {
+  const prefix = usePrefix();
   let other: JSX.HTMLAttributes<HTMLSelectElement>;
   [props, other] = splitProps(props, [
     "class",
