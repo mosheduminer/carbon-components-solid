@@ -5,6 +5,7 @@
     "test": "jest",
     "format": "prettier -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"src/icons/*.ts*\""
   },
+  "private": true,
   "type": "module",
   "dependencies": {
     "lodash.debounce": "^4.0.8",
