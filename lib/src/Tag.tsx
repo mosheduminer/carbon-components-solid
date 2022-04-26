@@ -1,4 +1,11 @@
-import { children, Component, JSX, Show, splitProps } from "solid-js";
+import {
+  children,
+  Component,
+  createMemo,
+  JSX,
+  Show,
+  splitProps,
+} from "solid-js";
 import { Dynamic } from "solid-js/web";
 import { Close16 } from "./icons/Close16";
 import { callEventHandlerUnion } from "./internal/callEventHandlerUnion";
@@ -50,9 +57,10 @@ export const Tag: Component<TagProps> = (props) => {
     "type",
   ]);
   const prefix = usePrefix();
-  const tagId = () => props.id || `tag-${createId()}`;
+  const tagId = createMemo(() => props.id || `tag-${createId()}`);
   const tagClasses = () => ({
     [props.class!]: !!props.class,
+    [`${prefix}--tag`]: true,
     [`${prefix}--tag--disabled`]: props.disabled,
     [`${prefix}--tag--filter`]: props.filter,
     [`${prefix}--tag--${props.size}`]: !!props.size,
@@ -77,18 +85,17 @@ export const Tag: Component<TagProps> = (props) => {
         <Dynamic
           component={props.onClick ? "button" : "div"}
           disabled={props.onClick ? props.disabled : undefined}
-          class={`${prefix}--tag`}
           classList={tagClasses()}
           id={tagId()}
           {...rest}
         >
-          {props.renderIcon ? (
-            <div class={`${prefix}--tag__custom-icon`}>
-              <props.renderIcon />
-            </div>
-          ) : (
-            ""
-          )}
+          <Show when={props.renderIcon}>
+            {(Icon) => (
+              <div class={`${prefix}--tag__custom-icon`}>
+                <Icon />
+              </div>
+            )}
+          </Show>
           <span
             //@ts-ignore
             title={
@@ -105,7 +112,6 @@ export const Tag: Component<TagProps> = (props) => {
       {/**
       //@ts-ignore (ref property in {...rest})*/}
       <div
-        class={`${prefix}--tag`}
         classList={tagClasses()}
         aria-label={
           props.title !== undefined

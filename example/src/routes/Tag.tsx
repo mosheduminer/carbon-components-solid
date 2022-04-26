@@ -1,5 +1,7 @@
 import { Tag } from "carbon-components-solid";
 import { Tag16 } from "carbon-components-solid/icons/Tag16";
+import { Component } from "solid-js";
+import { Dynamic } from "solid-js/web";
 
 const props = {
   get regular() {
@@ -38,7 +40,7 @@ export default function () {
         <Tag class="some-class" {...props.filter} filter>
           This is a tag
         </Tag>
-        <Tag class="some-class" {...props.icon}>
+        <Tag class="some-class" {...props.icon} renderIcon={Tag16}>
           This is a tag
         </Tag>
       </div>

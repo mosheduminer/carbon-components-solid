@@ -17,13 +17,8 @@ const Selector: Component<{
     const path = fullpath[(props.index || 0)];
     setIndex(props.list.findIndex(val => val === path));  
   })
-  // Ugly hack to work around SSR issue right now.
-  const [trigger, setTrigger] = createSignal(undefined, {equals: false});
-  onMount(() => {
-    setTimeout(setTrigger, 10)
-  })
   return (
-    () => trigger() || <ContentSwitcher selectedIndex={index()} onChange={props.callback}>
+    <ContentSwitcher selectedIndex={index()} onChange={props.callback}>
       <For each={props.list}>
         {(item) => {
           return <ContentSwitch name={item} text={item} />;
