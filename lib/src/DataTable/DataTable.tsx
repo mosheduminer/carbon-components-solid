@@ -723,7 +723,7 @@ class DataTableInternal {
    */
   handleOnInputValueChange = (
     event: Event & { currentTarget: HTMLInputElement },
-    defaultValue: string
+    defaultValue?: string
   ) => {
     if (event.target) {
       this.setState({ filterInputValue: event.currentTarget.value });

@@ -164,23 +164,15 @@ const updateClassNames = (calendar: Instance) => {
   }
 };
 
-const rightArrowHTML = () => {
-  return (
-    <svg width="16px" height="16px" viewBox="0 0 16 16">
-      <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 " />
-      <rect width="16" height="16" style="fill:none" />
-    </svg>
-  );
-};
+const rightArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
+  <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
+  <rect width="16" height="16" style="fill:none" />
+</svg>`;
 
-const leftArrowHTML = () => {
-  return (
-    <svg width="16px" height="16px" viewBox="0 0 16 16">
-      <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 " />
-      <rect width="16" height="16" style="fill:none" />
-    </svg>
-  );
-};
+const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
+  <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
+  <rect width="16" height="16" style="fill:none" />
+</svg>`;
 
 export type DatePickerProps = {
   allowInput?: boolean;
@@ -199,7 +191,7 @@ export type DatePickerProps = {
   onOpen?: Hook;
   short?: boolean;
   value?: string | (string | number | Date)[] | Date | number;
-} & JSX.HTMLAttributes<HTMLDivElement>;
+} & Omit<JSX.HTMLAttributes<HTMLDivElement>, "onInput">;
 
 export const DatePicker: Component<DatePickerProps> = (props) => {
   const prefix = usePrefix();
@@ -265,7 +257,7 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
             ).focus();
           }
         });
-        element.addEventListener("change", onChange);
+        element.addEventListener("input", onChange);
       }
     };
     initArrowDownListener(inputFieldRef);
@@ -346,8 +338,8 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
             }),
           ],
           clickOpens: true,
-          nextArrow: rightArrowHTML(),
-          prevArrow: leftArrowHTML(),
+          nextArrow: rightArrowHTML,
+          prevArrow: leftArrowHTML,
           onChange: (...args) => {
             if (props.onInput) {
               props.onInput(...args);
@@ -434,10 +426,10 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
       cal.destroy();
     }
     if (inputFieldRef) {
-      inputFieldRef.removeEventListener("change", onChange);
+      inputFieldRef.removeEventListener("input", onChange);
     }
     if (toInputFieldRef) {
-      toInputFieldRef.removeEventListener("change", onChange);
+      toInputFieldRef.removeEventListener("input", onChange);
     }
   });
 
@@ -583,7 +575,7 @@ export const DatePicker: Component<DatePickerProps> = (props) => {
                 ) : (
                   <input
                     {...childRest}
-                    ref={index === 0 ? inputFieldRef : toInputFieldRef}
+                    ref={el => index === 0 ? inputFieldRef = el : toInputFieldRef = el}
                     {...datePickerInputProps}
                     disabled={childProps.disabled}
                     class={`${prefix}--date-picker__input`}

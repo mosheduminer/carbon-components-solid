@@ -32,7 +32,14 @@ export type TableSelectRowProps = {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onChange?: JSX.EventHandlerUnion<HTMLElement, Event>;
+  onChange?: (
+    value: number | string | boolean,
+    name: string | undefined,
+    evt: InputEvent & {
+      currentTarget: HTMLInputElement;
+      target: Element;
+    }
+  ) => any;
   /**
    * Provide a handler to listen to when a user initiates a selection request
    */
@@ -40,7 +47,7 @@ export type TableSelectRowProps = {
   /**
    * Specify whether the control should be a radio button or inline checkbox
    */
-  radio?: boolean;
+  radio?: boolean | null;
 };
 
 export const TableSelectRow: Component<TableSelectRowProps> = (props) => {
@@ -50,7 +57,7 @@ export const TableSelectRow: Component<TableSelectRowProps> = (props) => {
       class={`${prefix}--table-column-checkbox`}
       classList={{
         [props.class!]: !!props.class,
-        [`${prefix}--table-column-radio`]: props.radio,
+        [`${prefix}--table-column-radio`]: !!props.radio,
       }}
     >
       <Dynamic
@@ -59,7 +66,7 @@ export const TableSelectRow: Component<TableSelectRowProps> = (props) => {
         id={props.id}
         name={props.name}
         onClick={props.onSelect}
-        onChange={props.onChange}
+        onInput={props.onChange}
         checked={props.checked}
         disabled={props.disabled}
         labelText={props.radio && props["aria-label"]}

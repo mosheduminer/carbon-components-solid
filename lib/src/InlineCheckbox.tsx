@@ -35,7 +35,10 @@ export type InlineCheckboxProps = {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onInput?: (checked: boolean, id: string, event: InputEvent) => any;
+  onInput?: (checked: boolean, id: string, event: InputEvent & {
+    currentTarget: HTMLInputElement;
+    target: Element;
+  }) => any;
 
   /**
    * Provide a handler that is invoked when a user clicks on the control

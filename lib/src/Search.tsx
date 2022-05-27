@@ -169,7 +169,7 @@ export const Search: Component<SearchProps> = (props) => {
         class={`${prefix}--search-magnifier-icon`}
       />
     ) : (
-      <Search16 className={`${prefix}--search-magnifier-icon`} />
+      <Search16 class={`${prefix}--search-magnifier-icon`} />
     );
 
   return (
@@ -186,9 +186,10 @@ export const Search: Component<SearchProps> = (props) => {
         [`${prefix}--search--light`]: props.light,
         [`${prefix}--search--disabled`]: props.disabled,
         [props.class!]: !!props.class,
+        ...props.classList,
       }}
     >
-      <div className={`${prefix}--search-magnifier`} ref={magnifier}>
+      <div class={`${prefix}--search-magnifier`} ref={magnifier}>
         {searchIcon()}
       </div>
       <label id={searchId} for={props.id} class={`${prefix}--label`}>
@@ -200,7 +201,7 @@ export const Search: Component<SearchProps> = (props) => {
         {...rest}
         type={props.type}
         disabled={props.disabled}
-        className={`${prefix}--search-input`}
+        class={`${prefix}--search-input`}
         id={props.id}
         placeholder={props.placeholder}
         onInput={composeEventHandlers([props.onInput, handleInput])}

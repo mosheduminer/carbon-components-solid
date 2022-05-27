@@ -5,6 +5,7 @@ import {
   createUniqueId,
   JSX,
   mergeProps,
+  onMount,
   splitProps,
 } from "solid-js";
 import { callEventHandlerUnion } from "../internal/callEventHandlerUnion";
@@ -69,7 +70,7 @@ export type TableToolbarSearchProps = {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onChange?: JSX.EventHandler<HTMLElement, Event | InputEvent>;
+  onChange?: (event: Event & {currentTarget: HTMLInputElement}, defaultValue?: string) => void;
   /**
    * Optional callback called when the search value is cleared.
    */
@@ -156,7 +157,7 @@ export const TableToolbarSearch: Component<TableToolbarSearchProps> = (
   const [expandedState, setExpandedState] = createSignal(
     props.defaultExpanded || !!props.defaultValue
   );
-  const expanded = controlled() ? props.expanded : expandedState;
+  const expanded = controlled() ? props.expanded : expandedState();
   const [value, setValue] = createSignal(props.defaultValue || "");
   const uniqueId = createUniqueId();
 
@@ -168,6 +169,10 @@ export const TableToolbarSearch: Component<TableToolbarSearchProps> = (
       setFocusTarget(undefined);
     }
   });
+  onMount(() => {
+    //@ts-ignore
+    if (props.defaultValue) props.onChange?.(null, props.defaultValue);
+  })
 
   const handleExpand = (
     event: FocusEvent & {
@@ -177,12 +182,10 @@ export const TableToolbarSearch: Component<TableToolbarSearchProps> = (
     value = !expanded
   ) => {
     if (!props.disabled) {
-      if (!controlled && !props.persistent) {
+      if (!controlled() && !props.persistent) {
         setExpandedState(value);
       }
-      if (props.onExpand) {
-        props.onExpand(event, value);
-      }
+      props.onExpand?.(event, value);
     }
   };
 
@@ -191,7 +194,7 @@ export const TableToolbarSearch: Component<TableToolbarSearchProps> = (
       disabled={props.disabled}
       classList={{
         [props.searchContainerClass!]: !!props.searchContainerClass,
-        [`${prefix}--toolbar-search-container-active`]: props.expanded,
+        [`${prefix}--toolbar-search-container-active`]: expandedState(),
         [`${prefix}--toolbar-search-container-disabled`]: props.disabled,
         [`${prefix}--toolbar-search-container-expandable`]: !props.persistent,
         [`${prefix}--toolbar-search-container-persistent`]: props.persistent,
@@ -218,7 +221,7 @@ export const TableToolbarSearch: Component<TableToolbarSearchProps> = (
       onBlur={(event) => {
         props.onBlur
           ? props.onBlur(event, handleExpand)
-          : !value && handleExpand(event, false);
+          : !value() && handleExpand(event, false);
       }}
       {...rest}
     />

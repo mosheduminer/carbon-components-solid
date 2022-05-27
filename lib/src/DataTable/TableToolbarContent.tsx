@@ -5,5 +5,5 @@ export const TableToolbarContent: Component<
   JSX.HTMLAttributes<HTMLDivElement>
 > = (props) => {
   const [, rest] = splitProps(props, ["children"]);
-  return <div {...rest}>{props.children}</div>;
+  return <div {...rest} class="cds--toolbar-content">{props.children}</div>;
 };
