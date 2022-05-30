@@ -12,14 +12,14 @@ export const HeaderSideNavItems: Component<HeaderSideNavItemsProps> = (
   const prefix = usePrefix();
   props = mergeProps({ hasDivider: false }, props);
   return (
-    <div
+    <ul
       classList={{
+        [props.class!]: !!props.class,
         [`${prefix}--side-nav__header-navigation`]: true,
         [`${prefix}--side-nav__header-divider`]: props.hasDivider,
       }}
-      class={props.class}
     >
       {props.children}
-    </div>
+    </ul>
   );
 };

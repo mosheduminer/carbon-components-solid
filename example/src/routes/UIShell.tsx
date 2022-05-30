@@ -137,12 +137,12 @@ export default function UIShell() {
 const StoryContent = ({ useResponsiveOffset = true }) => {
   const [open, setOpen] = createSignal(false);
   const content = (
-    <div class="bx--grid">
-      <div class="bx--row">
+    <div class="cds--grid">
+      <div class="cds--row">
         <div
           classList={{
-            "bx--col-lg-13": true,
-            "bx--offset-lg-3": useResponsiveOffset,
+            "cds--col-lg-13": true,
+            "cds--offset-lg-3": useResponsiveOffset,
           }}
         >
           <h2 style={{ margin: "0 0 30px" }}>Purpose and function</h2>

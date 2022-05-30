@@ -1,6 +1,6 @@
 import { Link, LinkProps } from "./Link";
 import { usePrefix } from "../internal/usePrefix";
-import { Component, JSX, splitProps } from "solid-js";
+import { Component, JSX, mergeProps, splitProps } from "solid-js";
 
 export type HeaderMenuItemPropsWithoutLinkProps = {
   "aria-current"?: JSX.AriaAttributes["aria-current"];
@@ -9,6 +9,7 @@ export type HeaderMenuItemPropsWithoutLinkProps = {
   isCurrentPage?: boolean;
   ref?: (node: HTMLElement) => any | HTMLElement;
   role?: JSX.HTMLAttributes<HTMLLIElement>["role"];
+  tabIndex?: JSX.HTMLAttributes<HTMLLIElement>["tabIndex"];
 };
 
 export type HeaderMenuItemProps = HeaderMenuItemPropsWithoutLinkProps &
@@ -24,7 +25,9 @@ export const HeaderMenuItem: Component<HeaderMenuItemProps> = (props) => {
     "isCurrentPage",
     "ref",
     "role",
+    "tabIndex",
   ]);
+  props = mergeProps({ tabIndex: 0 }, props);
 
   return (cb?: (ref: HTMLElement) => any) => (
     <li class={props.class} role={props.role}>
@@ -42,7 +45,7 @@ export const HeaderMenuItem: Component<HeaderMenuItemProps> = (props) => {
           props.ref?.(el);
           cb?.(el);
         }}
-        tabIndex={0}
+        tabIndex={props.tabIndex}
       >
         <span class={`${prefix}--text-truncate--end`}>{props.children}</span>
       </Link>

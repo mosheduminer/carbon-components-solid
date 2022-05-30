@@ -96,6 +96,7 @@ export const Search: Component<SearchProps> = (props) => {
   );
   const [, rest] = splitProps(props, [
     "class",
+    "classList",
     "type",
     "id",
     "placeholder",

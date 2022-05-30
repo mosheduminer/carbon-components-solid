@@ -12,19 +12,19 @@ export const HeaderName: Component<HeaderNameProps> = (props) => {
   let rest: Omit<LinkProps, "href">;
   props = mergeProps({ prefix: "IBM" }, props);
   [props, rest] = splitProps(props, ["children", "class", "href", "prefix"]);
-  const selectorPrefix = usePrefix();
+  const prefix = usePrefix();
   return (
     <Link
       {...rest}
-      class={`${selectorPrefix}--header__name`}
-      classList={{ [props.class!]: !!props.class }}
+      classList={{
+        [props.class!]: !!props.class,
+        [`${prefix}--header__name`]: true,
+      }}
       href={props.href}
     >
       {props.prefix && (
         <>
-          <span class={`${selectorPrefix}--header__name--prefix`}>
-            {props.prefix}
-          </span>
+          <span class={`${prefix}--header__name--prefix`}>{props.prefix}</span>
           &nbsp;
         </>
       )}

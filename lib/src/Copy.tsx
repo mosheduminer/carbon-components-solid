@@ -65,7 +65,7 @@ export const Copy: Component<CopyProps> = (props) => {
         [props.class!]: !!props.class,
         [`${prefix}--copy-btn--animating`]: !!animation(),
         [`${prefix}--copy-btn--${animation()}`]: !!animation(),
-        ...(props.classList || {}),
+        ...props.classList,
       }}
       onClick={composeEventHandlers([props.onClick, handleClick])}
       onAnimationEnd={composeEventHandlers([

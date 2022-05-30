@@ -8,12 +8,13 @@ export type ButtonSetProps = {
 
 export const ButtonSet: Component<ButtonSetProps> = (props) => {
   const prefix = usePrefix();
-  const [, rest] = splitProps(props, ["stacked", "children", "class", "ref"]);
+  const [, rest] = splitProps(props, ["stacked", "children", "class", "classList", "ref"]);
   return (
     <div
       classList={{
         [`${prefix}--btn-set--stacked`]: props.stacked,
         [props.class!]: !!props.class,
+        ...props.classList,
       }}
       class={`${prefix}--btn-set`}
       {...rest}

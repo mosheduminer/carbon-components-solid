@@ -9,6 +9,7 @@ import {
   mergeProps,
   splitProps,
 } from "solid-js";
+import { createMatchMedia } from "../internal/createMatchMedia";
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -97,6 +98,8 @@ export const SideNav: Component<SideNavProps> = (props) => {
 
   let eventHandlers = {};
 
+  const isSideNavCollapsed = createMatchMedia(`(max-width: 1055px)`);
+
   return (
     <>
       {props.isFixedNav ? null : (
@@ -127,7 +130,6 @@ export const SideNav: Component<SideNavProps> = (props) => {
         onMouseLeave={(e) =>
           props.addMouseListeners && props.isRail && handleToggle(e, true)
         }
-        aria-hidden={!expanded}
         ref={props.ref}
         class={`${prefix}--side-nav__navigation ${prefix}--side-nav`}
         classList={{
@@ -141,6 +143,7 @@ export const SideNav: Component<SideNavProps> = (props) => {
         }}
         aria-label={props["aria-label"]}
         aria-labelledby={props["aria-labelledby"]}
+        aria-hidden={props.isRail ? false : !expanded() && isSideNavCollapsed()}
         {...eventHandlers}
         {...rest}
       >

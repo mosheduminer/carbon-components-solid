@@ -17,6 +17,7 @@ export const Link: Component<LinkProps> = (props) => {
   const prefix = usePrefix();
   const [, rest] = splitProps(props, [
     "class",
+    "classList",
     "children",
     "disabled",
     "href",
@@ -37,6 +38,7 @@ export const Link: Component<LinkProps> = (props) => {
         [`${prefix}--link--inline`]: props.inline,
         [`${prefix}--link--visited`]: props.visited,
         [`${prefix}--link--${props.size}`]: props.size,
+        ...props.classList,
       }}
       rel={
         (rest as JSX.AnchorHTMLAttributes<HTMLAnchorElement>).target ===

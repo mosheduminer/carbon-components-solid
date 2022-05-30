@@ -1,11 +1,10 @@
 {
-  "name": "carbon-components-solid",
+  "name": "@mosheduminer/carbon-solid",
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
     "format": "prettier -w \"src/**/*.{js,ts,json,css,tsx,jsx}\" \"src/icons/*.ts*\""
   },
-  "private": true,
   "type": "module",
   "dependencies": {
     "lodash.debounce": "^4.0.8",
@@ -13,13 +12,12 @@
     "lodash.isequal": "^4.5.0"
   },
   "devDependencies": {
-    "@carbon/icons": "^10.32.0",
+    "@carbon/icons": "^11.4.0",
     "@rollup/plugin-babel": "5.3.0",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-image": "^2.0.6",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/user-event": "^13.2.1",
-    "@types/carbon-components": "^10.27.0",
     "@types/jest": "^27.0.1",
     "@types/jest-axe": "^3.5.2",
     "accessibility-checker": "^3.1.9",

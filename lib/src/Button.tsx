@@ -62,6 +62,7 @@ export const Button: Component<ButtonProps> = (props) => {
   let rest: Omit<JSX.HTMLAttributes<HTMLElement>, "ref">;
   [props, rest] = splitProps(props, [
     "children",
+    "classList",
     "dangerDescription",
     "disabled",
     "role",
@@ -219,7 +220,7 @@ export const Button: Component<ButtonProps> = (props) => {
       fallback={
         <a
           tabIndex={props.tabIndex}
-          classList={classList()}
+          classList={{...classList(), ...props.classList}}
           ref={props.ref as HTMLAnchorElement}
           onMouseEnter={composeEventHandlers([
             props.onMouseEnter as () => any,

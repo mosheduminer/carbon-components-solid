@@ -17,7 +17,7 @@ const components = [
   "ProgressBar",
   "Select",
   "StructuredList",
-  // "Tabs",
+  "Tabs",
   "Tag",
   "UIShell",
 ];
