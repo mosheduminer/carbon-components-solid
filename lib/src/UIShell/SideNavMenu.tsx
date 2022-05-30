@@ -55,7 +55,7 @@ export const SideNavMenu: Component<SideNavMenuProps> = (props) => {
     }
   };
 
-  const hasActiveChildren = () => activeChildrenCount() === 0;
+  const hasActiveChildren = () => activeChildrenCount() !== 0;
 
   return (
     <ActiveChildContext.Provider

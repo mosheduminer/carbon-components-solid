@@ -20,14 +20,15 @@ export const SideNavMenuItem: Component<SideNavMenuItemProps> = (props) => {
   const prefix = usePrefix();
   const context = useContext(ActiveChildContext);
   if (context) {
-    if (props.isActive) context[1]((v) => v + 1);
+    const [, setter] = context;
+    if (props.isActive) setter((v) => v + 1);
     createEffect(
       on(
         () => props.isActive,
         () => {
           if (props.isActive) {
-            context[1]((v) => v + 1);
-          } else context[1]((v) => v - 1);
+            setter((v) => v + 1);
+          } else setter((v) => v - 1);
         },
         { defer: true }
       )

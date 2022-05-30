@@ -27,9 +27,10 @@ export const SideNavLink: Component<SideNavLinkProps> = (props) => {
   );
   const [, rest] = splitProps(props, [
     "children",
+    "class",
+    "element",
     "isActive",
     "isSideNavExpanded",
-    "large",
     "large",
     "renderIcon",
     "ref",
@@ -48,11 +49,9 @@ export const SideNavLink: Component<SideNavLinkProps> = (props) => {
         }}
         ref={props.ref}
       >
-        {props.renderIcon && (
-          <SideNavIcon small>
-            <Dynamic component={props.renderIcon} />
-          </SideNavIcon>
-        )}
+        <SideNavIcon small>
+          <Dynamic component={props.renderIcon} />
+        </SideNavIcon>
         <SideNavLinkText>{props.children}</SideNavLinkText>
       </Link>
     </SideNavItem>

@@ -7,13 +7,7 @@ $css--reset: true;
 $css--default-type: true;
 $css--plex: true;
 
-// Include defaults typically provided through the `styles.scss` entrypoint
-//@import 'carbon-components/scss/globals/scss/_css--reset.scss';
-//@import 'carbon-components/scss/globals/scss/_css--font-face.scss';
-//@import 'carbon-components/scss/globals/scss/_css--helpers.scss';
-//@import 'carbon-components/scss/globals/scss/_css--body.scss';
+@use "@carbon/styles/scss/grid";
+@use "@carbon/styles/scss/grid/flexbox";
 
-// Optionally include the grid
-@use "carbon-components/scss/grid";
-
-@use "carbon-components";
+@use "@carbon/styles";
