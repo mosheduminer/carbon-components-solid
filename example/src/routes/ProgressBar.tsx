@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { ProgressBar } from "carbon-components-solid";
+import { ProgressBar } from "@mosheduminer/carbon-solid";
 
 export default function () {
   const size = 728;

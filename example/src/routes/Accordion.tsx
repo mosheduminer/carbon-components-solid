@@ -1,4 +1,4 @@
-import { Accordion, AccordionItem } from "carbon-components-solid";
+import { Accordion, AccordionItem } from "@mosheduminer/carbon-solid";
 
 export default function () {
   return (<Accordion align="end">

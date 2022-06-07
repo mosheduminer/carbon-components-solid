@@ -1,5 +1,5 @@
-import { Add16 } from "carbon-components-solid/icons/Add16";
-import { Button, ButtonSet } from "carbon-components-solid";
+import { Add16 } from "@mosheduminer/carbon-solid/icons/Add16";
+import { Button, ButtonSet } from "@mosheduminer/carbon-solid";
 import { For } from "solid-js";
 import { Dynamic } from "solid-js/web";
 

@@ -1,4 +1,4 @@
-import { Pagination } from "carbon-components-solid";
+import { Pagination } from "@mosheduminer/carbon-solid";
 
 
 const props = {

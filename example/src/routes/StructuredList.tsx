@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { CheckmarkFilled16 } from "carbon-components-solid/icons/CheckmarkFilled16";
+import { CheckmarkFilled16 } from "@mosheduminer/carbon-solid/icons/CheckmarkFilled16";
 import {
   Checkbox,
   StructuredListBody,
@@ -8,8 +8,8 @@ import {
   StructuredListInput,
   StructuredListRow,
   StructuredListWrapper,
-} from "carbon-components-solid";
-//import { usePrefix } from "carbon-components-solid/src/internal/usePrefix";
+} from "@mosheduminer/carbon-solid";
+//import { usePrefix } from "@mosheduminer/carbon-solid/src/internal/usePrefix";
 
 export default function () {
   const [isFlush, setIsFlush] = createSignal(false);

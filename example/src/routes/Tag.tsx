@@ -1,5 +1,5 @@
-import { Tag } from "carbon-components-solid";
-import { Tag16 } from "carbon-components-solid/icons/Tag16";
+import { Tag } from "@mosheduminer/carbon-solid";
+import { Tag16 } from "@mosheduminer/carbon-solid/icons/Tag16";
 import { Component } from "solid-js";
 import { Dynamic } from "solid-js/web";
 

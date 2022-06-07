@@ -16,6 +16,7 @@ const components = [
   "PaginationNav",
   "ProgressBar",
   "Select",
+  "Slider",
   "StructuredList",
   "Tabs",
   "Tag",

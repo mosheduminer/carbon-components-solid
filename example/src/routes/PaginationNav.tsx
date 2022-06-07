@@ -1,4 +1,4 @@
-import { PaginationNav } from "carbon-components-solid";
+import { PaginationNav } from "@mosheduminer/carbon-solid";
 
 export default function () {
   return (

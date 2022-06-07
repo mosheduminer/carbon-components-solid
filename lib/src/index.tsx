@@ -27,6 +27,7 @@ export * from "./SkeletonText";
 export * from "./Select";
 export * from "./SelectItemGroup";
 export * from "./SelectItem";
+export * from "./Slider";
 export * from "./StructuredList";
 export * from "./Tabs";
 export * from "./Tag";

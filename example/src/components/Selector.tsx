@@ -3,7 +3,7 @@ import {
   ContentSwitch,
   ContentSwitcher,
   ContentSwitcherOnChangeArgs,
-} from "carbon-components-solid"
+} from "@mosheduminer/carbon-solid"
 import { useLocation } from "solid-app-router";
 
 const Selector: Component<{

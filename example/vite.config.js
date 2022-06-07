@@ -14,6 +14,7 @@ export default defineConfig({
       "lodash.debounce",
       "lodash.findlast",
       "lodash.isequal",
+      "lodash.throttle",
     ],
   },
   ssr: {
@@ -26,6 +27,7 @@ export default defineConfig({
       // "lodash.debounce",
       // "lodash.findlast",
       // "lodash.isequal",
+      // "lodash.throttle",
     ]
   }
 });

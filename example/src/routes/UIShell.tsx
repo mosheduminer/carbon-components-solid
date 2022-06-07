@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { Button } from "carbon-components-solid";
+import { Button } from "@mosheduminer/carbon-solid";
 import {
   Content,
   Header,
@@ -18,11 +18,11 @@ import {
   SideNavMenu,
   SideNavMenuItem,
   SkipToContent,
-} from "carbon-components-solid/UIShell";
-import { Search20 } from "carbon-components-solid/icons/Search20";
-import { Notification20 } from "carbon-components-solid/icons/Notification20";
-import { Fade16 } from "carbon-components-solid/icons/Fade16";
-import { Switcher20 } from "carbon-components-solid/icons/Switcher20";
+} from "@mosheduminer/carbon-solid/UIShell";
+import { Search20 } from "@mosheduminer/carbon-solid/icons/Search20";
+import { Notification20 } from "@mosheduminer/carbon-solid/icons/Notification20";
+import { Fade16 } from "@mosheduminer/carbon-solid/icons/Fade16";
+import { Switcher20 } from "@mosheduminer/carbon-solid/icons/Switcher20";
 
 export default function UIShell() {
   return (

@@ -1,5 +1,5 @@
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "../../../lib/src";
-import { Button } from "carbon-components-solid";
+import { Button } from "@mosheduminer/carbon-solid";
 
 const Container = () => (
   <Tabs>

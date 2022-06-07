@@ -1,4 +1,4 @@
-import { Checkbox } from "carbon-components-solid";
+import { Checkbox } from "@mosheduminer/carbon-solid";
 
 const prefix = "cds";
 

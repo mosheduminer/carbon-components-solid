@@ -4,7 +4,7 @@ import {
   SelectItemProps,
   SelectProps,
   SelectItemGroup,
-} from "carbon-components-solid";
+} from "@mosheduminer/carbon-solid";
 
 const options: {
   select: Partial<SelectProps>;
