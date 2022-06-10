@@ -1,4 +1,4 @@
-import { createSignal } from "solid-js";
+import { createSignal, Show } from "solid-js";
 import { CheckmarkFilled16 } from "@mosheduminer/carbon-solid/icons/CheckmarkFilled16";
 import {
   Checkbox,
@@ -14,8 +14,8 @@ import {
 export default function () {
   const [isFlush, setIsFlush] = createSignal(false);
   const [isCondensed, setIsCondensed] = createSignal(false);
-  const [selection, setSelection] = createSignal(true);
-  const prefix = "bx" // usePrefix();
+  const [selection, setSelection] = createSignal(false);
+  const prefix = "cds"; // usePrefix();
   const structuredListBodyRowGenerator = (numRows) => {
     return [...Array(numRows)].map((_, i) => (
       <StructuredListRow label>
@@ -27,21 +27,22 @@ export default function () {
           sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
           vulputate nisl a porttitor interdum.
         </StructuredListCell>
-        <StructuredListInput
-          id={`row-${i}`}
-          value={`row-${i}`}
-          title={`row-${i}`}
-          name="row-0"
-          checked={!i || null}
-        />
-        <StructuredListCell>
-          <CheckmarkFilled16
-            class={`${prefix}--structured-list-svg`}
-            aria-label="select an option"
-          >
-            <title>select an option</title>
-          </CheckmarkFilled16>
-        </StructuredListCell>
+        <Show when={selection()}>
+          <StructuredListInput
+            id={`row-${i}`}
+            value={`row-${i}`}
+            title={`row-${i}`}
+            name="row-0"
+          />
+          <StructuredListCell>
+            <CheckmarkFilled16
+              class={`${prefix}--structured-list-svg`}
+              aria-label="select an option"
+            >
+              <title>select an option</title>
+            </CheckmarkFilled16>
+          </StructuredListCell>
+        </Show>
       </StructuredListRow>
     ));
   };

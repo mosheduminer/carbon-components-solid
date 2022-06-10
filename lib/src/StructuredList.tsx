@@ -173,8 +173,11 @@ export const StructuredListInput: Component<StructuredListInputProps> = (
       type="radio"
       tabIndex={-1}
       id={instanceId}
-      class={`${prefix}--structured-list-input`}
-      class={props.class}
+      classList={{
+        [`${prefix}--structured-list-input`]: true,
+        [`${prefix}--visually-hidden`]: true,
+        [props.class!]: !!props.class,
+      }}
       value={props.value}
       name={props.name}
       title={props.title}
@@ -197,11 +200,11 @@ export const StructuredListCell: Component<StructuredListCellProps> = (
 
   return (
     <div
-      class={props.class}
       classList={{
         [`${prefix}--structured-list-th`]: props.head,
         [`${prefix}--structured-list-td`]: !props.head,
         [`${prefix}--structured-list-content--nowrap`]: props.noWrap,
+        [props.class!]: !!props.class,
       }}
       role={props.head ? "columnheader" : "cell"}
       {...rest}
