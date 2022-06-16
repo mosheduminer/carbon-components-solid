@@ -14,7 +14,7 @@ import { Button } from "./Button";
 import { ChevronDown16 } from "./icons/ChevronDown16";
 import useResizeObserver from "./internal/ResizeObserver";
 import copy from "copy-to-clipboard";
-import debounce from "lodash.debounce";
+import { debounce } from "lodash-es";
 import { composeEventHandlers } from "./internal/events";
 import { usePrefix } from "./internal/usePrefix";
 

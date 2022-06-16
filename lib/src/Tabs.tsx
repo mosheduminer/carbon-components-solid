@@ -32,7 +32,7 @@ import { createFallbackId } from "./internal/id";
 import { getInteractiveContent } from "./internal/useNoInteractiveChildren";
 import { useControllableState } from "./internal/useControllableState";
 import { callEventHandlerUnion } from "./internal/callEventHandlerUnion";
-import debounce from "lodash.debounce";
+import { debounce } from "lodash-es";
 import { ChevronLeft16 } from "./icons/ChevronLeft16";
 import { ChevronRight16 } from "./icons/ChevronRight16";
 

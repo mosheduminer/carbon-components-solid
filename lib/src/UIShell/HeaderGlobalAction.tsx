@@ -7,7 +7,7 @@ export type HeaderGlobalActionProps = {
   class?: string;
   "aria-label"?: string;
   "aria-labelledby"?: string;
-  onClick?: JSX.BoundEventHandler<HTMLButtonElement, MouseEvent>;
+  onClick?: JSX.EventHandlerUnion<HTMLButtonElement, MouseEvent>;
   isActive?: boolean;
   ref?: HTMLButtonElement | ((el: HTMLButtonElement) => void) | undefined;
   tooltipAlignment?: "start" | "center" | "end";

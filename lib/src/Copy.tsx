@@ -7,7 +7,7 @@ import {
   onCleanup,
 } from "solid-js";
 import { composeEventHandlers } from "./internal/events";
-import debounce from "lodash.debounce";
+import { debounce } from "lodash-es";
 import { usePrefix } from "./internal/usePrefix";
 
 export type CopyProps = {

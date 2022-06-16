@@ -22,6 +22,10 @@ export {
   type HeaderNavigationProps,
 } from "./HeaderNavigation";
 export {
+  HeaderPanel,
+  type HeaderPanelProps,
+} from "./HeaderPanel";
+export {
   HeaderSideNavItems,
   type HeaderSideNavItemsProps,
 } from "./HeaderSideNavItems";

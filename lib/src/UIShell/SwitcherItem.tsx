@@ -7,7 +7,7 @@ export type SwitcherItemProps = {
   "aria-labelledby"?: string;
   children: JSX.Element;
   class?: string;
-  isSelected?: string;
+  isSelected?: boolean;
   ref?: JSX.HTMLAttributes<HTMLAnchorElement>["ref"];
   tabIndex: string | number;
 };

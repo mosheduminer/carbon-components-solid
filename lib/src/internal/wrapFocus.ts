@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import findLast from "lodash.findlast";
+import { findLast } from "lodash-es";
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
   DOCUMENT_POSITION_BROAD_FOLLOWING,
@@ -20,14 +20,14 @@ import {
 function elementOrParentIsFloatingMenu(
   node: Element,
   prefix: string,
-  selectorsFloatingMenus?: string[],
+  selectorsFloatingMenus?: string[]
 ) {
   if (selectorsFloatingMenus === undefined) {
     selectorsFloatingMenus = [
       `.${prefix}--overflow-menu-options`,
       `.${prefix}--tooltip`,
       ".flatpickr-calendar",
-    ]
+    ];
   }
   if (node && typeof node.closest === "function") {
     return selectorsFloatingMenus.some((selector) => node.closest(selector));
@@ -59,14 +59,18 @@ function wrapFocus({
   currentActiveNode: Element;
   oldActiveNode: Element;
   selectorsFloatingMenus: string[];
-  prefix: string,
+  prefix: string;
 }) {
   if (
     bodyNode &&
     currentActiveNode &&
     oldActiveNode &&
     !bodyNode.contains(currentActiveNode) &&
-    !elementOrParentIsFloatingMenu(currentActiveNode, prefix, selectorsFloatingMenus)
+    !elementOrParentIsFloatingMenu(
+      currentActiveNode,
+      prefix,
+      selectorsFloatingMenus
+    )
   ) {
     const comparisonResult =
       oldActiveNode.compareDocumentPosition(currentActiveNode);
