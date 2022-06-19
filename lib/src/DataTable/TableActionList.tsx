@@ -9,6 +9,8 @@ export const TableActionList: Component<
     <div
       class={`${prefix}--action-list`}
       classList={{ [props.class!]: !!props.class }}
-    />
+    >
+      {props.children}
+    </div>
   );
 };

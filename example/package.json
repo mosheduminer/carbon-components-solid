@@ -18,7 +18,7 @@
     "solid-start-node": "0.1.0-alpha.74",
     "solid-start-static": "0.1.0-alpha.75",
     "typescript": "^4.6.3",
-    "vite": "2.9.5"
+    "vite": "2.9.12"
   },
   "engines": {
     "node": ">=12"

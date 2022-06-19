@@ -11,10 +11,6 @@ export default defineConfig({
       "flatpickr/dist/l10n/index",
       "flatpickr/dist/plugins/rangePlugin",
       "copy-to-clipboard",
-      "lodash.debounce",
-      "lodash.findlast",
-      "lodash.isequal",
-      "lodash.throttle",
     ],
   },
   ssr: {
@@ -24,10 +20,11 @@ export default defineConfig({
       // "flatpickr/dist/l10n/index",
       // "flatpickr/dist/plugins/rangePlugin",
       // "copy-to-clipboard",
-      // "lodash.debounce",
-      // "lodash.findlast",
-      // "lodash.isequal",
-      // "lodash.throttle",
     ]
+  },
+  build: {
+    commonjsOptions: {
+      transformMixedEsModules: true
+    }
   }
 });

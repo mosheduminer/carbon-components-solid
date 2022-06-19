@@ -411,8 +411,10 @@ class DataTableInternal {
         ...rest,
         checked: row.isSelected,
         onSelect: composeEventHandlers([
+          () => console.log(unwrap(this.state)),
           this.handleOnSelectRow(row.id),
           onClick,
+          () => console.log(unwrap(this.state)),
         ]),
         id: `${this.getTablePrefix()}__select-row-${row.id}`,
         name: `select-row-${row.id}`,
@@ -640,18 +642,16 @@ class DataTableInternal {
         const selectedRowsCount = !row.isSelected
           ? selectedRows + 1
           : selectedRows - 1;
-        return {
-          // Basic assumption here is that we want to show the batch action bar if
-          // the row is being selected. If it's being unselected, then see if we
-          // have a non-zero number of selected rows that batch actions could
-          // still apply to
-          shouldShowBatchActions: !row.isSelected || selectedRowsCount > 0,
-          rowsById: {
-            ...state.rowsById,
-            [rowId]: {
-              ...row,
-              isSelected: !row.isSelected,
-            },
+        // Basic assumption here is that we want to show the batch action bar if
+        // the row is being selected. If it's being unselected, then see if we
+        // have a non-zero number of selected rows that batch actions could
+        // still apply to
+        state.shouldShowBatchActions = !row.isSelected || selectedRowsCount > 0;
+        state.rowsById = {
+          ...state.rowsById,
+          [rowId]: {
+            ...row,
+            isSelected: !row.isSelected,
           },
         };
       })

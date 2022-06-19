@@ -19,6 +19,7 @@ export * from "./DatePicker";
 export * from "./DatePickerInput";
 export * from "./FileUploader";
 export * from "./Form";
+export * from "./Notification";
 export * from "./Pagination";
 export * from "./PaginationNav";
 export * from "./ProgressBar";
