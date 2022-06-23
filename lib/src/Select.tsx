@@ -97,8 +97,8 @@ export const Select: Component<SelectProps> = (props) => {
           {...other}
           {...ariaProps}
           id={props.id}
-          class={`${prefix}--select-input`}
           classList={{
+            [`${prefix}--select-input`]: true,
             [`${prefix}--select-input--${props.size}`]: !!props.size,
           }}
           disabled={props.disabled || undefined}
@@ -122,12 +122,14 @@ export const Select: Component<SelectProps> = (props) => {
 
   return (
     <div
-      class={`${prefix}--form-item`}
-      classList={{ [props.class!]: !!props.class }}
+      classList={{
+        [`${prefix}--form-item`]: true,
+        [props.class!]: !!props.class,
+      }}
     >
       <div
-        class={`${prefix}--select`}
         classList={{
+          [`${prefix}--select`]: true,
           [`${prefix}--select--inline`]: props.inline,
           [`${prefix}--select--light`]: props.light,
           [`${prefix}--select--invalid`]: props.invalid,
@@ -138,8 +140,8 @@ export const Select: Component<SelectProps> = (props) => {
         {!props.noLabel && (
           <label
             for={props.id}
-            class={`${prefix}--label`}
             classList={{
+              [`${prefix}--label`]: true,
               [`${prefix}--visually-hidden`]: props.hideLabel,
               [`${prefix}--label--disabled`]: props.disabled,
             }}
